@@ -11,9 +11,9 @@ import { InternetListingComponent } from './views/internet-listing/internet-list
 import { DevicesListingComponent } from './views/devices-listing/devices-listing.component';
 import { ShopingCarComponent } from './views/shoping-car/shoping-car.component';
 import { MyServicesComponent } from './views/my-services/my-services.component';
-import { OnlinePayComponent } from './online-pay/online-pay.component';
+import { OnlinePayComponent } from './views/online-pay/online-pay.component';
 import { EployeesManagmentComponent } from './views/eployees-managment/eployees-managment.component';
-import { NewEmployeeComponent } from './views/new-employee/new-employee.component';
+import { NewEmployeeComponent } from './views/new-employee-form/new-employee.component';
 import { SeervicesManagmentComponent } from './views/seervices-managment/seervices-managment.component';
 import { NewServicesFormComponent } from './views/new-services-form/new-services-form.component';
 import { DevicesManagmentComponent } from './views/devices-managment/devices-managment.component';
