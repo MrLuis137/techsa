@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
-import { User } from '../../models/User';
+
 
 
 @Component({
@@ -10,14 +9,12 @@ import { User } from '../../models/User';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public productService: ProductService) { }
+  constructor() { }
 
   ngOnInit(): void {
   
   }
 
-  async createUser(User){
-    await this.
-  }
+  
 
 }
