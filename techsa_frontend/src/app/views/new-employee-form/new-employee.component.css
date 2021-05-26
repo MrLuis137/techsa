@@ -1,0 +1,59 @@
+h1{
+    color: #ffffff;
+    font-weight: bold;
+    display:contents;
+    width: 200px;
+    float: center;
+    font-family: Sans-serif;
+}
+.div-degraded{
+    background: linear-gradient(310deg, #219653 18%,#0056d7 54%,#7b61ff 73%);
+    background: -moz-linear-gradient(310deg, #219653 18%,#0056d7 54%,#7b61ff 73%);
+    background: -webkit-linear-gradient(310deg, #219653 18%,#0056d7 54%,#7b61ff 73%);
+    border-radius: 5px 5px 5px 5px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-control {
+    display: block;
+    width: 90%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    
+}
+.form-label{
+    color: #ffffff;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
+    font-family: Sans-serif;
+    
+}
+.btn-forms{
+    -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 20px;
+  background: #219653;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+

@@ -4,14 +4,19 @@ import {Request, Response} from "express";
 //TypeORM
 import "reflect-metadata";
 import {createConnection, Repository} from "typeorm";
-import { user } from './entity/User';
-
+import { Gerente } from './entity/Gerente';
+import {Dispositivo} from './entity/Dispositivo';
+import {Servicio} from './entity/Servicio';
+import { Cliente } from './entity/Cliente';
+import { Contrato } from './entity/Contrato';
+import { AgenteVentas } from './entity/AgenteVentas';
 
 createConnection().then(async connection => {
-    
-    const userRepository = connection.getRepository(user)
+    const clienteRepository = connection.getRepository(Cliente);
+    const servicioRepository = connection.getRepository(Servicio);
+    const contratoRepository = connection.getRepository(Contrato);
 
-    const app = express();
+    /*const app = express();
     app.use(express.json)
     
     //Create user
@@ -28,7 +33,7 @@ createConnection().then(async connection => {
         return res.send(results);
     });
     
-    //Get user by id
+    //Get user by idcd
     app.get("/users/:id", async function(req: Request, res: Response) {
         // here we will have logic to return user by id
     });
@@ -43,6 +48,6 @@ createConnection().then(async connection => {
         //
     });
     app.listen(3000);
-    console.log("Servidor iniciado")
+    console.log("Servidor iniciado")*/
 
 }).catch(error => console.log(error));

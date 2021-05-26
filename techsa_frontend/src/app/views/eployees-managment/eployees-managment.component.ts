@@ -6,7 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./eployees-managment.component.css']
 })
 export class EployeesManagmentComponent implements OnInit {
-
+  employees = [
+    {"name":'Allison Solano',
+    "workid":125478,
+    "id":25478,
+    "number":71066089,
+    "password":'AllisonContrasena',
+    "datebirth":'2/5/2021',
+    "job":'Administrador'
+    },
+    {"name":'Allison Solano',
+    "workid":125478,
+    "id":25478,
+    "number":71066089,
+    "password":'AllisonContrasena',
+    "datebirth":'2/5/2021',
+    "job":'Administrador'
+    }
+  ]
   constructor() { }
 
   ngOnInit(): void {
