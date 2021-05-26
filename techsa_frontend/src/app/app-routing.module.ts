@@ -6,7 +6,7 @@ import { TelephonyListingComponent } from './views/telephony-listing/telephony-l
 import { NewEmployeeComponent } from './views/new-employee-form/new-employee.component';
 import { EployeesManagmentComponent } from './views/eployees-managment/eployees-managment.component';
 import { InternetListingComponent } from './views/internet-listing/internet-listing.component';
-
+import { MovileTelephonyListingComponent } from './views/movile-telephony-listing/movile-telephony-listing.component';
 
 
 const routes: Routes = [
@@ -15,7 +15,8 @@ const routes: Routes = [
   {path:'devices-listing', component:DevicesListingComponent},
   {path:'new-employee',component: NewEmployeeComponent},
   {path:'employees-managment',component: EployeesManagmentComponent},
-  {path:'internet-listing',component: InternetListingComponent}
+  {path:'internet-listing',component: InternetListingComponent},
+  {path:'movile-listing',component: MovileTelephonyListingComponent}
 
 ];
 
