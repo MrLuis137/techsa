@@ -5,6 +5,7 @@ import { LoginComponent } from './views/login/login.component';
 import { TelephonyListingComponent } from './views/telephony-listing/telephony-listing.component';
 import { NewEmployeeComponent } from './views/new-employee-form/new-employee.component';
 import { EployeesManagmentComponent } from './views/eployees-managment/eployees-managment.component';
+import { InternetListingComponent } from './views/internet-listing/internet-listing.component';
 
 
 
@@ -13,7 +14,9 @@ const routes: Routes = [
   {path:'telephony-listing', component:TelephonyListingComponent},
   {path:'devices-listing', component:DevicesListingComponent},
   {path:'new-employee',component: NewEmployeeComponent},
-  {path:'employees-managment',component: EployeesManagmentComponent}
+  {path:'employees-managment',component: EployeesManagmentComponent},
+  {path:'internet-listing',component: InternetListingComponent}
+
 ];
 
 @NgModule({
