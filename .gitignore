@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+techsa_backend/package-lock.json
+techsa_backend/package-lock.json
+techsa_frontend/package-lock.json
+techsa_frontend/package.json

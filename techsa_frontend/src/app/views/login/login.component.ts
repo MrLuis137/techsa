@@ -10,14 +10,15 @@ import { User } from '../../models/User';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public productService: ProductService) { }
+  // constructor(public productService: ProductService) { }
+  constructor () {}
 
   ngOnInit(): void {
   
   }
 
   async createUser(User){
-    await this.
+    //await this.
   }
 
 }

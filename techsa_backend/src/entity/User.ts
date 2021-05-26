@@ -5,8 +5,6 @@ export class user{
     @PrimaryGeneratedColumn()
     cedula:number;
 
-
-    
     @Column()
     nombre: string;
 
