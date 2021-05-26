@@ -1,1 +1,48 @@
-<p>new-employee works!</p>
+<div class="div-degraded">
+    <form  novalidate="">
+        <br>
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+          </div><br>
+    
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+          </div><br>
+          
+          <div class="col-6">
+            <label for="id" class="form-label">Cedula</label>
+            <div class="input-group has-validation">
+              <input type="int" class="form-control" id="id" placeholder="" required="">
+            </div>
+          </div><br>
+
+          <div class="col-12">
+            <label for="workid" class="form-label">Id laboral</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control" id="workid" placeholder="" required="">
+            </div>
+          </div><br>
+    
+          <div class="col-12">
+            <label for="date" class="form-label">Fecha de nacimiento </label>
+            <input type="date" class="form-control" id="date" placeholder="">
+            
+          </div><br>
+    
+          <div class="col-md-5">
+            <label for="job" class="form-label">Puesto</label>
+            <select class="form-select" id="job" required="">
+              <option value="">Administrador</option>
+              <option>Empleado</option>
+            </select>
+          </div><br>
+        </div>
+        <button class="btn-forms" type="submit">Agregar</button>
+      </form>
+
+</div>
+
+
