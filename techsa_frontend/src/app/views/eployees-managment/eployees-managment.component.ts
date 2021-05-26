@@ -10,23 +10,31 @@ export class EployeesManagmentComponent implements OnInit {
     {"name":'Allison Solano',
     "workid":125478,
     "id":25478,
-    "number":71066089,
+    "email":'allisonSolno@gmail.com',
+    "address":'Turrialba',
     "password":'AllisonContrasena',
-    "datebirth":'2/5/2021',
+    "datebirth":'13/12/2000',
     "job":'Administrador'
     },
     {"name":'Allison Solano',
     "workid":125478,
     "id":25478,
-    "number":71066089,
+    "email":'allisonSolno',
+    "address":'Turrialba',
     "password":'AllisonContrasena',
-    "datebirth":'2/5/2021',
+    "datebirth":'13/12/2000',
     "job":'Administrador'
     }
   ]
   constructor() { }
 
   ngOnInit(): void {
+  }
+  delete (employee:String){
+    console.log("Eliminando empleado: ",employee)
+  }
+  modify (employee:String){
+    console.log("Modificando empleado: ",employee)
   }
 
 }

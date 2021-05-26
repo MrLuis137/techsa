@@ -1,5 +1,4 @@
-
-<div class="div-degraded">
+<div class="div-form">
   <h1>Agregar empleado</h1>
   <!--
     Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
@@ -40,6 +39,16 @@
       <div class="form-group">
         <label class="form-label">Fecha de nacimiento </label>
         <input formControlName="workid" formControlName="datebirth" #datebirth type="date" class="form-control" id="datebirth" >
+        
+      </div><br>
+      <div class="form-group">
+        <label for="email" class="form-label">Correo </label>
+        <input #email type="text" class="form-control" id="email" >
+        
+      </div><br>
+      <div class="form-group">
+        <label for="address" class="form-label">Dirección </label>
+        <input #address type="text" class="form-control" id="address" >
         
       </div><br>
   
