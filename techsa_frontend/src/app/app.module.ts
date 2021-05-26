@@ -21,6 +21,8 @@ import { NewServicesFormComponent } from './views/new-services-form/new-services
 import { DevicesManagmentComponent } from './views/devices-managment/devices-managment.component';
 import { NewDeviceFormComponent } from './views/new-device-form/new-device-form.component';
 import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.co
     BrowserModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
