@@ -1,4 +1,11 @@
-
+h1{
+    color: #ffffff;
+    font-weight: bold;
+    display:contents;
+    width: 200px;
+    float: center;
+    font-family: Sans-serif;
+}
 .div-degraded{
     background: linear-gradient(310deg, #219653 18%,#0056d7 54%,#7b61ff 73%);
     background: -moz-linear-gradient(310deg, #219653 18%,#0056d7 54%,#7b61ff 73%);
@@ -49,3 +56,4 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
+
