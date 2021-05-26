@@ -10,6 +10,7 @@ export class EployeesManagmentComponent implements OnInit {
     {"name":'Allison Solano',
     "workid":125478,
     "id":25478,
+    "number":71066089,
     "password":'AllisonContrasena',
     "datebirth":'2/5/2021',
     "job":'Administrador'
@@ -17,6 +18,7 @@ export class EployeesManagmentComponent implements OnInit {
     {"name":'Allison Solano',
     "workid":125478,
     "id":25478,
+    "number":71066089,
     "password":'AllisonContrasena',
     "datebirth":'2/5/2021',
     "job":'Administrador'

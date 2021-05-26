@@ -13,7 +13,9 @@ export class NewEmployeeComponent implements OnInit {
   }
   
   add(firstName:String){
-    //console.log(firstName)
+    //Ahora solo tiene un parametro porque intente dejarlo lo mas 
+    //sencillo posible
+    console.log(firstName)
     //this.onSuccess("Agregado")
   }
 
