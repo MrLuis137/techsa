@@ -1,10 +1,14 @@
-import{PrimaryGeneratedColumn, Column, Entity} from 'typeorm'
+import { Contrato } from './Contrato';
+import{PrimaryGeneratedColumn, Column, Entity, OneToMany, JoinColumn} from 'typeorm'
 
+@Entity()
 export class Servicio{
 
     @PrimaryGeneratedColumn('increment')
-    id:number;
+    Id:number;
 
     @Column()
-    nombre: String;
+    Nombre: String;
+
+
 }

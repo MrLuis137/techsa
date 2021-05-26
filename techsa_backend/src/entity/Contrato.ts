@@ -1,16 +1,18 @@
-import{Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Cliente } from './Cliente';
+import{Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
+import { Servicio } from './Servicio';
 
 @Entity()
 export class Contrato{
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    Id: number;
     
-    @Column()
-    idServicio: number;
+    @ManyToOne(type => Servicio) @JoinColumn()
+    IdServicio: Servicio;
     
-    @Column()
-    usuarioId: number;
+    @ManyToOne(type => Cliente) @JoinColumn()
+    IdCliente: Cliente;
 
     @Column()
     FechaContratado: Date;
@@ -18,6 +20,5 @@ export class Contrato{
     @Column()
     Estado : boolean;
 
-
-
+    
 }

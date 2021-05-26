@@ -1,31 +1,31 @@
-import{Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import{Entity, PrimaryGeneratedColumn, Column, Double} from "typeorm";
 
 @Entity()
 export class Dispositivo{
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    Id: number;
     
     @Column()
-    modelo: String;
+    Modelo: String;
     
     @Column()
-    marca: String;
+    Marca: String;
 
     @Column()
-    ram: number;
+    Ram: number;
 
     @Column()
-    almacenamiento : number;
+    Almacenamiento : number;
 
     @Column()
-    precio: Float32Array;
+    Precio: number;
     
     @Column()
-    cantidad: number;
+    Cantidad: number;
 
     @Column({type: "blob"})
-    imagen: Buffer;
+    Imagen: Buffer;
 
 
 

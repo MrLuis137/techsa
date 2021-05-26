@@ -3,23 +3,23 @@ import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 @Entity()
 export class AgenteVentas{
     @PrimaryGeneratedColumn()
-    id_laboral:number;
+    Id_laboral:number;
     
     @Column()
-    nombre: string;
+    Nombre: string;
 
     @Column()
-    usuario: string;
+    Usuario: string;
 
     @Column()
-    cedula: number;
+    Cedula: number;
 
     @Column()
-    fechaNacimiento: Date;
+    FechaNacimiento: Date;
 
     @Column()
-    puesto: String
+    Puesto: String
 
     @Column()
-    contrasenia: String
+    Contrasenia: String
 }

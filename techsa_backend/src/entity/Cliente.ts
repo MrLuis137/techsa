@@ -1,26 +1,26 @@
-import{PrimaryGeneratedColumn, Entity, Column} from 'typeorm'
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
 export class Cliente{
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    Id: number;
 
     @Column()
-    nombre: String;
+    Nombre: String;
 
     @Column()
-    apellido: String;
+    Apellido: String;
 
     @Column()
-    residencia: String;
+    Residencia: String;
 
     @Column()
-    correo: String;
+    Correo: String;
 
     @Column()
-    nombreUsuario: String;
+    NombreUsuario: String;
 
     @Column()
 
-    contrasenia: String;
+    Contrasenia: String;
 }
