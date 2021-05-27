@@ -23,6 +23,8 @@ import { NewDeviceFormComponent } from './views/new-device-form/new-device-form.
 import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.component';
+import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { FormsModule } from '@angular/forms';
     NewServicesFormComponent,
     DevicesManagmentComponent,
     NewDeviceFormComponent,
-    CoverageAreasComponent
+    CoverageAreasComponent,
+    ClientNavbarComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,

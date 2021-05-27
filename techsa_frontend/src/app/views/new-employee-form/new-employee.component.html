@@ -1,13 +1,14 @@
-<div class="div-form">
+<div class="div-ext-form">
   <h1>Agregar empleado</h1>
   <!--
     Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
     Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
     newEmployeeForm.value obtiene los datos del form y los devuelve como un json
   -->
-  <form [formGroup] = "newEmployeeForm" (ngSubmit)="add(newEmployeeForm.value)">
+  <form  [formGroup] = "newEmployeeForm" (ngSubmit)="add(newEmployeeForm.value)">
     <br>
-    <div>
+    <div class="div-form">
+    <div >
       <div class="form-group">
         <label class="form-label">Nombre</label>
         <!-- Los componentes que reciben los datos deben de tener la etiqueta formControlName=" "
@@ -24,20 +25,19 @@
         
       <div class="form-group">
         <label class="form-label">Cédula</label>
-        <div class="input-group has-validation">
           <input formControlName="EmployeeId" #id type="int" class="form-control" id="id" placeholder="" required="">
-        </div>
+        
       </div><br>
 
       <div class="form-group">
-        <label class="form-label">Id laboral</label>
-        <div  class="input-group has-validation">
+        <label class="form-label">ID laboral</label>
           <input formControlName="workid" #workid type="text" class="form-control" id="workid" placeholder="" required="">
-        </div>
+        
       </div><br>
-  
+    </div>
+    <div >
       <div class="form-group">
-        <label class="form-label">Fecha de nacimiento </label>
+        <label class="form-label">Día de nacimiento </label>
         <input formControlName="workid" formControlName="datebirth" #datebirth type="date" class="form-control" id="datebirth" >
         
       </div><br>
@@ -47,21 +47,23 @@
         
       </div><br>
       <div class="form-group">
-        <label for="address" class="form-label">Dirección </label>
+        <label for="address"  class="form-label">Dirección </label>
         <input #address type="text" class="form-control" id="address" >
+        
         
       </div><br>
   
       <div class="form-group">
         <label class="form-label">Puesto</label>
-        <select formControlName="job" #job class="form-select" id="job" required="">
+        <select formControlName="job" #job class="form-control" id="job" required="">
           <option>Administrador</option>
           <option>Empleado</option>
         </select>
       </div><br>
 
     </div>
-    <button  class="btn btn-primary" >Añadir</button>
+  </div>
+    <button  class="btn-forms" >Agregar</button>
   </form>
 
 </div>

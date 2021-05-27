@@ -1,1 +1,43 @@
-<p>register works!</p>
+
+<div class="div-ext-form">
+<h1>Registro</h1>
+
+<form  [formGroup] = "newClientForm" (ngSubmit)="register(newClientForm.value)">
+    <br>
+    <div class="div-form">
+    <div >
+    <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input formControlName="firstName" #firstName type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+    </div><br>
+
+    <div class="form-group">
+        <label  class="form-label">Apellido</label>
+        <input formControlName="lastName" #lastName type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+    </div><br>
+        
+    <div class="form-group">
+        <label class="form-label">Correo</label>
+        <input formControlName="email" #email type="text" class="form-control" id="email" placeholder="" required="">
+        
+    </div><br>
+
+    <div class="form-group">
+        <label class="form-label">Nombre de usuario</label>
+        <input formControlName="userName" #userName type="text" class="form-control" id="userName" placeholder="" required="">
+        
+    </div><br>
+    </div>
+    <div >
+    <div class="form-group">
+        <label class="form-label">Contraseña </label>
+        <input formControlName="password" formControlName="password" #password type="text" class="form-control" id="password" >
+        
+    </div><br>
+
+    </div>
+</div>
+    <button  class="btn-forms" >Registrarse</button>
+</form>
+
+</div>

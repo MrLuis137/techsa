@@ -10,6 +10,11 @@ div{
     display: flex;
     background-color: black;
 }
+.table{
+    background-color: black;
+    color: white;
+    border-spacing: 50px;
+}
 .btn-delete{
     -webkit-border-radius: 10;
     -moz-border-radius: 10;
