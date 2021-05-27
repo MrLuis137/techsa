@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-new-device-form',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-device-form.component.css']
 })
 export class NewDeviceFormComponent implements OnInit {
+  
+  constructor(private builder:FormBuilder) { 
+    
 
-  constructor() { }
-
+  }
+  
   ngOnInit(): void {
   }
-
+  
 }

@@ -2,3 +2,27 @@
 body{
     background: black;
 }
+
+
+/*FORMS*/
+
+.form-label{
+    color: #ffffff;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
+    font-family: Sans-serif;
+    
+}
+.btn-forms{
+    -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  background: #219653;
+  padding: 8px 18px 8px 18px;
+  text-decoration: none;
+  float: center;
+}

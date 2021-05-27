@@ -36,10 +36,8 @@ export class NewEmployeeComponent implements OnInit {
   
   //La función que reciba el submit va a obtener un json con los datos del form
   add(values){
-    //Ahora solo tiene un parametro porque intente dejarlo lo mas 
-    //sencillo posible
     console.log(values)
-    //this.onSuccess("Agregado")
+    this.onSuccess("Agregado")
   }
 
   onSuccess(mesagge:String){
