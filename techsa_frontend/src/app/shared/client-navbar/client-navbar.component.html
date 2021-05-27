@@ -1,0 +1,65 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="#">
+            <img src="../../../assets/navbar-icon/logo-navbar.png" alt="" width="150" height="75">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Información y Adquisición
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="telephony-listing">Telefonía Fija</a></li>
+                        <li><a class="dropdown-item" routerLink="movile-telephony-listing">Telefonía Móvil</a></li>
+                        <li><a class="dropdown-item" routerLink="internet-listing">Internet</a></li>
+                        <li><a class="dropdown-item" routerLink="devices-listing">Dispositivos</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mis Planes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="my-services">Gestión Planes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" routerLink="online-pay">Pago en Línea</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="coverage-areas">Zonas Cobertura</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="shoping-car">Carrito Compras</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link disabled" routerLink="#" tabindex="-1" aria-disabled="true">TEMPORAL</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="employees-managment">Gest. Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="seervices-managment">Gest. Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="devices-managment">Gest. Dispositivos</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-success" routerLink="login">Log In</button>
+        </div>
+    </div>
+  </nav>
