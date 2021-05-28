@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.component';
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
+import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.compone
     NewDeviceFormComponent,
     CoverageAreasComponent,
     ClientNavbarComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    ModifyEmployeeComponent
   ],
   imports: [
     BrowserModule,
