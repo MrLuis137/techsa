@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.component';
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

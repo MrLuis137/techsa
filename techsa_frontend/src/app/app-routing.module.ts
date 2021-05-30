@@ -16,6 +16,7 @@ import { ShopingCarComponent } from './views/shoping-car/shoping-car.component';
 import { DevicesManagmentComponent } from './views/devices-managment/devices-managment.component';
 import { SeervicesManagmentComponent } from './views/seervices-managment/seervices-managment.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
+import { NewServicesFormComponent } from './views/new-services-form/new-services-form.component';
 
 
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   
   //Services-Management
   {path:'seervices-managment',component: SeervicesManagmentComponent},
+  {path: 'new-service', component: NewServicesFormComponent},
 
   //Devices-Management
   {path:'devices-managment',component: DevicesManagmentComponent},
