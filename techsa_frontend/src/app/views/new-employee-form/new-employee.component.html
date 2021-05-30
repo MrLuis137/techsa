@@ -16,54 +16,66 @@
            y lo que va ahí es el nombre de el campo que se puso en el .ts 
           En este caso firstName: [''], 
           entonces la etiqueta es formControlName="firstName"-->
-        <input formControlName="firstName" #firstName type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+        <input formControlName="nombre" #firstName type="text" class="form-control" id="firstName" placeholder="" value="" required="">
       </div><br>
 
       <div class="form-group">
         <label  class="form-label">Apellido</label>
-        <input formControlName="lastName" #lastName type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+        <input formControlName="apellido" #lastName type="text" class="form-control" id="lastName" placeholder="" value="" required="">
       </div><br>
         
       <div class="form-group">
         <label class="form-label">Cédula</label>
-          <input formControlName="EmployeeId" #id type="int" class="form-control" id="id" placeholder="" required="">
+          <input formControlName="cedula" #id type="int" class="form-control" id="id" placeholder="" required="">
         
       </div><br>
 
       <div class="form-group">
         <label class="form-label">ID laboral</label>
-          <input formControlName="workid" #workid type="text" class="form-control" id="workid" placeholder="" required="">
+          <input formControlName="id_laboral" #workid type="text" class="form-control" id="workid" placeholder="" required="">
+        
+      </div><br>
+      <div class="form-group">
+        <label for="address"  class="form-label">Usuario </label>
+        <input formControlName="ususario" #address type="text" class="form-control" id="address" >
+        
         
       </div><br>
     </div>
     <div >
       <div class="form-group">
         <label class="form-label">Día de nacimiento </label>
-        <input formControlName="workid" formControlName="datebirth" #datebirth type="date" class="form-control" id="datebirth" >
+        <input formControlName="fechaNacimiento" formControlName="datebirth" #datebirth type="date" class="form-control" id="datebirth" >
         
       </div><br>
       <div class="form-group">
         <label for="email" class="form-label">Correo </label>
-        <input #email type="text" class="form-control" id="email" >
+        <input formControlName="correo" #email type="text" class="form-control" id="email" >
         
       </div><br>
       <div class="form-group">
         <label for="address"  class="form-label">Dirección </label>
-        <input #address type="text" class="form-control" id="address" >
+        <input formControlName="residencia" #address type="text" class="form-control" id="address" >
         
         
       </div><br>
   
       <div class="form-group">
         <label class="form-label">Puesto</label>
-        <select formControlName="job" #job class="form-control" id="job" required="">
+        <select formControlName="puesto" #job class="form-control" id="job" required="">
           <option>Administrador</option>
           <option>Empleado</option>
         </select>
       </div><br>
-
+      <div class="form-group">
+        <label for="address"  class="form-label">Contraseña </label>
+        <input formControlName="contrasenia" #address type="text" class="form-control" id="address" >
+        
+        
+      </div><br>
     </div>
   </div>
+  
     <button  class="btn-forms" >Agregar</button>
   </form>
 

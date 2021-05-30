@@ -20,16 +20,19 @@ export class NewEmployeeComponent implements OnInit {
       Se pueden agregar comprobaciones, pero no lo hice :v
       cualquier cosa, creo que en el video está como https://youtu.be/fP0XXKAWR1E
       */
-      firstName: [''],
-      lastName: [''],
-      EmployeeId: [''],
-      workid: [''],
+      nombre: [''],
+      apellido: [''],
+      usuario: [''],
+      id_laboral: [''],
+      cedula: [''],
+      contrasenia: [''],
+      correo:[''],
+      residencia:[''],
       //Tipo de datos para el datePiker (No se si así se llama xD)
-      datebirth: [Date],
-      job: ['Administrador']
+      fechaNacimiento: [Date],
+      puesto: ['Administrador']
     })
   }
-  
   ngOnInit(): void {
     
   }
