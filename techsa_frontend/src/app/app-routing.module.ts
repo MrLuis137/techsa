@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DevicesListingComponent } from './views/devices-listing/devices-listing.component';
 import { LoginComponent } from './views/login/login.component';
+import { TelephonyListingComponent } from './views/telephony-listing/telephony-listing.component';
 import { NewEmployeeComponent } from './views/new-employee-form/new-employee.component';
 import { EployeesManagmentComponent } from './views/eployees-managment/eployees-managment.component';
 import { NewDeviceFormComponent } from './views/new-device-form/new-device-form.component';
 import { RegisterComponent } from './views/register/register.component';
-import { TelephonyListingComponent } from './views/telephony-listing/telephony-listing.component';
 import { MovileTelephonyListingComponent } from './views/movile-telephony-listing/movile-telephony-listing.component';
 import { InternetListingComponent } from './views/internet-listing/internet-listing.component';
-import { DevicesListingComponent } from './views/devices-listing/devices-listing.component';
 import { MyServicesComponent } from './views/my-services/my-services.component';
 import { OnlinePayComponent } from './views/online-pay/online-pay.component';
 import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.component';
