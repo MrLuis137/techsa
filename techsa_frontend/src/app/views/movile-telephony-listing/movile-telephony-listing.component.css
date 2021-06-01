@@ -1,3 +1,35 @@
+#page-title-text{
+    color: white;
+    font-family: Saira;
+    font-style: Bold;
+
+    text-align: center;
+
+}
+
+#page-subtitle-text{
+    color: white;
+    font-family: Saira;
+    font-style: medium;
+    text-align: left;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+.prepaid-section {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.postpaid-section {
+    margin-top: 3rem;
+}
+
+.postpaidplusdevice-section {
+    margin-top: 3rem;
+}
 
 .card {
 
