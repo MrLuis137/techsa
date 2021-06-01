@@ -7,4 +7,6 @@ export class Gerente{
     fechaNacimiento: Date;
     puesto: String;
     contrasenia: String;
+    correo:String;
+    residencia:String;
 }

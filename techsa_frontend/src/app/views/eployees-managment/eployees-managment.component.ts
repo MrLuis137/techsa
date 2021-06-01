@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EployeesManagmentComponent implements OnInit {
   employees = [
-    {"name":'Allison Solano',
+    {"_id":1,
+      "name":'Allison Solano',
     "workid":125478,
     "id":25478,
     "email":'allisonSolno@gmail.com',
@@ -16,7 +17,8 @@ export class EployeesManagmentComponent implements OnInit {
     "datebirth":'13/12/2000',
     "job":'Administrador'
     },
-    {"name":'Allison Solano',
+    {"_id":2,
+      "name":'Allison Solano',
     "workid":125478,
     "id":25478,
     "email":'allisonSolno',
@@ -29,6 +31,7 @@ export class EployeesManagmentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //employees= 
   }
   delete (employee:String){
     console.log("Eliminando empleado: ",employee)

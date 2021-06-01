@@ -1,6 +1,8 @@
 <body>
 <div>
+    <br>
     <h1>Gestión de empleados</h1>
+    <br>
     <button routerLink="/new-employee" class='btn-verde' >Agregar empleado</button>
     <br>
     <table class="table">
@@ -18,16 +20,16 @@
         </thead>
         <tbody *ngFor='let employee of employees'>
             <tr>
-            <td>{{employee.workid}}</td>
-            <td>{{employee.name}}</td>
-            <td>{{employee.password}}</td>
-            <td>{{employee.email}}</td>
-            <td>{{employee.datebirth}}</td>
-            <td>{{employee.address}}</td>
-            <td>{{employee.job}}</td>
+            <td>{{employee?.workid}}</td>
+            <td>{{employee?.name}}</td>
+            <td>{{employee?.password}}</td>
+            <td>{{employee?.email}}</td>
+            <td>{{employee?.datebirth}}</td>
+            <td>{{employee?.address}}</td>
+            <td>{{employee?.job}}</td>
             <td>
                 <button class='btn-delete' (click)='delete(employee)'>Eliminar</button>
-                <button class='btn-verde' (click)='modify(employee)'>Modificar</button>
+                <button class='btn-verde' routerLink="/employees-managment/{{employee?._id}}">Modificar</button>
             </td>
             </tr>
         </tbody>

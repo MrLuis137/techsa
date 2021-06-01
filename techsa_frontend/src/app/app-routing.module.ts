@@ -15,6 +15,8 @@ import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.co
 import { ShopingCarComponent } from './views/shoping-car/shoping-car.component';
 import { DevicesManagmentComponent } from './views/devices-managment/devices-managment.component';
 import { SeervicesManagmentComponent } from './views/seervices-managment/seervices-managment.component';
+import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
+import { NewServicesFormComponent } from './views/new-services-form/new-services-form.component';
 
 
 
@@ -27,10 +29,13 @@ const routes: Routes = [
   //*Admin*
   //Employees-Management
   {path:'employees-managment',component: EployeesManagmentComponent},
+  {path:'employees-managment/:id',component: ModifyEmployeeComponent},
   {path:'new-employee',component: NewEmployeeComponent},
+
   
   //Services-Management
   {path:'seervices-managment',component: SeervicesManagmentComponent},
+  {path: 'new-service', component: NewServicesFormComponent},
 
   //Devices-Management
   {path:'devices-managment',component: DevicesManagmentComponent},
