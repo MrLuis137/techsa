@@ -1,4 +1,55 @@
 
+#page-title-text{
+    color: white;
+    font-family: Saira;
+    font-style: Bold;
+
+    text-align: center;
+
+}
+
+#page-subtitle-text{
+    color: white;
+    font-family: Saira;
+    font-style: medium;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+.internet-section {
+    align-items: center;
+    border-radius: 1em;
+    margin-top: 3rem;
+}
+
+
+
+
+
+.gradient30 {
+    background: linear-gradient(102.63deg, #7B61FF 18.44%, #0056D7 47.56%, #219653 92.2%);
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
+}
+
+.gradient50 {
+    background: linear-gradient(104.48deg, #219653 21.31%, #7B61FF 115.01%);
+
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
+}
+
+.gradient100 {
+    background: linear-gradient(103.57deg, #7B61FF -1.5%, #020202 68.14%);
+
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
+}
+
+.gradient200 {
+    background: linear-gradient(90.27deg, #D508F7 -5.25%, #219653 23.62%, #7B61FF 51.9%, #161925 83.18%, #0056D7 110.25%);
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
+}
+
 .card {
 
     border-color: #7B61FF;
@@ -7,6 +58,7 @@
     font-style: normal;
 
     width: 20rem;
+    margin-bottom: 3rem;
     /* text-align: center; */
 
     border-radius: 5px;
