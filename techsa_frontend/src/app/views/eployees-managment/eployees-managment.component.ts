@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-eployees-managment',
@@ -28,10 +29,11 @@ export class EployeesManagmentComponent implements OnInit {
     "job":'Administrador'
     }
   ]
-  constructor() { }
+  constructor(private base:UsersService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     //employees= 
+    console.log(await this.base.getGerente());
   }
   delete (employee:String){
     console.log("Eliminando empleado: ",employee)

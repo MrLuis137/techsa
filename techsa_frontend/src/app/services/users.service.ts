@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {User} from '../models/User'
+//import {User} from '../models/User'
 
 const baseUrl = "http://localhost:3000"
 
@@ -28,12 +28,20 @@ export class UsersService {
   constructor(private http: HttpClient) {
     
    }
-
+/*
    createUser(user:User){
     return this.request('post', `${baseUrl}/users`, user);
    }
 
    getUsers(){
      return this.request('post',`${baseUrl}/users`);
+   }*/
+   agregarGerente(values){
+    console.log('servicio',values)
+    return this.request('post',`${baseUrl}/new-gerente`,values)
    }
+   getGerente(){
+    return this.request('get', `${baseUrl}/get-gerente`);;
+   }
+    
 }

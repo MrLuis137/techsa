@@ -22,4 +22,5 @@ export class Gerente{
 
     @Column()
     contrasenia: String
+
 }

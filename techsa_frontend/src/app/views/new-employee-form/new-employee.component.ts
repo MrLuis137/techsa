@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 //Importar estos modulos, además hay que hacer un import de ReactiveFormsModule en app.module.ts
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
-import { NotificationsService} from 'angular2-notifications'
+
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-new-employee',
@@ -13,24 +14,21 @@ export class NewEmployeeComponent implements OnInit {
   newEmployeeForm: FormGroup
 
   //Importar el FormBuilder para construir el modelito.
-  constructor(private service:NotificationsService, private builder:FormBuilder  ) { 
+  constructor( private builder:FormBuilder , private base:UsersService ) { 
     this.newEmployeeForm =  this.builder.group({
       /*Nombre del campo: tipo de datos
       [''] por defecto el campo es vacío
       Se pueden agregar comprobaciones, pero no lo hice :v
       cualquier cosa, creo que en el video está como https://youtu.be/fP0XXKAWR1E
       */
+      id_laboral: [''],
       nombre: [''],
       apellido: [''],
       usuario: [''],
-      id_laboral: [''],
       cedula: [''],
       contrasenia: [''],
-      correo:[''],
-      residencia:[''],
-      //Tipo de datos para el datePiker (No se si así se llama xD)
       fechaNacimiento: [Date],
-      puesto: ['Administrador']
+      puesto: ['Gerente']
     })
   }
   ngOnInit(): void {
@@ -38,21 +36,12 @@ export class NewEmployeeComponent implements OnInit {
   }
   
   //La función que reciba el submit va a obtener un json con los datos del form
-  add(values){
-    console.log(values)
-    this.onSuccess("Agregado")
+  add(values:any){
+    console.log(values);
+    if (values.puesto == 'Gerente'){
+      this.base.agregarGerente(values)
+    }
   }
 
-  onSuccess(mesagge:String){
-    this.service.success(
-      'Success',
-      mesagge, 
-      {
-      position: ['bottom','right'],
-      animate: 'fade',
-      showProgressBar:true
-      }
-    )
-  }
 
 }
