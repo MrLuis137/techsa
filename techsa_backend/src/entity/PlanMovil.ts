@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, Connection, Repository, createConnection } from 'typeorm';
 import { Servicio } from './Servicio';
 
 @Entity()
@@ -24,4 +24,21 @@ export class PlanMovil{
     @Column()
     PecioLlamadas: number;
 
+}
+
+let connection:Connection;
+
+export async function getPlanMovilRepository(): Promise<Repository<PlanMovil>>{
+    if (connection = undefined) {
+        connection = await createConnection({
+            type: 'mysql',
+            database:'techsa',
+            synchronize:true,
+            entities:[
+                PlanMovil
+            ],
+        })
+    }
+
+    return connection.getRepository(PlanMovil)
 }
