@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MovileTelephonyService } from '../../services/moviletelephony.service';
+import { PlanMovil } from '../../models/PlanMovil';
+
 
 @Component({
   selector: 'app-movile-telephony-listing',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovileTelephonyListingComponent implements OnInit {
 
-  constructor() { }
+  dataSource = [];
+
+  constructor(public moviletelephonyservice: MovileTelephonyService) { }
 
   ngOnInit(): void {
+    this.refresh()
+  }
+
+  async refresh() {
+    console.log("From Telephony Listing");
+    console.log("Refres()")
+    const data = await this.moviletelephonyservice.getMobilePlans();
+    this.dataSource = data;
+    
   }
 
 }
