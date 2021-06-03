@@ -6,6 +6,7 @@ import { AgenteVentas } from '../entity/AgenteVentas';
 
 export const router: Router = Router();
 
+
 ///////////////////////////  Agente Ventas  //////////////////////////////////////
 //Falta modificar
 //GET Agentes de Ventas
