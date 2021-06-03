@@ -45,23 +45,23 @@ export class NewEmployeeComponent implements OnInit {
     console.log(data);
 
     const agentePrueba = new AgenteVentas();
-    agentePrueba.Nombre = "Andres";
-    agentePrueba.Cedula = 800;
-    agentePrueba.FechaNacimiento = new Date("2015-09-10T18:31:25.000Z");
+    agentePrueba.Nombre = "carlos";
+    agentePrueba.Cedula = 8000;
+    agentePrueba.FechaNacimiento = new Date("2015-07-10T18:31:25.000Z");
     agentePrueba.Puesto = "AgenteVentas";
-    agentePrueba.Usuario = "limon";
-    agentePrueba.Id_laboral = 2020;
+    agentePrueba.Usuario = "carlos";
+    agentePrueba.Id_laboral = 3030;
     agentePrueba.Contrasenia = "12345";
     await this.agenteVentasService.createAgenteVentas(agentePrueba);
 
-    await this.agenteVentasService.deleteAgenteVentas("12345");
+    await this.agenteVentasService.deleteAgenteVentas("2020");
   }
   ////Josue
   
   //La función que reciba el submit va a obtener un json con los datos del form
   async add(values:any){
     console.log(values);
-    console.log(await this.base.agregarEmployee(values))
+    //console.log(await this.base.agregarEmployee(values)) 
     
   }
 

@@ -10,6 +10,7 @@ export const router: Router = Router();
 //Falta modificar
 //GET Agentes de Ventas
 router.get('/agenteventas', async function(req: Request, res:Response, next:NextFunction){
+    console.log("get AgenteSSS de Ventas");
     try{
         const repository = await connect.getAgenteVentasRepository();
         const todosAgentes = await repository.find();
@@ -22,6 +23,7 @@ router.get('/agenteventas', async function(req: Request, res:Response, next:Next
 
 //GET Agente Ventas
 router.get('/agenteventas/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get Agente de ventas");
     try{
         const repository = await connect.getAgenteVentasRepository();
         const todosAgentes = await repository.findOne(req.params.id);
@@ -34,6 +36,7 @@ router.get('/agenteventas/:id',async function (req:Request, res:Response, next:N
 
 //CREATE Agente Ventas
 router.post('/agenteventas',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create Agente de Ventas");
     try{
         const repository = await connect.getAgenteVentasRepository();
         const newAgenteVentas = new AgenteVentas();
@@ -56,6 +59,7 @@ router.post('/agenteventas',async function (req:Request, res:Response, next:Next
 
 //*DELETE Agente Ventas
 router.delete('/agenteventas/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete Agentes de Ventas");
     try{
         const repository = await connect.getAgenteVentasRepository();
         await repository.delete(req.params.id)
