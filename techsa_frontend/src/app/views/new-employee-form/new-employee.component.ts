@@ -23,17 +23,13 @@ export class NewEmployeeComponent implements OnInit {
       Se pueden agregar comprobaciones, pero no lo hice :v
       cualquier cosa, creo que en el video está como https://youtu.be/fP0XXKAWR1E
       */
-      nombre: [''],
-      apellido: [''],
-      usuario: [''],
       id_laboral: [''],
+      nombre: [''],
+      usuario: [''],
       cedula: [''],
       contrasenia: [''],
-      correo:[''],
-      residencia:[''],
-      //Tipo de datos para el datePiker (No se si así se llama xD)
       fechaNacimiento: [Date],
-      puesto: ['Administrador']
+      puesto: ['Gerente']
     })
   }
   ngOnInit(): void {
@@ -63,21 +59,11 @@ export class NewEmployeeComponent implements OnInit {
   ////Josue
   
   //La función que reciba el submit va a obtener un json con los datos del form
-  add(values){
-    console.log(values)
-    this.onSuccess("Agregado")
+  async add(values:any){
+    console.log(values);
+    console.log(await this.base.agregarEmployee(values))
+    
   }
 
-  onSuccess(mesagge:String){
-    this.service.success(
-      'Success',
-      mesagge, 
-      {
-      position: ['bottom','right'],
-      animate: 'fade',
-      showProgressBar:true
-      }
-    )
-  }
 
 }

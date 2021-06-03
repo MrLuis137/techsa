@@ -21,7 +21,7 @@ createConnection().then(async connection => {
     const contratoRepository = connection.getRepository(Contrato);
     const planMovilRepository = connection.getRepository(PlanMovil);
     const planMovilDispositivo = connection.getRepository(PlanMovilDispositivo);
-
+    const gerenteRepository = connection.getRepository(Gerente);
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     //                                  Cliente
@@ -103,6 +103,35 @@ createConnection().then(async connection => {
     //                                  Servicios
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //                                  Gerente
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    app.post("/new-gerente" , async function (req: Request, res: Response) {
+        console.log("Entra al backend")
+        const gerente = await gerenteRepository.create(req.body);
+        console.log('gerente',gerente)
+        const results = await gerenteRepository.save(gerente);
+        console.log('results',results)
+        return res.send(results);
+        
+    } )
+    app.get("/get-gerente"), async function (req: Request, res: Response){
+        try {
+            console.log('backend')
+            const results = planMovilRepository.find();
+            console.log('results')
+            res.send(results);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //                                  Gerente
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+
     app.listen(3000);
     console.log("Servidor iniciado")
 

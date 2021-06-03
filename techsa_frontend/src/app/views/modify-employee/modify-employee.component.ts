@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-modify-employee',
@@ -9,51 +10,34 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModifyEmployeeComponent implements OnInit {
   modifyEmployeeForm: FormGroup;
-  data= {address: "",
-  datebirth: "",
-  email: "",
-  id: 0,
-  job: "",
-  name: "",
-  password: "",
-  workid: 0,
-  _id: 0};
-  constructor(private builder:FormBuilder, private _ac:ActivatedRoute) { 
+  data= [{id : -1,id_laboral: -1,nombre: '',usuario: '',cedula: -1,
+  fechaNacimiento: '',puesto: '',contrasenia: ''}];
+
+  constructor(private builder:FormBuilder, private _ac:ActivatedRoute,
+    private base:UsersService) { 
     this.modifyEmployeeForm =  this.builder.group({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      EmployeeId:new FormControl(),
-      workid: new FormControl(),
-      datebirth: new FormControl(),
-      password:new FormControl(),
-      job:new FormControl(),
-      email:new FormControl(),
-      id:new FormControl(),
-      address:new FormControl()
+      id :new FormControl(),
+        id_laboral:new FormControl(),
+        nombre: new FormControl(),
+        usuario: new FormControl(),
+        cedula: new FormControl(),
+       fechaNacimiento: new FormControl(),
+       puesto:new FormControl(),
+       contrasenia: new FormControl()
     });
     
   }
 
-  ngOnInit(): void {
-    this._ac.paramMap.subscribe(param =>{
-      const id =param.get('id')
-      //TRAER LOS DATOS DE BASE y asignarlos al modifyEmployeeForm     
+   ngOnInit() {
+    this._ac.paramMap.subscribe(async param =>{
+      const id =param.get('id_laboral');
+      this.data = await this.base.getEmployee(id)
+      this.modifyEmployeeForm.setValue(this.data[0]);  
     })
-    this.modifyEmployeeForm.setValue({address: "Turrialba",
-     datebirth: "13/12/2000",
-     email: "allisonSolno@gmail.com",
-     EmployeeId: 25478,
-     job: "Empleado",
-     firstName: "Allison",
-     lastName:"Solano",
-     password: "AllisonContrasena",
-     workid: 125478,
-     id: 1})
-     console.log(this.data)
   }
   modify(values){
-    //Eviar a la base los datos y manejar si hay errores
-    console.log(values)
+    console.log(this.base.modifyEmployee(this.data[0].id,this.data[0].puesto,values))
+    
   }
 
 }
