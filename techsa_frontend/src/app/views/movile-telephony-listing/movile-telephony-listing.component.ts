@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { PlanMovil } from '../../models/PlanMovil';
 
@@ -19,10 +20,9 @@ export class MovileTelephonyListingComponent implements OnInit {
   }
 
   async refresh() {
-    console.log("From Telephony Listing");
-    console.log("Refres()")
+
     const data = await this.moviletelephonyservice.getMobilePlans();
-    this.dataSource = data;
+    console.log(data);
     
   }
 

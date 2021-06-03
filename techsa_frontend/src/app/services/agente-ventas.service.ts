@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PlanMovil } from '../models/PlanMovil';
+import { AgenteVentas } from '../models/AgenteVentas';
 
 const baseUrl = "http://localhost:4201"
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class MovileTelephonyService {
+export class AgenteVentasService {
 
   constructor(private http:HttpClient) { }
 
+  //Hace el request al backend
   private async request(method: string, url:string, data?:any, responseType?:any){
     
     console.log('request' + JSON.stringify(data));
@@ -27,8 +27,20 @@ export class MovileTelephonyService {
     });
   }
 
-  getMobilePlans(){
-    return this.request('get',`${baseUrl}/planmovil`)
+  getAgenteVentasAll(){
+    return this.request('get', `${baseUrl}/agenteventas`);
+  }
 
+  getAgenteVentasbyId(id:string){
+    return this.request('get', `${baseUrl}/agenteventas/${id}`);
+  }
+
+  createAgenteVentas( agenteVentas:AgenteVentas ){
+    console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
+    return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
+  }
+
+  deleteAgenteVentas( id:string ){
+    return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
   }
 }

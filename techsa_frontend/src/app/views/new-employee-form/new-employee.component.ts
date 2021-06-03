@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 //Importar estos modulos, además hay que hacer un import de ReactiveFormsModule en app.module.ts
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { NotificationsService} from 'angular2-notifications'
+import { async } from '@angular/core/testing';
+import { AgenteVentasService } from '../../services/agente-ventas.service';
+import { AgenteVentas } from '../../models/AgenteVentas';
 
 @Component({
   selector: 'app-new-employee',
@@ -13,7 +16,7 @@ export class NewEmployeeComponent implements OnInit {
   newEmployeeForm: FormGroup
 
   //Importar el FormBuilder para construir el modelito.
-  constructor(private service:NotificationsService, private builder:FormBuilder  ) { 
+  constructor(private service:NotificationsService, private builder:FormBuilder, public agenteVentasService:AgenteVentasService  ) { 
     this.newEmployeeForm =  this.builder.group({
       /*Nombre del campo: tipo de datos
       [''] por defecto el campo es vacío
@@ -34,8 +37,30 @@ export class NewEmployeeComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+  ////Josue
+  this.refresh();
+  ////Josue
     
   }
+
+  ////Josue
+  async refresh() {
+    const data = await this.agenteVentasService.getAgenteVentasAll();
+    console.log(data);
+
+    const agentePrueba = new AgenteVentas();
+    agentePrueba.Nombre = "Andres";
+    agentePrueba.Cedula = 800;
+    agentePrueba.FechaNacimiento = new Date("2015-09-10T18:31:25.000Z");
+    agentePrueba.Puesto = "AgenteVentas";
+    agentePrueba.Usuario = "limon";
+    agentePrueba.Id_laboral = 2020;
+    agentePrueba.Contrasenia = "12345";
+    await this.agenteVentasService.createAgenteVentas(agentePrueba);
+
+    await this.agenteVentasService.deleteAgenteVentas("12345");
+  }
+  ////Josue
   
   //La función que reciba el submit va a obtener un json con los datos del form
   add(values){
