@@ -53,7 +53,6 @@ export class NewEmployeeComponent implements OnInit {
     agentePrueba.Id_laboral = 3030;
     agentePrueba.Contrasenia = "12345";
     await this.agenteVentasService.createAgenteVentas(agentePrueba);
-
     await this.agenteVentasService.deleteAgenteVentas("2020");
   }
   ////Josue
