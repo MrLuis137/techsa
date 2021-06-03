@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, createConnection, Connection, Repository} from 'typeorm';
 import { Servicio } from './Servicio';
 
 @Entity()
@@ -7,7 +7,7 @@ export class PlanMovil{
     ID: number;
 
     @ManyToOne(type => Servicio)
-    IdServicio:Servicio
+    idServicioId:Servicio
 
     @Column()
     TipoPlan: String;

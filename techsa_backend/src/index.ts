@@ -87,8 +87,9 @@ createConnection().then(async connection => {
     }
 
     app.get("/planmovil"), async function (req: Request, res: Response){
+        console.log("omh")
         const results = planMovilRepository.find();
-        res.send(results);
+        return res.send(results);
     }
 
     app.get("/planmovil:id"), async function (req: Request, res: Response){
