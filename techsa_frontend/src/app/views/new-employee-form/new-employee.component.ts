@@ -23,7 +23,6 @@ export class NewEmployeeComponent implements OnInit {
       */
       id_laboral: [''],
       nombre: [''],
-      apellido: [''],
       usuario: [''],
       cedula: [''],
       contrasenia: [''],
@@ -36,11 +35,10 @@ export class NewEmployeeComponent implements OnInit {
   }
   
   //La función que reciba el submit va a obtener un json con los datos del form
-  add(values:any){
+  async add(values:any){
     console.log(values);
-    if (values.puesto == 'Gerente'){
-      this.base.agregarGerente(values)
-    }
+    console.log(await this.base.agregarEmployee(values))
+    
   }
 
 

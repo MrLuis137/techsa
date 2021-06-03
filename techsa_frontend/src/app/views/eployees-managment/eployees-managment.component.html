@@ -11,25 +11,25 @@
                 <th scope="col">ID laboral</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Contraseña</th>
-                <th scope="col">Correo</th>
                 <th scope="col">Fecha Nacimiento</th>
-                <th scope="col">Dirección</th>
                 <th scope="col">Puesto</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Cédula</th>
                 <th scope="col">Función</th>
             </tr>
         </thead>
         <tbody *ngFor='let employee of employees'>
             <tr>
-            <td>{{employee?.workid}}</td>
-            <td>{{employee?.name}}</td>
-            <td>{{employee?.password}}</td>
-            <td>{{employee?.email}}</td>
-            <td>{{employee?.datebirth}}</td>
-            <td>{{employee?.address}}</td>
-            <td>{{employee?.job}}</td>
+            <td>{{employee?.id_laboral}}</td>
+            <td>{{employee?.nombre}}</td>
+            <td>{{employee?.contrasenia}}</td>
+            <td>{{employee?.fechaNacimiento}}</td>
+            <td>{{employee?.puesto}}</td>
+            <td>{{employee?.usuario}}</td>
+            <td>{{employee?.cedula}}</td>
             <td>
-                <button class='btn-delete' (click)='delete(employee)'>Eliminar</button>
-                <button class='btn-verde' routerLink="/employees-managment/{{employee?._id}}">Modificar</button>
+                <button class='btn-delete' (click)='delete(employee?.id,employee?.puesto)'>Eliminar</button>
+                <button class='btn-verde' routerLink="/employees-managment/{{employee?.id_laboral}}">Modificar</button>
             </td>
             </tr>
         </tbody>

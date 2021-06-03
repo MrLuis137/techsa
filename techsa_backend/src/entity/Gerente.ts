@@ -3,8 +3,11 @@ import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 @Entity()
 export class Gerente{
     @PrimaryGeneratedColumn()
-    id_laboral:number;
+    id:number;
     
+    @Column()
+    id_laboral: number;
+
     @Column()
     nombre: string;
 

@@ -1,1 +1,28 @@
-<p>devices-managment works!</p>
+<br>
+    <button routerLink="/new-device" class='btn-verde' >Agregar Dispositivo</button>
+    <br>
+    <br>
+<div class="row row-cols1 row-cols-md-3 g-4">
+    
+    <div class="col" *ngFor='let device of data'>
+        <div class="card text-center" >
+    
+            <img src={{device?.Imagen}} class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">  <span class="badge rounded-pill">{{device.Marca}}{{device.Modelo}}</span>  </h5>
+                <h6 class="card-subtitle">₡{{device.Precio}}</h6>
+                <p class="card-text">
+                    Almacenamiento: {{device.Almacenamiento}} GB
+                    <br>RAM: {{device.Ram}}
+                    <br>Cantidad: {{device.Cantidad}} unidades
+                    <br>Color: Todos
+                    <br>Cantidad 20</p>
+        
+                <button (click)='delete(device.id)' class="btnRojo">Eliminar</button>
+                <a href="/devices-listing" class="btn">Modificar</a>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
