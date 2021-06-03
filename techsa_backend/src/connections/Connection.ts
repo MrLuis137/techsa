@@ -3,14 +3,15 @@ import { PlanMovil } from '../entity/PlanMovil';
 import { Servicio } from '../entity/Servicio';
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
-import { Cliente } from '../../../techsa_frontend/src/app/models/Cliente';
-import { Contrato } from '../../../techsa_frontend/src/app/models/Contrato';
-import { PlanFijo } from '../../../techsa_frontend/src/app/models/PlanFijo';
-import { PlanInternet } from '../../../techsa_frontend/src/app/models/PlanInternet';
-import { PlanInternetPlanFijo } from '../../../techsa_frontend/src/app/models/PlanInternetPlanFijo';
-import { PlanInternetPlanMovil } from '../../../techsa_frontend/src/app/models/PlanIntertnetPlanMovil';
-import { PlanMovilDispositivo } from '../../../techsa_frontend/src/app/models/PlanMovilDispositivo';
-import { Dispositivo } from '../../../techsa_frontend/src/app/models/Dispositivo';
+
+import { Cliente } from '../entity/Cliente';
+import { Contrato } from '../entity/Contrato';
+import { PlanFijo } from '../entity/PlanFijo';
+import { PlanInternet } from '../entity/PlanInternet';
+import { PlanInternetPlanFijo } from '../entity/PlanInternetPlanFijo';
+import { PlanInternetPlanMovil } from '../entity/PlanIntertnetPlanMovil';
+import { PlanMovilDispositivo } from '../entity/PlanMovilDispositivo';
+import { Dispositivo } from '../entity/Dispositivo';
 
 
 //Acá en teoría es donde se realizan las peticiones a la base de datos 
