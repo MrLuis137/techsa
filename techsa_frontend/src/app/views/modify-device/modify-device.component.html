@@ -3,7 +3,8 @@
     <h1>Modificar teléfono</h1>
     <!--
     -->
-    <form  [formGroup] = "newDeviceForm" (ngSubmit)="modify(newDeviceForm.value)">
+    <form>
+    <!-- <form  [formGroup] ="newDeviceForm" (ngSubmit)="modify(newDeviceForm.value)"> -->
       <br>
       <div class="div-form">
       <div >
@@ -15,7 +16,8 @@
               <option>Huawei</option>
               <option>Xiaomi</option>
             </select>
-        </div><br>
+        </div>
+        <br>
   
         <div class="form-group">
           <label  class="form-label">Modelo</label>

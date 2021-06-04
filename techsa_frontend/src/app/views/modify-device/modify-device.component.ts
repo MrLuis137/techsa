@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService} from '../../services/device.service';
 import { ActivatedRoute } from '@angular/router';
+import { Dispositivo } from '../../models/Dispositivo';
 
 @Component({
   selector: 'app-modify-device',
   templateUrl: './modify-device.component.html',
   styleUrls: ['./modify-device.component.css']
 })
-export class ModifyDeviceComponent implements OnInit {
-
+export class ModifyDeviceComponent implements OnInit {  
   constructor(
     private deviceService:DeviceService,
     private _ac:ActivatedRoute
