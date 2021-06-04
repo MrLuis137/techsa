@@ -15,7 +15,7 @@ export class PlanInternetPlanFijo{
     @ManyToOne(type => PlanInternet)
     IdPlanInternet:Servicio
     
-    @ManyToOne(type => PlanMovil)
+    @ManyToOne(type => PlanFijo)
     IdPlanFijo:Servicio
 
     @Column()

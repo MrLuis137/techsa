@@ -11,21 +11,3 @@ export class Servicio{
     Nombre: String;
 
 }
-
-let connection:Connection;
-
-export async function getServicioRepository(): Promise<Repository<Servicio>>{
-    if(connection == undefined){
-        connection = await createConnection({
-            type:'mysql',
-            database:'techsa',
-            username:'techsa',
-            password:'techsa',
-            synchronize:true,
-            entities: [
-                Servicio
-            ],
-        });
-    }
-    return connection.getRepository(Servicio);
-}

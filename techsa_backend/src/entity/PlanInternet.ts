@@ -20,6 +20,5 @@ export class PlanInternet{
 
     @Column()
     PrecioMensual:Number;
-
-
+    
 }

@@ -48,7 +48,6 @@ router.post('/agenteventas',async function (req:Request, res:Response, next:Next
         newAgenteVentas.Cedula = req.body.Cedula;
         newAgenteVentas.FechaNacimiento = req.body.FechaNacimiento;
         newAgenteVentas.Puesto = req.body.Puesto;
-        newAgenteVentas.Usuario = req.body.Usuario;
         newAgenteVentas.Id_laboral = req.body.Id_laboral;
         newAgenteVentas.Contrasenia = req.body.Contrasenia;
         
@@ -111,7 +110,6 @@ router.post('/gerente',async function (req:Request, res:Response, next:NextFunct
         newGerente.Cedula = req.body.Cedula;
         newGerente.FechaNacimiento = req.body.FechaNacimiento;
         newGerente.Puesto = req.body.Puesto;
-        newGerente.Usuario = req.body.Usuario;
         newGerente.Id_laboral = req.body.Id_laboral;
         newGerente.Contrasenia = req.body.Contrasenia;
         
@@ -178,7 +176,8 @@ router.post('/dispositivo',async function (req:Request, res:Response, next:NextF
         newDispositivo.Precio = req.body.Precio;
         newDispositivo.Cantidad = req.body.Cantidad;
         newDispositivo.Imagen = req.body.Imagen;
-        
+        newDispositivo.Camara = req.body.Camara;
+        newDispositivo.Color = req.body.Camara;
         const resultado = await repository.save(newDispositivo);
         res.send(resultado);
     }

@@ -9,9 +9,6 @@ export class AgenteVentas{
     Nombre: string;
 
     @Column()
-    Usuario: string;
-
-    @Column()
     Cedula: number;
 
     @Column()

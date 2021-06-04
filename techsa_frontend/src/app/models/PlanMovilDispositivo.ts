@@ -3,4 +3,5 @@ export class PlanMovilDispositivo{
     IdPlan: number;
     IdDispositivo: number;
     Precio: number;
+    IdServicio:number;
 }

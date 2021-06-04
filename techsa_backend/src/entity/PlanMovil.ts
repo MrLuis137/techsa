@@ -22,6 +22,12 @@ export class PlanMovil{
     PrecioMensual:Number;
 
     @Column()
-    PecioLlamadas: number;
+    Minutos: number;
+
+    @Column()
+    GBInternet: number;
+
+    @Column()
+    CostoLlamada: number;
 
 }

@@ -11,7 +11,7 @@ import { Cliente } from './entity/Cliente';
 import { Contrato } from './entity/Contrato';
 import { AgenteVentas } from './entity/AgenteVentas';
 import { PlanInternet } from './entity/PlanInternet';
-import { PlanInternetPlanMovil } from './entity/PlanIntertnetPlanMovil';
+import { PlanInternetPlanMovilPlanFijo } from './entity/PlanIntertnetPlanMovilPlanFijo';
 import { PlanMovil } from './entity/PlanMovil';
 import { PlanMovilDispositivo } from './entity/PlanMovilDispositivo';
 
@@ -73,7 +73,7 @@ createConnection().then(async connection => {
     app.post("/planmovil", async function(req: Request, res: Response){
         const servicio = await  servicioRepository.create({Nombre:'Plan_Movil'});
         let planMovil = await planMovilRepository.create(req.body);
-        planMovil[0].IdServicio = servicio;
+        planMovil[0].idServicioId = servicio;
         servicioRepository.save(servicio);
         const result = planMovilRepository.save(planMovil);
         res.send(result)

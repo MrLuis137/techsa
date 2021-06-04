@@ -9,7 +9,7 @@ import { Contrato } from '../entity/Contrato';
 import { PlanFijo } from '../entity/PlanFijo';
 import { PlanInternet } from '../entity/PlanInternet';
 import { PlanInternetPlanFijo } from '../entity/PlanInternetPlanFijo';
-import { PlanInternetPlanMovil } from '../entity/PlanIntertnetPlanMovil';
+import { PlanInternetPlanMovilPlanFijo } from '../entity/PlanIntertnetPlanMovilPlanFijo';
 import { PlanMovilDispositivo } from '../entity/PlanMovilDispositivo';
 import { Dispositivo } from '../entity/Dispositivo';
 
@@ -30,7 +30,7 @@ export async function connect(){
         entities: [
             PlanMovil,Servicio, AgenteVentas, Gerente, Cliente, 
             Contrato, PlanFijo,PlanInternet, PlanInternetPlanFijo,
-            PlanInternetPlanMovil, PlanMovilDispositivo,Dispositivo
+            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo
         ],
     });
 }

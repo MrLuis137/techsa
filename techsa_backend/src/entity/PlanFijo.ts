@@ -16,15 +16,15 @@ export class PlanFijo{
     PrecioMensual:Number;
 
     @Column()
-    CantMinutos: number;
+    Minutos: number;
 
     @Column()
-    TarifaAdicFijoTechsa: number;
+    FijoTechsa: number;
 
     @Column()
-    TarifaAdicFijoOtroOperador: number;
+    FijoOperador: number;
 
     @Column()
-    TarifaAdicmovil: number;
+    MovilCualquiera: number;
 
 }

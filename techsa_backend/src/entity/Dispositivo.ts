@@ -13,6 +13,12 @@ export class Dispositivo{
     Marca: String;
 
     @Column()
+    Color: String;
+
+    @Column()
+    Camara: number;
+
+    @Column()
     Ram: number;
 
     @Column()

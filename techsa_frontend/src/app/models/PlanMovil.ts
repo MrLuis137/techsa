@@ -5,5 +5,7 @@ export class PlanMovil{
     NombrePlan: String;
     Descripcion: String;
     PrecioMensual:Number;
-    PecioLlamadas: number;
+    Minutos: number;
+    GBInternet: number;
+    CostoLlamada:number;
 }

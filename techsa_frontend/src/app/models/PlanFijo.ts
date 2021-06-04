@@ -3,8 +3,8 @@ export class PlanFijo{
     IdServicio:number;
     NombrePlan: String;
     PrecioMensual:Number;
-    CantMinutos: number;
-    TarifaAdicFijoTechsa: number;
-    TarifaAdicFijoOtroOperador: number;
-    TarifaAdicmovil: number;
+    Minutos: number;
+    FijoTechsa: number;
+    FijoOperador: number;
+    MovilCualquiera: number;
 }

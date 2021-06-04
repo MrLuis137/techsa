@@ -21,6 +21,5 @@ export class Cliente{
     NombreUsuario: String;
 
     @Column()
-
     Contrasenia: String;
 }

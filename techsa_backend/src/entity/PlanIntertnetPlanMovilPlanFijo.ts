@@ -2,9 +2,10 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import { Servicio } from './Servicio';
 import { PlanInternet } from './PlanInternet';
 import { PlanMovil } from './PlanMovil';
+import { PlanFijo } from './PlanFijo';
 
 @Entity()
-export class PlanInternetPlanMovil{
+export class PlanInternetPlanMovilPlanFijo{
     @PrimaryGeneratedColumn('increment')
     ID: number;
 
@@ -15,7 +16,10 @@ export class PlanInternetPlanMovil{
     IdPlanInternet:Servicio
     
     @ManyToOne(type => PlanMovil)
-    IdPlanFijo:PlanMovil
+    IdPlanMovil:PlanMovil
+
+    @ManyToOne(type => PlanFijo)
+    IdPlanFijo:PlanFijo
 
     @Column()
     PrecioMensual:Number;
