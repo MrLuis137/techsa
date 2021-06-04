@@ -2,6 +2,8 @@ import {NextFunction, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
 import {getConnectionManager} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
+import { Gerente } from '../entity/Gerente';
+import { Dispositivo } from '../entity/Dispositivo';
 
 
 export const router: Router = Router();
@@ -63,6 +65,133 @@ router.delete('/agenteventas/:id',async function (req:Request, res:Response, nex
     console.log("delete Agentes de Ventas");
     try{
         const repository = await connect.getAgenteVentasRepository();
+        await repository.delete(req.params.id)
+        res.send('OK');
+    }
+    catch(err){
+        return next(err);
+    }
+});
+///////////////////////////  Gerente  //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+//GET Gerentes
+router.get('/gerente', async function(req: Request, res:Response, next:NextFunction){
+    console.log("get gerentes");
+    try{
+        const repository = await connect.getGerenteRepository();
+        const todosGerente = await repository.find();
+        res.send(todosGerente);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//GET Gerente
+router.get('/gerente/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get Gerente por id");
+    try{
+        const repository = await connect.getGerenteRepository();
+        const gerente = await repository.findOne(req.params.id);
+        res.send(gerente);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//CREATE Agente Ventas
+router.post('/gerente',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create Gerente");
+    try{
+        const repository = await connect.getGerenteRepository();
+        const newGerente = new Gerente();
+        console.log(req.body)
+        newGerente.Nombre = req.body.Nombre;
+        newGerente.Cedula = req.body.Cedula;
+        newGerente.FechaNacimiento = req.body.FechaNacimiento;
+        newGerente.Puesto = req.body.Puesto;
+        newGerente.Usuario = req.body.Usuario;
+        newGerente.Id_laboral = req.body.Id_laboral;
+        newGerente.Contrasenia = req.body.Contrasenia;
+        
+        const resultado = await repository.save(newGerente);
+        res.send(resultado);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//*DELETE Agente Ventas
+router.delete('/gerente/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete Gerente");
+    try{
+        const repository = await connect.getGerenteRepository();
+        await repository.delete(req.params.id)
+        res.send('OK');
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+///////////////////////////  Dispositivo  //////////////////////////////////////
+//Falta modificar
+//GET Dispositivo
+router.get('/dispositivo', async function(req: Request, res:Response, next:NextFunction){
+    console.log("get dispositivo");
+    try{
+        const repository = await connect.getDispositivoRepository();
+        const todosDispositivos = await repository.find();
+        res.send(todosDispositivos);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//GET dispositivo
+router.get('/dispositivo/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get dispositivo");
+    try{
+        const repository = await connect.getDispositivoRepository();
+        const dispositivo = await repository.findOne(req.params.id);
+        res.send(dispositivo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//CREATE dispositivo
+router.post('/dispositivo',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create dispositivo");
+    try{
+        const repository = await connect.getDispositivoRepository();
+        const newDispositivo = new Dispositivo();
+        console.log(req.body)
+        newDispositivo.Modelo = req.body.Modelo;
+        newDispositivo.Marca = req.body.Marca;
+        newDispositivo.Ram = req.body.Ram;
+        newDispositivo.Almacenamiento = req.body.Almacenamiento;
+        newDispositivo.Precio = req.body.Precio;
+        newDispositivo.Cantidad = req.body.Cantidad;
+        newDispositivo.Imagen = req.body.Imagen;
+        
+        const resultado = await repository.save(newDispositivo);
+        res.send(resultado);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//*DELETE dispositivo
+router.delete('/dispositivo/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete dispositivo");
+    try{
+        const repository = await connect.getDispositivoRepository();
         await repository.delete(req.params.id)
         res.send('OK');
     }

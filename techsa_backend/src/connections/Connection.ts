@@ -36,7 +36,14 @@ export async function connect(){
 }
 
 ///////////////////////////  Gerente //////////////////////////////////////
-//Falta agregar, modificar, eliminar y get:id
+//Falta modificar
+export async function getGerenteRepository(): Promise<Repository<Gerente>>{
+    console.log("getGerenteRepository")
+    if(connection == undefined){  //Si la coneccion es indefinida, llama a la función de arriba para conectarse
+        await connect();
+    }
+    return connection.getRepository(Gerente);  //Retorna el repositorio
+}
 
 ///////////////////////////  Agente de Ventas /////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
@@ -48,6 +55,15 @@ export async function getAgenteVentasRepository(): Promise<Repository<AgenteVent
     return connection.getRepository(AgenteVentas);  //Retorna el repositorio
 }
 
+///////////////////////////  Dispositivos //////////////////////////////////////
+//Falta modificar
+export async function getDispositivoRepository(): Promise<Repository<Dispositivo>>{
+    console.log("getDispositivosRepository")
+    if(connection == undefined){  //Si la coneccion es indefinida, llama a la función de arriba para conectarse
+        await connect();
+    }
+    return connection.getRepository(Dispositivo);  //Retorna el repositorio
+}
 
 ///////////////////////////  Plan Movil  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id

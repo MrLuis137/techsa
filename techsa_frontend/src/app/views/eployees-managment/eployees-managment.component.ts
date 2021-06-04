@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { AgenteVentasService } from '../../services/agente-ventas.service';
+import { GerenteService } from '../../services/gerente.service';
 
 @Component({
   selector: 'app-eployees-managment',
@@ -7,16 +8,28 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./eployees-managment.component.css']
 })
 export class EployeesManagmentComponent implements OnInit {
+
   employees = []
-  constructor(private base:UsersService) { }
+
+  constructor( 
+    private agenteVentasService:AgenteVentasService,
+    private gerenteService: GerenteService
+    ) { }
 
   async ngOnInit() {
-    this.employees = await this.base.getEmployees()
+    this.employees = await this.agenteVentasService.getAgenteVentasAll();
+    this.employees=this.employees.concat(await this.gerenteService.getGerenteAll());
     console.log(this.employees);
   }
-  delete (employeeID:number,employeePuesto:String){
+
+  async delete (employeeID:string,employeePuesto:String){
     console.log("Eliminando empleado: ",employeeID,employeePuesto)
-    this.base.deleteEmployee(employeeID,employeePuesto)
+    if (employeePuesto == 'Gerente'){
+      await this.gerenteService.deleteGerente(employeeID)
+    }else{
+      await this.agenteVentasService.deleteAgenteVentas(employeeID);
+    }
+    
     
   }
 

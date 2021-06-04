@@ -20,16 +20,16 @@
         </thead>
         <tbody *ngFor='let employee of employees'>
             <tr>
-            <td>{{employee?.id_laboral}}</td>
-            <td>{{employee?.nombre}}</td>
-            <td>{{employee?.contrasenia}}</td>
-            <td>{{employee?.fechaNacimiento}}</td>
-            <td>{{employee?.puesto}}</td>
-            <td>{{employee?.usuario}}</td>
-            <td>{{employee?.cedula}}</td>
+            <td>{{employee?.Id_laboral}}</td>
+            <td>{{employee?.Nombre}}</td>
+            <td>{{employee?.Contrasenia}}</td>
+            <td>{{employee?.FechaNacimiento}}</td>
+            <td>{{employee?.Puesto}}</td>
+            <td>{{employee?.Usuario}}</td>
+            <td>{{employee?.Cedula}}</td>
             <td>
-                <button class='btn-delete' (click)='delete(employee?.id,employee?.puesto)'>Eliminar</button>
-                <button class='btn-verde' routerLink="/employees-managment/{{employee?.id_laboral}}">Modificar</button>
+                <button class='btn-delete' (click)='delete(employee?.Id_laboral,employee?.Puesto)'>Eliminar</button>
+                <button class='btn-verde' routerLink="/employees-managment/{{employee?.Id_laboral}}">Modificar</button>
             </td>
             </tr>
         </tbody>

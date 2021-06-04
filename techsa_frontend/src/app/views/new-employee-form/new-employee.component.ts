@@ -5,6 +5,7 @@ import { NotificationsService} from 'angular2-notifications'
 import { async } from '@angular/core/testing';
 import { AgenteVentasService } from '../../services/agente-ventas.service';
 import { AgenteVentas } from '../../models/AgenteVentas';
+import { Gerente } from '../../models/Gerente';
 
 @Component({
   selector: 'app-new-employee',
@@ -33,36 +34,34 @@ export class NewEmployeeComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-  ////Josue
-  this.refresh();
-  ////Josue
     
   }
-
-  ////Josue
-  async refresh() {
-    const data = await this.agenteVentasService.getAgenteVentasAll();
-    console.log(data);
-
-    const agentePrueba = new AgenteVentas();
-    agentePrueba.Nombre = "carlos";
-    agentePrueba.Cedula = 8000;
-    agentePrueba.FechaNacimiento = new Date("2015-07-10T18:31:25.000Z");
-    agentePrueba.Puesto = "AgenteVentas";
-    agentePrueba.Usuario = "carlos";
-    agentePrueba.Id_laboral = 3030;
-    agentePrueba.Contrasenia = "12345";
-    await this.agenteVentasService.createAgenteVentas(agentePrueba);
-    await this.agenteVentasService.deleteAgenteVentas("2020");
-  }
-  ////Josue
   
-  //La función que reciba el submit va a obtener un json con los datos del form
   async add(values:any){
-    console.log(values);
-    //console.log(await this.base.agregarEmployee(values)) 
+    var empleado:any;
+    if (values.puesto=='Gerente'){
+      empleado = new Gerente();
+      empleado = this.setEmployee(empleado,values)
+      //await this.gerenteService.createGerente(empleado);
+    }
+    else{
+      empleado = new AgenteVentas();
+      empleado = this.setEmployee(empleado,values)
+      await this.agenteVentasService.createAgenteVentas(empleado);
+    }
+    
+    
     
   }
-
+  setEmployee(empleado:any,values:any):any {
+    empleado.Nombre = values.nombre;
+    empleado.Cedula = values.cedula;
+    empleado.FechaNacimiento = new Date(values.fechaNacmiento);
+    empleado.Puesto = values.puesto;
+    empleado.Usuario = values.usuario;
+    empleado.Id_laboral = values.id_laboral;
+    empleado.Contrasenia = values.contrasenia;
+    return empleado
+  }
 
 }

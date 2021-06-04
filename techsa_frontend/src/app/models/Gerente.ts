@@ -1,5 +1,6 @@
 
 export class Gerente{
+    id:number;
     id_laboral:number;
     nombre: string;
     usuario: string;
@@ -7,6 +8,4 @@ export class Gerente{
     fechaNacimiento: Date;
     puesto: String;
     contrasenia: String;
-    correo:String;
-    residencia:String;
 }

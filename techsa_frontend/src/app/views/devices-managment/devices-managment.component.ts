@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
   selector: 'app-devices-managment',
@@ -8,15 +8,15 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class DevicesManagmentComponent implements OnInit {
   data=[]
-  constructor(private base:UsersService) { }
+  constructor(private base:DeviceService) { }
 
   async ngOnInit() {
-    this.data=await this.base.getDevices();
+    this.data=await this.base.getDispositivoAll();
   }
-  async delete(deviceId:number){
+  async delete(deviceId:string){
     console.log(deviceId)
-    this.base.deleteDevice(deviceId)
-    this.data=await this.base.getDevices();
+    this.base.deleteDispositivo(deviceId)
+    this.data=await this.base.getDispositivoAll();
   }
 
 }

@@ -27,6 +27,7 @@ import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.comp
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     CoverageAreasComponent,
     ClientNavbarComponent,
     AdminNavbarComponent,
-    ModifyEmployeeComponent
+    ModifyEmployeeComponent,
+    ModifyDeviceComponent
   ],
   imports: [
     BrowserModule,

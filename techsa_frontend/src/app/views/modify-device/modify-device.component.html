@@ -1,0 +1,59 @@
+<div class="div-ext-form">
+    <br>
+    <h1>Modificar teléfono</h1>
+    <!--
+    -->
+    <form  [formGroup] = "newDeviceForm" (ngSubmit)="modify(newDeviceForm.value)">
+      <br>
+      <div class="div-form">
+      <div >
+        <div class="form-group">
+            <label class="form-label">Marca</label>
+            <select formControlName="Marca" #job class="form-control" id="job" required="">
+              <option>Apple</option>
+              <option>Samsung</option>
+              <option>Huawei</option>
+              <option>Xiaomi</option>
+            </select>
+        </div><br>
+  
+        <div class="form-group">
+          <label  class="form-label">Modelo</label>
+          <input formControlName="Modelo" #model type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+        </div><br>
+          
+        <div class="form-group">
+          <label class="form-label">Ram</label>
+            <input formControlName="Ram" #id type="number" class="form-control" id="id" placeholder="" required="">
+          
+        </div><br>        
+      </div>
+      <div >
+        <div class="form-group">
+            <label class="form-label">Almacenamiento</label>
+              <input formControlName="Almacenamiento" #workid type="number" class="form-control" id="workid" placeholder="" required="">
+            
+          </div><br>
+        <div class="form-group">
+            <label for="price"  class="form-label">Precio</label>
+            <input formControlName="Precio" #price type="number" class="form-control" id="address" >
+            
+            
+          </div><br>
+        <div class="form-group">
+          <label class="form-label">Cantidad</label>
+          <input formControlName="Cantidad"  #datebirth type="number" class="form-control" id="datebirth" >
+          
+        </div><br>
+        
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">Imagen </label>
+        <input formControlName="Imagen" #email type="text" class="form-control" id="email" >
+      </div><br>
+    
+      <button  class="btn-forms" >Modificar</button>
+    </form>
+  
+  </div>
