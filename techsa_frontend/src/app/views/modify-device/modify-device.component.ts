@@ -57,7 +57,7 @@ export class ModifyDeviceComponent implements OnInit {
     device.Almacenamiento = values.Almacenamiento;
     device.Precio = values.Precio;
     device.Cantidad = values.Cantidad;
-    device.Imagen = Buffer.from(values.Imagen);
+    //device.Imagen = Buffer.from(values.Imagen);
     return device
   }
 

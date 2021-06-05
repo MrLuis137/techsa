@@ -261,6 +261,19 @@ router.get('/planmovil', async function(req: Request, res:Response, next:NextFun
     }
 });
 
+///////////////////////////  Plan Móvil Dispositivo //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+router.get('/planmovildispositivo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanMovilDispositivoRepository();
+        const todosPlanMovilDispositivo = await repository.find();
+        res.send(todosPlanMovilDispositivo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 ///////////////////////////  Plan Fijo  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/planfijo', async function(req: Request, res:Response, next:NextFunction){
@@ -281,6 +294,46 @@ router.get('/servicio', async function(req: Request, res:Response, next:NextFunc
         const repository = await connect.getServicioRepository();
         const todosServicios = await repository.find();
         res.send(todosServicios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+
+///////////////////////////  Plan Internet  //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+router.get('/planinternet', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanInternetRepository();
+        const todosInternet = await repository.find();
+        res.send(todosInternet);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+///////////////////////////  Plan Internet Plan fijo  //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+router.get('/planinternetfijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanInternetPlanFijoRepository();
+        const todosInternetFijo = await repository.find();
+        res.send(todosInternetFijo);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+///////////////////////////  Plan Internet Plan Movil Plan Fijo  //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+router.get('/planinternetfijomovil', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
+        const todosInternetfijoMovil = await repository.find();
+        res.send(todosInternetfijoMovil);
     }
     catch(err){
             return next(err);

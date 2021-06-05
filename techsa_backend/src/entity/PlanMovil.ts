@@ -30,4 +30,7 @@ export class PlanMovil{
     @Column()
     CostoLlamada: number;
 
+    @Column()
+    idServicioIdId: number;
+
 }
