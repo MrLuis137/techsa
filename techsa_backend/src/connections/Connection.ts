@@ -33,7 +33,7 @@ export async function connect(){
         entities: [
             PlanMovil,Servicio, AgenteVentas, Gerente, Cliente, 
             Contrato, PlanFijo,PlanInternet, PlanInternetPlanFijo,
-            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo
+            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo,CarritoCompras
         ],
     });
 }
