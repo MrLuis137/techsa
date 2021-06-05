@@ -12,6 +12,9 @@ import { PlanInternetPlanFijo } from '../entity/PlanInternetPlanFijo';
 import { PlanInternetPlanMovilPlanFijo } from '../entity/PlanIntertnetPlanMovilPlanFijo';
 import { PlanMovilDispositivo } from '../entity/PlanMovilDispositivo';
 import { Dispositivo } from '../entity/Dispositivo';
+import { CarritoCompras } from '../entity/CarritoCompras';
+import { ServicioXCarrito } from '../entity/ServicioXCarrito';
+import { DispositivoXCarrito } from '../entity/DispositivoXCarrito';
 
 
 //Acá en teoría es donde se realizan las peticiones a la base de datos 
@@ -83,4 +86,28 @@ export async function getServicioRepository(): Promise<Repository<Servicio>>{
         await connect();
     }
     return connection.getRepository(Servicio);
+}
+
+export async function getCarritoRepository(): Promise<Repository<CarritoCompras>>{
+    console.log("getServicioRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(CarritoCompras);
+}
+
+export async function getDispositivoXCarritoRepository(): Promise<Repository<DispositivoXCarrito>>{
+    console.log("getServicioRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(DispositivoXCarrito);
+}
+
+export async function getServicioXCarritoRepository(): Promise<Repository<ServicioXCarrito>>{
+    console.log("getServicioRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(ServicioXCarrito);
 }

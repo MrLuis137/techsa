@@ -19,4 +19,5 @@
    "scripts": {
       "start": "ts-node src/server.ts"
    }
+
 }

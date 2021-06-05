@@ -4,7 +4,10 @@ import {getConnectionManager} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
 import { Dispositivo } from '../entity/Dispositivo';
-
+import { CarritoCompras } from '../entity/CarritoCompras';
+import { DispositivoXCarrito } from '../entity/DispositivoXCarrito';
+import { ServicioXCarrito } from '../entity/ServicioXCarrito';
+import { Servicio } from '../entity/Servicio';
 
 export const router: Router = Router();
 
@@ -219,6 +222,53 @@ router.get('/servicio', async function(req: Request, res:Response, next:NextFunc
         const repository = await connect.getServicioRepository();
         const todosServicios = await repository.find();
         res.send(todosServicios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/carrito:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getCarritoRepository();
+        const todosServicios = await repository.findOne({where:[ {IdCliente: req.params.id} ] });
+        res.send(todosServicios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/carrito/servicios:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getDispositivoXCarritoRepository();
+        const servicesRepository = await connect.getServicioRepository();
+        const servicioXCarrito = await repository.find({where:[ {IdCarrito: req.params.id} ] });
+        let servicios:Servicio[];
+        for (let i; i< servicioXCarrito.length; i+=1){
+            const servicioId = servicioXCarrito[i].IdDispositivo
+            const service = servicesRepository.findOne(servicioId);
+            servicios.push(service[0])
+        }
+        res.send(servicios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/carritodispositivos:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getDispositivoXCarritoRepository();
+        const deviceRepository = await connect.getDispositivoRepository();
+        const dispositivoXCarrito = await repository.find({where:[ {IdCarrito: req.params.id} ] });
+        let devices:Dispositivo[];
+        for (let i; i< dispositivoXCarrito.length; i+=1){
+            const servicioId = dispositivoXCarrito[i].IdDispositivo
+            const device = deviceRepository.findOne(servicioId);
+            devices.push(device[0])
+        }
+        res.send(devices);
     }
     catch(err){
             return next(err);

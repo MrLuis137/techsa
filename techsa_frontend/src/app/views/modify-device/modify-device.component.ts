@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService} from '../../services/device.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modify-device',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./modify-device.component.css']
 })
 export class ModifyDeviceComponent implements OnInit {
-
+  newDeviceForm: FormGroup
   constructor(
     private deviceService:DeviceService,
     private _ac:ActivatedRoute
