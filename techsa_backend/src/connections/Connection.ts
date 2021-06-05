@@ -27,6 +27,7 @@ export async function connect(){
         username:'techsa',
         password:'techsa',
         synchronize:true,
+        port:3306,
         entities: [
             PlanMovil,Servicio, AgenteVentas, Gerente, Cliente, 
             Contrato, PlanFijo,PlanInternet, PlanInternetPlanFijo,

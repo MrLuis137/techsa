@@ -6,6 +6,7 @@ import { async } from '@angular/core/testing';
 import { AgenteVentasService } from '../../services/agente-ventas.service';
 import { AgenteVentas } from '../../models/AgenteVentas';
 import { Gerente } from '../../models/Gerente';
+import { GerenteService } from '../../services/gerente.service';
 
 @Component({
   selector: 'app-new-employee',
@@ -17,7 +18,12 @@ export class NewEmployeeComponent implements OnInit {
   newEmployeeForm: FormGroup
 
   //Importar el FormBuilder para construir el modelito.
-  constructor(private service:NotificationsService, private builder:FormBuilder, public agenteVentasService:AgenteVentasService  ) { 
+  constructor(
+    private service:NotificationsService, 
+    private builder:FormBuilder, 
+    private agenteVentasService:AgenteVentasService,
+    private gerenteService:GerenteService
+    ) { 
     this.newEmployeeForm =  this.builder.group({
       /*Nombre del campo: tipo de datos
       [''] por defecto el campo es vacío
@@ -42,7 +48,7 @@ export class NewEmployeeComponent implements OnInit {
     if (values.puesto=='Gerente'){
       empleado = new Gerente();
       empleado = this.setEmployee(empleado,values)
-      //await this.gerenteService.createGerente(empleado);
+      await this.gerenteService.createGerente(empleado);
     }
     else{
       empleado = new AgenteVentas();

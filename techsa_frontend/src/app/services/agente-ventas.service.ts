@@ -31,8 +31,8 @@ export class AgenteVentasService {
     return this.request('get', `${baseUrl}/agenteventas`);
   }
 
-  getAgenteVentasbyId(id:string){
-    return this.request('get', `${baseUrl}/agenteventas/${id}`);
+  async getAgenteVentasbyId(id:string){
+    return await this.request('get', `${baseUrl}/agenteventas/${id}`);
   }
 
   createAgenteVentas( agenteVentas:AgenteVentas ){
@@ -42,5 +42,10 @@ export class AgenteVentasService {
 
   deleteAgenteVentas( id:string ){
     return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
+  }
+
+  updateGerente(id:string, agenteVentas:AgenteVentas){
+    console.log("servicio updateAgente de Ventas")
+    return this.request('put', `${baseUrl}/agenteventas/${id}`, agenteVentas,'text');
   }
 }

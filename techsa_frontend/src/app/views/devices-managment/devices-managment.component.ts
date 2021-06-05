@@ -8,7 +8,9 @@ import { DeviceService } from '../../services/device.service';
 })
 export class DevicesManagmentComponent implements OnInit {
   data=[]
-  constructor(private base:DeviceService) { }
+  constructor(
+    private base:DeviceService
+    ) { }
 
   async ngOnInit() {
     this.data=await this.base.getDispositivoAll();

@@ -29,8 +29,8 @@ export class GerenteService {
     return this.request('get', `${baseUrl}/gerente`);
   }
 
-  getGerentebyId(id:string){
-    return this.request('get', `${baseUrl}/gerente/${id}`);
+  async getGerentebyId(id:string){
+    return await this.request('get', `${baseUrl}/gerente/${id}`)
   }
 
   createGerente( gerente:Gerente ){
@@ -40,5 +40,9 @@ export class GerenteService {
 
   deleteGerente( id:string ){
     return this.request('delete', `${baseUrl}/gerente/${id}`, null, 'text');
+  }
+
+  updateGerente(id:string, gerente:Gerente){
+    return this.request('put', `${baseUrl}/gerente/${id}`, gerente,'text');
   }
 }
