@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { Dispositivo } from '../../models/Dispositivo';
 
 @Component({
   selector: 'app-devices-listing',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevicesListingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private car :CartService) { }
 
   ngOnInit(): void {
+    this.addToCart()
+  }
+
+  addToCart(){
+    console.log("HOLA");
+    let p = new Dispositivo()
+    p.Almacenamiento = 100
+    p.Camara = 5
+    p.Color = "rojo"
+    p.Marca = "Samsung"
+    //this.car.addPhone(p)
   }
 
 }
