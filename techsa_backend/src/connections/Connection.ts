@@ -65,6 +65,16 @@ export async function getDispositivoRepository(): Promise<Repository<Dispositivo
     return connection.getRepository(Dispositivo);  //Retorna el repositorio
 }
 
+///////////////////////////  Plan Fijo //////////////////////////////////////
+//Falta modificar
+export async function getPlanFijoRepository(): Promise<Repository<PlanFijo>>{
+    console.log("getPlanFijoRepository")
+    if(connection == undefined){  //Si la coneccion es indefinida, llama a la función de arriba para conectarse
+        await connect();
+    }
+    return connection.getRepository(PlanFijo);  //Retorna el repositorio
+}
+
 ///////////////////////////  Plan Movil  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 export async function getPlanMovilRepository(): Promise<Repository<PlanMovil>>{

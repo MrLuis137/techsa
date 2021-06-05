@@ -212,6 +212,19 @@ router.get('/planmovil', async function(req: Request, res:Response, next:NextFun
     }
 });
 
+///////////////////////////  Plan Fijo  //////////////////////////////////////
+//Falta agregar, modificar, eliminar y get:id
+router.get('/planfijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanFijoRepository();
+        const todosPlanFijo = await repository.find();
+        res.send(todosPlanFijo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 ///////////////////////////  Servicio  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/servicio', async function(req: Request, res:Response, next:NextFunction){
