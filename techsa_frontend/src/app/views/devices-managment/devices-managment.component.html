@@ -15,11 +15,12 @@
                     Almacenamiento: {{device.Almacenamiento}} GB
                     <br>RAM: {{device.Ram}}
                     <br>Cantidad: {{device.Cantidad}} unidades
-                    <br>Color: Todos
-                    <br>Cantidad 20</p>
+                    <br>Color: {{device?.Color}}
+                    <br>Cantidad {{device?.Cantidad}}
+                    <br>Cámara {{device?.Camara}}</p>
         
                 <button (click)='delete(device.Id)' class="btnRojo">Eliminar</button>
-                <a href="/devices-listing" class="btn">Modificar</a>
+                <a href="/device/{{device?.Id}}" class="btn">Modificar</a>
             </div>
         </div>
     </div>

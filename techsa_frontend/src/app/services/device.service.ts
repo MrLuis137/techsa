@@ -42,5 +42,8 @@ export class DeviceService {
   deleteDispositivo( id:string ){
     return this.request('delete', `${baseUrl}/dispositivo/${id}`, null, 'text');
   }
+  updateDispositivo(id:string, dispositivo:Dispositivo){
+    return this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
+  }
 
 }

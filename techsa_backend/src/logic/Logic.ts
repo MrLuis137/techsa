@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
-import {getConnectionManager} from "typeorm";
+import {getConnectionManager, Repository} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
 import { Dispositivo } from '../entity/Dispositivo';
@@ -59,6 +59,30 @@ router.post('/agenteventas',async function (req:Request, res:Response, next:Next
     }
 });
 
+//*UPDATE Agente de ventas
+
+router.put('/agenteventas/:id', async function (req, res, next:NextFunction) {
+    try{
+        console.log("update Agente de ventas")
+        console.log(req.body)
+
+        const repository = await connect.getAgenteVentasRepository();
+        let AgenteVentasUpdate = await repository.findOne(req.params.id);
+
+        AgenteVentasUpdate.Nombre = req.body.Nombre;
+        AgenteVentasUpdate.Cedula = req.body.Cedula;
+        AgenteVentasUpdate.FechaNacimiento = req.body.FechaNacimiento;
+        AgenteVentasUpdate.Puesto = req.body.Puesto;
+        AgenteVentasUpdate.Contrasenia = req.body.Contrasenia;
+        await repository.save(AgenteVentasUpdate);
+        res.send('OK');
+
+    } 
+    catch(err){
+        console.log(err)
+    }
+}); 
+
 //*DELETE Agente Ventas
 router.delete('/agenteventas/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete Agentes de Ventas");
@@ -92,6 +116,7 @@ router.get('/gerente/:id',async function (req:Request, res:Response, next:NextFu
     try{
         const repository = await connect.getGerenteRepository();
         const gerente = await repository.findOne(req.params.id);
+        console.log(gerente)
         res.send(gerente);
     }
     catch(err){
@@ -99,7 +124,7 @@ router.get('/gerente/:id',async function (req:Request, res:Response, next:NextFu
     }
 });
 
-//CREATE Agente Ventas
+//CREATE Gerente
 router.post('/gerente',async function (req:Request, res:Response, next:NextFunction){
     console.log("create Gerente");
     try{
@@ -121,7 +146,31 @@ router.post('/gerente',async function (req:Request, res:Response, next:NextFunct
     }
 });
 
-//*DELETE Agente Ventas
+//*UPDATE Gerente
+
+router.put('/gerente/:id', async function (req, res, next:NextFunction) {
+    try{
+        console.log("update Gerente")
+        console.log(req.body)
+
+        const repository = await connect.getGerenteRepository();
+        let gerenteUpdate = await repository.findOne(req.params.id);
+
+        gerenteUpdate.Nombre = req.body.Nombre;
+        gerenteUpdate.Cedula = req.body.Cedula;
+        gerenteUpdate.FechaNacimiento = req.body.FechaNacimiento;
+        gerenteUpdate.Puesto = req.body.Puesto;
+        gerenteUpdate.Contrasenia = req.body.Contrasenia;
+        await repository.save(gerenteUpdate);
+        res.send('OK');
+
+    } 
+    catch(err){
+        console.log(err)
+    }
+}); 
+
+//*DELETE Gerente
 router.delete('/gerente/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete Gerente");
     try{
