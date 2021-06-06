@@ -15,6 +15,7 @@ import { PlanInternetPlanMovilPlanFijo } from './entity/PlanIntertnetPlanMovilPl
 import { PlanMovil } from './entity/PlanMovil';
 import { PlanMovilDispositivo } from './entity/PlanMovilDispositivo';
 
+
 createConnection().then(async connection => {
     const clienteRepository = connection.getRepository(Cliente);
     const servicioRepository = connection.getRepository(Servicio);

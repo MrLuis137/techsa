@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlanfijoService } from '../../services/planfijo.service';
 import { PlanFijo } from '../../models/PlanFijo';
 
+
 @Component({
   selector: 'app-telephony-listing',
   templateUrl: './telephony-listing.component.html',

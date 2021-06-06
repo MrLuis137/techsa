@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { DeviceService } from '../../services/device.service';
 import { Dispositivo } from '../../models/Dispositivo'
+
 @Component({
   selector: 'app-new-device-form',
   templateUrl: './new-device-form.component.html',

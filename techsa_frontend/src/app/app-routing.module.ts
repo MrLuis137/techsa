@@ -21,6 +21,7 @@ import { ModifyDeviceComponent } from './views/modify-device/modify-device.compo
 
 
 
+
 const routes: Routes = [
 
   //LogIn

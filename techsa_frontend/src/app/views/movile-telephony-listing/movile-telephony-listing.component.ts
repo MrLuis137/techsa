@@ -11,6 +11,7 @@ import { PlanMovil } from '../../models/PlanMovil';
 })
 export class MovileTelephonyListingComponent implements OnInit {
 
+  
   dataSource = [];
 
   constructor(public moviletelephonyservice: MovileTelephonyService) { }

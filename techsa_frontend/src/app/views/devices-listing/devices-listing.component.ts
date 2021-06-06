@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Dispositivo } from '../../models/Dispositivo';
 
+
 @Component({
   selector: 'app-devices-listing',
   templateUrl: './devices-listing.component.html',

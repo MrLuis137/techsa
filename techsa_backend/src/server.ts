@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import {router as connectionsRouter} from './logic/Logic'
 
 
+
 const app = express()
   .use(cors())
   .use(bodyParser.json())

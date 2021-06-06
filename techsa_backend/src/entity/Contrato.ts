@@ -2,6 +2,7 @@ import { Cliente } from './Cliente';
 import{Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
 import { Servicio } from './Servicio';
 
+
 @Entity()
 export class Contrato{
 

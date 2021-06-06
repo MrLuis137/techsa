@@ -4,6 +4,7 @@ import { type } from 'os';
 import { Dispositivo } from './Dispositivo';
 import { Servicio } from './Servicio';
 
+
 @Entity()
 export class PlanMovilDispositivo{
     @PrimaryGeneratedColumn('increment')

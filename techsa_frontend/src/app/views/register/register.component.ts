@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 
+
 /* Solamente esta el html, si gusta dar funcionalidad,adelante*/
 @Component({
   selector: 'app-register',

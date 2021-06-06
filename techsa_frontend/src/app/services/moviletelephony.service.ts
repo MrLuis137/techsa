@@ -4,7 +4,6 @@ import { PlanMovil } from '../models/PlanMovil';
 
 const baseUrl = "http://localhost:4201"
 
-
 @Injectable({
   providedIn: 'root'
 })

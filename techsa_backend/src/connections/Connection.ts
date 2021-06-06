@@ -4,6 +4,7 @@ import { Servicio } from '../entity/Servicio';
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
 
+
 import { Cliente } from '../entity/Cliente';
 import { Contrato } from '../entity/Contrato';
 import { PlanFijo } from '../entity/PlanFijo';

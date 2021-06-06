@@ -4,6 +4,7 @@ import { PlanInternet } from './PlanInternet';
 import { PlanFijo } from './PlanFijo';
 import { PlanMovil } from './PlanMovil';
 
+
 @Entity()
 export class PlanInternetPlanFijo{
     @PrimaryGeneratedColumn('increment')

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Dispositivo } from '../models/Dispositivo';
 
+
 const baseUrl = "http://localhost:4201"
 
 @Injectable({

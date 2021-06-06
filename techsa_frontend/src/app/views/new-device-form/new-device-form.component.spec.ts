@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewDeviceFormComponent } from './new-device-form.component';
 
+
 describe('NewDeviceFormComponent', () => {
   let component: NewDeviceFormComponent;
   let fixture: ComponentFixture<NewDeviceFormComponent>;
