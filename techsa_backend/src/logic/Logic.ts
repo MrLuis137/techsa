@@ -286,7 +286,7 @@ router.get('/planmovilallid/:id',async function (req:Request, res:Response, next
         //const planmovil = await repository.findOne(req.params.id);
         const planmovil = await repository.find({
             where:[
-                {idServicioIdId:req.params.id}
+                {idServicioIdId:req.params.id}  //donde el id de servicio es el id que se le pasa
             ]
         })
         res.send(planmovil);
