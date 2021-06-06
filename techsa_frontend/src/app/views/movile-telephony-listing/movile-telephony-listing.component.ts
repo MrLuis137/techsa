@@ -22,8 +22,9 @@ export class MovileTelephonyListingComponent implements OnInit {
   async refresh() {
 
     const data = await this.moviletelephonyservice.getMobilePlans();
+    const data2 = await this.moviletelephonyservice.getMobilePlansDevice();
     console.log(data);
-    
+    console.log(data2);
   }
 
 }

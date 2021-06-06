@@ -10,7 +10,7 @@ export class PlanMovilDispositivo{
     ID: number;
 
     @ManyToOne(type => PlanMovil)
-    IdPlan: PlanMovil[]
+    IdPlan: PlanMovil
 
     @ManyToOne(type => Dispositivo)
     IdDispositivo: Dispositivo

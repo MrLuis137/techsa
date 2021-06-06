@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
-import {getConnectionManager, Repository} from "typeorm";
+import {getConnectionManager, Repository, getManager} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
 import { Dispositivo } from '../entity/Dispositivo';
@@ -264,12 +264,22 @@ router.get('/planmovil', async function(req: Request, res:Response, next:NextFun
     }
 });
 
+
 ///////////////////////////  Plan Móvil Dispositivo //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/planmovildispositivo', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getPlanMovilDispositivoRepository();
         const todosPlanMovilDispositivo = await repository.find();
+        // //const todosPlanMovilDispositivo2 = await getManager().query(`
+        // SELECT dispositivo.Id,dispositivo.Modelo, plan_movil.NombrePlan
+        // FROM dispositivo
+        // LEFT OUTER JOIN plan_movil_dispositivo
+        //     ON dispositivo.Id = plan_movil_dispositivo.idDispositivoId
+        //     AND plan_movil_dispositivo.idServicioIdId = 1203
+        // LEFT OUTER JOIN plan_movil
+        //     ON plan_movil_dispositivo.idPlanID = plan_movil.ID;
+        //         `);
         res.send(todosPlanMovilDispositivo);
     }
     catch(err){

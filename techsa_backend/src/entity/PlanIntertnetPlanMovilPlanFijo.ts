@@ -23,5 +23,5 @@ export class PlanInternetPlanMovilPlanFijo{
 
     @Column()
     PrecioMensual:Number;
-
+    
 }

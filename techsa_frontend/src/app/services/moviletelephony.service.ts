@@ -28,7 +28,10 @@ export class MovileTelephonyService {
   }
 
   getMobilePlans(){
-    return this.request('get',`${baseUrl}/planmovil`)
+    return this.request('get',`${baseUrl}/planmovil`);
+  }
 
+  getMobilePlansDevice(){
+    return this.request('get',`${baseUrl}/planmovildispositivo`);
   }
 }
