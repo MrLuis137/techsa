@@ -1,6 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import { Servicio } from './Servicio';
 
+
 @Entity()
 export class PlanInternet{
     @PrimaryGeneratedColumn('increment')

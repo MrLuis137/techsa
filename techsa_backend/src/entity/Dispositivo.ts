@@ -1,5 +1,6 @@
 import{Entity, PrimaryGeneratedColumn, Column, Double} from "typeorm";
 
+
 @Entity()
 export class Dispositivo{
 

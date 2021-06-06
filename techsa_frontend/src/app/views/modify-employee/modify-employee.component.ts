@@ -6,6 +6,7 @@ import { AgenteVentasService } from 'src/app/services/agente-ventas.service';
 import { AgenteVentas } from '../../models/AgenteVentas';
 import { Gerente } from '../../models/Gerente';
 
+
 @Component({
   selector: 'app-modify-employee',
   templateUrl: './modify-employee.component.html',

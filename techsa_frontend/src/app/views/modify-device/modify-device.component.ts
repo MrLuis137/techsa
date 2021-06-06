@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 
+
 import { DeviceService} from '../../services/device.service';
 import { ActivatedRoute } from '@angular/router';
 import { Dispositivo } from 'src/app/models/Dispositivo';
@@ -57,7 +58,7 @@ export class ModifyDeviceComponent implements OnInit {
     device.Almacenamiento = values.Almacenamiento;
     device.Precio = values.Precio;
     device.Cantidad = values.Cantidad;
-    device.Imagen = Buffer.from(values.Imagen);
+    //device.Imagen = Buffer.from(values.Imagen);
     return device
   }
 

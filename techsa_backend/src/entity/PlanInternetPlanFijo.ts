@@ -4,6 +4,7 @@ import { PlanInternet } from './PlanInternet';
 import { PlanFijo } from './PlanFijo';
 import { PlanMovil } from './PlanMovil';
 
+
 @Entity()
 export class PlanInternetPlanFijo{
     @PrimaryGeneratedColumn('increment')
@@ -13,10 +14,10 @@ export class PlanInternetPlanFijo{
     IdServicio:Servicio
 
     @ManyToOne(type => PlanInternet)
-    IdPlanInternet:Servicio
+    IdPlanInternet:PlanInternet
     
     @ManyToOne(type => PlanFijo)
-    IdPlanFijo:Servicio
+    IdPlanFijo:PlanFijo
 
     @Column()
     PrecioMensual:Number;

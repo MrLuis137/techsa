@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModifyDeviceComponent } from './modify-device.component';
 
+
 describe('ModifyDeviceComponent', () => {
   let component: ModifyDeviceComponent;
   let fixture: ComponentFixture<ModifyDeviceComponent>;

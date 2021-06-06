@@ -4,7 +4,6 @@ import { PlanMovil } from '../models/PlanMovil';
 
 const baseUrl = "http://localhost:4201"
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +31,11 @@ export class MovileTelephonyService {
   }
 
   createPlanMovil( planMovil:PlanMovil ){
-    console.log('createPlanfijo' + JSON.stringify(planMovil));
-    return this.request('post', `${baseUrl}/planfijo`, planMovil);
+    console.log('createPlanMovil' + JSON.stringify(planMovil));
+    return this.request('post', `${baseUrl}/planmovil`, planMovil);
+  }
+
+  getMobilePlansDevice(){
+    return this.request('get',`${baseUrl}/planmovildispositivo`);
   }
 }

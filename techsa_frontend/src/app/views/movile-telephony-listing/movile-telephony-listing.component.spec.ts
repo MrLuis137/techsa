@@ -13,6 +13,7 @@ describe('MovileTelephonyListingComponent', () => {
     .compileComponents();
   }));
 
+  
   beforeEach(() => {
     fixture = TestBed.createComponent(MovileTelephonyListingComponent);
     component = fixture.componentInstance;

@@ -4,6 +4,7 @@ import { type } from 'os';
 import { Dispositivo } from './Dispositivo';
 import { Servicio } from './Servicio';
 
+
 @Entity()
 export class PlanMovilDispositivo{
     @PrimaryGeneratedColumn('increment')
@@ -19,7 +20,6 @@ export class PlanMovilDispositivo{
     Precio: number;
 
     @ManyToOne(type => Servicio)
-    idServicioId:Servicio
-
+    idServicioId:Servicio 
     
 }

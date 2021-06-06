@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-coverage-areas',
   templateUrl: './coverage-areas.component.html',
