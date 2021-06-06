@@ -22,9 +22,6 @@ import { NewlandlineFormComponent } from './views/new-landline-form/new-landline
 import { NewMobilePhoneFormComponent } from './views/new-mobilephone-form/new-mobilephone-form.component';
 
 
-
-
-
 const routes: Routes = [
 
   //LogIn

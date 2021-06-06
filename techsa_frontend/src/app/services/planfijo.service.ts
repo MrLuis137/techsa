@@ -12,6 +12,7 @@ export class PlanfijoService {
 
   constructor(private http:HttpClient) { }
 
+  //Crea el request al backend
   private async request(method: string, url:string, data?:any, responseType?:any){
     
     console.log('request' + JSON.stringify(data));
@@ -27,20 +28,24 @@ export class PlanfijoService {
     });
   }
 
+  //Retorna todos los planes fijos de la base de datos 
   getPlanFijoAll(){
     return this.request('get', `${baseUrl}/planfijo`);
   }
 
+  //Busca un plan fijo por id 
   getPlanFijobyId(id:string){
     return this.request('get', `${baseUrl}/planfijo/${id}`);
   }
 
+  //Guarda un plan fijo en la base de datos
   createPlanFijo( planFijo:PlanFijo ){
     console.log('createPlanfijo' + JSON.stringify(planFijo));
     return this.request('post', `${baseUrl}/planfijo`, planFijo);
   }
 
-  deleteAgenteVentas( id:string ){
+  //Borra un plan fijo de la base de datos por id 
+  deletePlanFijo( id:string ){
     return this.request('delete', `${baseUrl}/planfijo/${id}`, null, 'text');
   }
 

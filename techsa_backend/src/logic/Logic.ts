@@ -253,12 +253,43 @@ router.delete('/dispositivo/:id',async function (req:Request, res:Response, next
 });
 
 ///////////////////////////  Plan Móvil  //////////////////////////////////////
-//Falta agregar, modificar, eliminar y get:id
+//GET todos los plan moviles
 router.get('/planmovil', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getPlanMovilRepository();
         const todosPlanMovil = await repository.find();
         res.send(todosPlanMovil);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//GET Plan Movil por id
+router.get('/planmovil/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get planmovil");
+    try{
+        const repository = await connect.getPlanMovilRepository();
+        const planmovil = await repository.findOne(req.params.id);
+        res.send(planmovil);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//GET todos los planes moviles del id de idservicioid 
+router.get('/planmovilallid/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get planmovil id servicio");
+    try{
+        const repository = await connect.getPlanMovilRepository();
+        //const planmovil = await repository.findOne(req.params.id);
+        const planmovil = await repository.find({
+            where:[
+                {idServicioIdId:req.params.id}
+            ]
+        })
+        res.send(planmovil);
     }
     catch(err){
         return next(err);
@@ -272,16 +303,9 @@ router.get('/planmovildispositivo', async function(req: Request, res:Response, n
     try{
         const repository = await connect.getPlanMovilDispositivoRepository();
         const todosPlanMovilDispositivo = await repository.find();
-        // //const todosPlanMovilDispositivo2 = await getManager().query(`
-        // SELECT dispositivo.Id,dispositivo.Modelo, plan_movil.NombrePlan
-        // FROM dispositivo
-        // LEFT OUTER JOIN plan_movil_dispositivo
-        //     ON dispositivo.Id = plan_movil_dispositivo.idDispositivoId
-        //     AND plan_movil_dispositivo.idServicioIdId = 1203
-        // LEFT OUTER JOIN plan_movil
-        //     ON plan_movil_dispositivo.idPlanID = plan_movil.ID;
-        //         `);
-        res.send(todosPlanMovilDispositivo);
+        const todosPlanMovilDispositivo2 = await getManager().query(
+            `SELECT * FROM plan_movil_dispositivo;`);
+        res.send(todosPlanMovilDispositivo2);
     }
     catch(err){
         return next(err);

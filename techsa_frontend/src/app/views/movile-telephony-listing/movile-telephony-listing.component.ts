@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { PlanMovil } from '../../models/PlanMovil';
+import { MobiledeviceService } from '../../services/mobiledevice.service';
+
 
 
 @Component({
@@ -12,9 +14,11 @@ import { PlanMovil } from '../../models/PlanMovil';
 export class MovileTelephonyListingComponent implements OnInit {
 
   
-  dataSource = [];
+  prepaidList = [];
+  postpaidList = [];
+  mobileDeviceList = [];
 
-  constructor(public moviletelephonyservice: MovileTelephonyService) { }
+  constructor(public mobileService: MovileTelephonyService, public mobileDeviceService: MobiledeviceService) { }
 
   ngOnInit(): void {
     this.refresh()
@@ -22,10 +26,9 @@ export class MovileTelephonyListingComponent implements OnInit {
 
   async refresh() {
 
-    const data = await this.moviletelephonyservice.getMobilePlans();
-    const data2 = await this.moviletelephonyservice.getMobilePlansDevice();
+    const data = await this.mobileDeviceService.getPlanMovilDispositivoAll();
+    this.mobileDeviceList = data;
     console.log(data);
-    console.log(data2);
   }
 
 }
