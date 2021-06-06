@@ -17,7 +17,10 @@ import { DevicesManagmentComponent } from './views/devices-managment/devices-man
 import { SeervicesManagmentComponent } from './views/seervices-managment/seervices-managment.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { NewServicesFormComponent } from './views/new-services-form/new-services-form.component';
-import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
+import { NewInternetFormComponent } from './views/new-internet-form/new-internet-form.component';
+import { NewlandlineFormComponent } from './views/new-landline-form/new-landline-form.component';
+import { NewMobilePhoneFormComponent } from './views/new-mobilephone-form/new-mobilephone-form.component';
+
 
 
 
@@ -37,11 +40,15 @@ const routes: Routes = [
   //Services-Management
   {path:'seervices-managment',component: SeervicesManagmentComponent},
   {path: 'new-service', component: NewServicesFormComponent},
+  {path: 'new-internet', component: NewInternetFormComponent},
+  {path: 'new-landline', component: NewlandlineFormComponent},
+  {path: 'new-mobilephone', component: NewMobilePhoneFormComponent},
+  
+  
 
   //Devices-Management
   {path:'devices-managment',component: DevicesManagmentComponent},
   {path:'new-device', component: NewDeviceFormComponent},
-  {path:'device/:id', component: ModifyDeviceComponent},
 
   //*Client*
   //Services Info Section 

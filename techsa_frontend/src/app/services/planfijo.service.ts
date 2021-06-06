@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PlanMovil } from '../models/PlanMovil';
+import { PlanFijo } from '../models/PlanFijo';
+import { async } from '@angular/core/testing';
 
 const baseUrl = "http://localhost:4201"
 
@@ -8,7 +9,7 @@ const baseUrl = "http://localhost:4201"
 @Injectable({
   providedIn: 'root'
 })
-export class MovileTelephonyService {
+export class PlanfijoService {
 
   constructor(private http:HttpClient) { }
 
@@ -27,12 +28,21 @@ export class MovileTelephonyService {
     });
   }
 
-  getMobilePlans(){
-    return this.request('get',`${baseUrl}/planmovil`)
+  getPlanFijoAll(){
+    return this.request('get', `${baseUrl}/planfijo`);
   }
 
-  createPlanMovil( planMovil:PlanMovil ){
-    console.log('createPlanfijo' + JSON.stringify(planMovil));
-    return this.request('post', `${baseUrl}/planfijo`, planMovil);
+  getPlanFijobyId(id:string){
+    return this.request('get', `${baseUrl}/planfijo/${id}`);
   }
+
+  createPlanFijo( planFijo:PlanFijo ){
+    console.log('createPlanfijo' + JSON.stringify(planFijo));
+    return this.request('post', `${baseUrl}/planfijo`, planFijo);
+  }
+
+  deleteAgenteVentas( id:string ){
+    return this.request('delete', `${baseUrl}/planfijo/${id}`, null, 'text');
+  }
+
 }

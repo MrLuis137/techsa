@@ -20,6 +20,9 @@ import { SeervicesManagmentComponent } from './views/seervices-managment/seervic
 import { NewServicesFormComponent } from './views/new-services-form/new-services-form.component';
 import { DevicesManagmentComponent } from './views/devices-managment/devices-managment.component';
 import { NewDeviceFormComponent } from './views/new-device-form/new-device-form.component';
+import { NewInternetFormComponent } from './views/new-internet-form/new-internet-form.component';//aqui
+import { NewlandlineFormComponent } from './views/new-landline-form/new-landline-form.component';//aqui
+import { NewMobilePhoneFormComponent } from './views/new-mobilephone-form/new-mobilephone-form.component';//aqui
 import { CoverageAreasComponent } from './views/coverage-areas/coverage-areas.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +30,6 @@ import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.comp
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,9 @@ import { ModifyDeviceComponent } from './views/modify-device/modify-device.compo
     TelephonyListingComponent,
     MovileTelephonyListingComponent,
     InternetListingComponent,
+    NewInternetFormComponent,
+    NewlandlineFormComponent,
+    NewMobilePhoneFormComponent,
     DevicesListingComponent,
     ShopingCarComponent,
     MyServicesComponent,
@@ -50,8 +55,7 @@ import { ModifyDeviceComponent } from './views/modify-device/modify-device.compo
     CoverageAreasComponent,
     ClientNavbarComponent,
     AdminNavbarComponent,
-    ModifyEmployeeComponent,
-    ModifyDeviceComponent
+    ModifyEmployeeComponent
   ],
   imports: [
     BrowserModule,
