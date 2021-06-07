@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MobiledeviceService } from '../../services/mobiledevice.service';
 import { DeviceService } from '../../services/device.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
-
 import { PlanMovil } from '../../models/PlanMovil';
-
-
-
 
 
 
