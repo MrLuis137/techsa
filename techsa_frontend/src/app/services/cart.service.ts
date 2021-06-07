@@ -33,13 +33,13 @@ export class CartService {
   }
 */
   getDispositivosById(id:string){
-    return this.request('get', `${baseUrl}/carritodispositivos`,id);
+    return this.request('get', `${baseUrl}/carrito/dispositivos/`,id);
     //return this.request('get', `${baseUrl}/agenteventas`);
   }
 
 
   getServiciosById(id:string){
-    return this.request('get', `${baseUrl}/carrito/servicios`,id);
+    return this.request('get', `${baseUrl}/carrito/servicios/${id}`);
     //return this.request('get', `${baseUrl}/agenteventas`);
   }
 /*

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import { Dispositivo } from './Dispositivo';
 import { CarritoCompras } from './CarritoCompras';
 

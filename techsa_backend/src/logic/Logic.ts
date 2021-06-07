@@ -232,19 +232,46 @@ router.get('/servicio', async function(req: Request, res:Response, next:NextFunc
 router.get('/carrito/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getCarritoRepository();
-        const todosServicios = await repository.findOne({where:[ {IdCliente: req.params.id} ] });
-        res.send(todosServicios);
+        const carrito = await repository.findOne({where:[ {IdCliente: req.params.id} ] });
+        res.send(carrito);
     }
     catch(err){
             return next(err);
     }
 });
 
+router.get('/carrito/', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getCarritoRepository();
+        const carrito = await repository.find();
+        res.send(carrito);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+
+router.get('/carrito/servicios/', async function(req: Request, res:Response, next:NextFunction){
+    console.log("servivcios")
+    try{
+        const repository = await connect.getServicioXCarritoRepository();
+        const servivcios = await repository.find();
+        
+        console.log(servivcios)
+        res.send(servivcios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+
 router.get('/carrito/servicios/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
-        const repository = await connect.getDispositivoXCarritoRepository();
+        const repository = await connect.getServicioXCarritoRepository();
         const servicesRepository = await connect.getServicioRepository();
-        const servicioXCarrito = await repository.find({where:[ {IdCarrito: req.params.id} ] });
+        const servicioXCarrito = await repository.find({where:[ {carrtoIdCarrito: req.params.id} ] });
         let servicios:Servicio[];
         for (let i; i< servicioXCarrito.length; i+=1){
             const servicioId = servicioXCarrito[i].IdDispositivo
@@ -258,7 +285,7 @@ router.get('/carrito/servicios/:idcliente', async function(req: Request, res:Res
     }
 });
 
-router.get('/carritodispositivos/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.get('/carrito/dispositivos/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getDispositivoXCarritoRepository();
         const deviceRepository = await connect.getDispositivoRepository();
