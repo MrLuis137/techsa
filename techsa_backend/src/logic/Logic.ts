@@ -365,9 +365,26 @@ router.get('/planinternetfijo', async function(req: Request, res:Response, next:
     }
 });
 
+router.get('/planinternetfijoallid/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get plan internet fijo id internet");
+    try{
+        const repository = await connect.getPlanInternetPlanFijoRepository();
+        const planInternetPlanfijo = await repository.find({
+            where:[
+                {IdPlanInternet:req.params.id}  //donde el id de servicio es el id que se le pasa
+            ]
+        })
+        res.send(planInternetPlanfijo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 ///////////////////////////  Plan Internet Plan Movil Plan Fijo  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/planinternetfijomovil', async function(req: Request, res:Response, next:NextFunction){
+    console.log("get plan internet fijo movil por id internet");
     try{
         const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
         const todosInternetfijoMovil = await repository.find();
@@ -375,6 +392,22 @@ router.get('/planinternetfijomovil', async function(req: Request, res:Response, 
     }
     catch(err){
             return next(err);
+    }
+});
+
+router.get('/planinternetfijomovilallid/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get plan internet fijo movil por id internet");
+    try{
+        const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
+        const planInternetPlanfijomovil = await repository.find({
+            where:[
+                {idPlanInternetID:req.params.id}  //donde el id de servicio es el id que se le pasa
+            ]
+        })
+        res.send(planInternetPlanfijomovil);
+    }
+    catch(err){
+        return next(err);
     }
 });
 

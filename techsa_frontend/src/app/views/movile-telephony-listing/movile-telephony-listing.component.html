@@ -72,17 +72,16 @@
             
             <div class="card text-center" >
                 <div class="card-header">
-                {{(this.tempMobilePlan[i]).NombrePlan}} + {{(this.tempDevice[i]).Modelo}} 
+                {{(this.tempMobilePlan[i]).NombrePlan}} + {{(this.tempDevice[i]).Marca}} 
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">Prepago</span>  </h5>
+                    <h5 class="card-title">  <span class="badge rounded-pill">{{(this.tempDevice[i]).Modelo}}</span>  </h5>
             
-                    <h6 class="card-subtitle">$1000</h6>
+                    <h6 class="card-subtitle">₡{{postpagoDispositivo.Precio}} al mes</h6>
             
-                    <p class="card-text">Tarifas por minuto:
-                        <br>Fijos TECHSA              ₡34
-                        <br>Fijos otro operador       ₡40
-                        <br>Móvil cualquier operador  ₡36</p>
+                    <p class="card-text">Costo Llamada por minuto:
+                        <br>₡{{(this.tempMobilePlan[i]).CostoLlamada}}
+                    </p>
             
                     <a href="/movile-listing" class="btn">¡Lo quiero!</a>
                 </div>
