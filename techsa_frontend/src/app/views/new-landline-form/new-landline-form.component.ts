@@ -18,12 +18,13 @@ export class NewlandlineFormComponent implements OnInit {
       NombrePlan: [''],
       PrecioMensual: [''],
       Minutos: [''],
-      FijoTechsa: [''],
-      FijoOperador: [''],
-      MovilCualquiera: ['']
+      TarifaAdicFijoTechsa: [''],
+      TarifaAdicFijoOtroOperador: [''],
+      TarifaAdicmovil: ['']
     })
   }
 
+  
   ngOnInit(): void {
   }
   async add(values){

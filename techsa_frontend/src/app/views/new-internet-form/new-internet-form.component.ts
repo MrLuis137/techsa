@@ -22,7 +22,6 @@ export class NewInternetFormComponent implements OnInit {
     })
   }
 
-  
   ngOnInit(): void {
   }
   async add(values){
