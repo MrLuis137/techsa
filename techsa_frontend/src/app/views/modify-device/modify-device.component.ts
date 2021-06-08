@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { DeviceService} from '../../services/device.service';
 import { ActivatedRoute } from '@angular/router';
 import { Dispositivo } from 'src/app/models/Dispositivo';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modify-device',

@@ -12,6 +12,9 @@ import { PlanInternetPlanFijo } from '../entity/PlanInternetPlanFijo';
 import { PlanInternetPlanMovilPlanFijo } from '../entity/PlanIntertnetPlanMovilPlanFijo';
 import { PlanMovilDispositivo } from '../entity/PlanMovilDispositivo';
 import { Dispositivo } from '../entity/Dispositivo';
+import { CarritoCompras } from '../entity/CarritoCompras';
+import { ServicioXCarrito } from '../entity/ServicioXCarrito';
+import { DispositivoXCarrito } from '../entity/DispositivoXCarrito';
 
 
 //Acá en teoría es donde se realizan las peticiones a la base de datos 
@@ -31,7 +34,7 @@ export async function connect(){
         entities: [
             PlanMovil,Servicio, AgenteVentas, Gerente, Cliente, 
             Contrato, PlanFijo,PlanInternet, PlanInternetPlanFijo,
-            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo
+            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo,CarritoCompras,ServicioXCarrito, DispositivoXCarrito
         ],
     });
 }
@@ -84,4 +87,28 @@ export async function getServicioRepository(): Promise<Repository<Servicio>>{
         await connect();
     }
     return connection.getRepository(Servicio);
+}
+
+export async function getCarritoRepository(): Promise<Repository<CarritoCompras>>{
+    console.log("getCarritoRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(CarritoCompras);
+}
+
+export async function getDispositivoXCarritoRepository(): Promise<Repository<DispositivoXCarrito>>{
+    console.log("getDispositivoXCarritoRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(DispositivoXCarrito);
+}
+
+export async function getServicioXCarritoRepository(): Promise<Repository<ServicioXCarrito>>{
+    console.log("getServicioXCarritoRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(ServicioXCarrito);
 }

@@ -1,10 +1,13 @@
-import {NextFunction, Request, Response, Router} from 'express';
+import {NextFunction, query, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
 import {getConnectionManager, Repository} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
 import { Dispositivo } from '../entity/Dispositivo';
-
+import { CarritoCompras } from '../entity/CarritoCompras';
+import { DispositivoXCarrito } from '../entity/DispositivoXCarrito';
+import { ServicioXCarrito } from '../entity/ServicioXCarrito';
+import { Servicio } from '../entity/Servicio';
 
 export const router: Router = Router();
 
@@ -292,6 +295,112 @@ router.get('/servicio', async function(req: Request, res:Response, next:NextFunc
         const repository = await connect.getServicioRepository();
         const todosServicios = await repository.find();
         res.send(todosServicios);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+///////////////////////////  Carrito  //////////////////////////////////////
+router.get('/carrito/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getCarritoRepository();
+        const carrito = await repository.findOne({where:[ {IdCliente: req.params.id} ] });
+        res.send(carrito);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/carrito/', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getCarritoRepository();
+        const carrito = await repository.find();
+        res.send(carrito);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+
+router.get('/carrito/servicios/', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getServicioXCarritoRepository();
+        const servivcios = await repository.find();
+        
+        if(servivcios){
+            res.send("Holi")
+            return      
+        }
+        //res.send(servivcios);
+        res.send({h:"Holi"})
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+
+router.get('/carrito/servicios/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getServicioXCarritoRepository();
+        const servicesRepository = await connect.getServicioRepository();
+        let query = 'SELECT servicio.Nombre, idServicioId as IdServicio FROM cliente '
+        query += 'INNER JOIN carrito_compras ON carrito_compras.idClienteId = cliente.Id ' 
+        query += 'INNER JOIN servicio_x_carrito on servicio_x_carrito.idCarritoIdCarrito = carrito_compras.IdCarrito '
+        query += 'INNER JOIN servicio servicio ON servicio.Id = servicio_x_carrito.idServicioId '
+        query += `WHERE cliente.Id = ${req.params.idcliente}`
+        //console.log(servicioXCarrito)
+        const servicioXCarrito = await repository.query(query)
+        res.send(servicioXCarrito);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/carrito/dispositivos/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getDispositivoXCarritoRepository();
+        let query = 'SELECT dispositivo.Id, dispositivo.marca, dispositivo.Almacenamiento, dispositivo.Camara, dispositivo.Color, dispositivo.Modelo, dispositivo.Precio, dispositivo.Ram FROM cliente '
+        query += 'INNER JOIN carrito_compras ON carrito_compras.idClienteId = cliente.Id '
+        query += 'INNER JOIN dispositivo_x_carrito on dispositivo_x_carrito.idCarritoIdCarrito = carrito_compras.IdCarrito '
+        query += 'INNER JOIN dispositivo ON dispositivo.Id = dispositivo_x_carrito.idDispositivoId '
+        query += `WHERE cliente.Id = ${req.params.idcliente}`
+        const devices = await repository.query(query)
+        
+        
+        res.send(devices);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.put('/carrito/dispositivos/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const carritoRepository = await connect.getCarritoRepository();
+        const servicesXCarrito = await connect.getServicioXCarritoRepository();
+        const carrito = await carritoRepository.findOne({where:{IdCliente : req.params.idcliente}})
+        const res = await servicesXCarrito.query(`INSERT INTO dispositivo_x_carrito(idCarritoIdCarrito, idDispositivoId) VALUES (${carrito.IdCarrito} , ${req.body.dispositivo});`)
+        console.log(res)
+        return res
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.put('/carrito/servicios/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const carritoRepository = await connect.getCarritoRepository();
+        const servicesXCarrito = await connect.getServicioXCarritoRepository();
+        const carrito = await carritoRepository.findOne({where:{IdCliente : req.params.idcliente}})
+        const res = await servicesXCarrito.query(`INSERT INTO servicio_x_carrito ( idCarritoIdCarrito, idServicioId) VALUES (${carrito.IdCarrito} , ${req.body.servicio});`)
+        console.log(res)
+        return res
     }
     catch(err){
             return next(err);
