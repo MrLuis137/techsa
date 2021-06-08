@@ -39,6 +39,7 @@ export class InternetListingComponent implements OnInit {
 
     this.internetLandline();
     this.internetLandlineMobile();
+    console.log(this.internetList);
     console.log(this.internetLandline_And_MobilesPlans);
 
   }
@@ -124,6 +125,9 @@ export class InternetListingComponent implements OnInit {
 
   }
 
-
+  addToCart(planInternet:PlanInternet){
+    console.log(planInternet);
+    //this.car.addPhone(device)
+  }
 
 }

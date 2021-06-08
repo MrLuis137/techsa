@@ -1,4 +1,3 @@
-
 <h1 id="page-title-text">Internet</h1>
 
 <section *ngFor="let planInternet of this.internetList" [ngClass]="chooseGradient(planInternet.Velocidad)" >
@@ -8,28 +7,24 @@
     </div>
 
     <div class="container">
-        <!-- Planes internet -->
-        <!-- <div class="container"> -->
-            <div class="card text-center" >
-                <div class="card-header">
-                    {{planInternet.NombrePlan}} 
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">₡{{planInternet.PrecioMensual}} mensuales</span>  </h5>
-            
-                    <p class="card-text">
-                        <br>{{planInternet.Descripcion}}
-                        <br></p>
-            
-                    <a href="/internet-listing" class="btn">¡Lo quiero!</a>
-                </div>
+        <div class="card text-center" >
+            <div class="card-header">
+                {{planInternet.NombrePlan}} 
             </div>
-        <!-- </div> -->
+            <div class="card-body">
+                <h5 class="card-title">  <span class="badge rounded-pill">₡{{planInternet.PrecioMensual}} mensuales</span>  </h5>
+        
+                <p class="card-text">
+                    <br>{{planInternet.Descripcion}}
+                    <br></p>
+        
+                <a (click)="addToCart(planInternet)" class="btn">¡Lo quiero!</a>
+            </div>
+        </div>
 
         <!-- Los demás planes de la misma velocidad del plan inicial -->
         <div *ngFor="let otroPlan of this.internetLandline_And_MobilesPlans" >
             <div *ngIf="planInternet.Velocidad == otroPlan.Velocidad; else elseBlock">
-                <!-- <div class="col-sm"> -->
                     <div  class="card text-center" >
                         <div class="card-header">
                             {{otroPlan.NombrePlan}} 
@@ -41,11 +36,9 @@
                             <p class="card-text">
                                 <br>{{otroPlan.Descripcion}}
                                 <br></p>
-                    
-                            <a href="/internet-listing" class="btn">¡Lo quiero!</a>
+                            <a (click)="addToCart(otroPlan)" class="btn">¡Lo quiero!</a>
                         </div>
                     </div>
-                <!-- </div> -->
             </div>
             <ng-template #elseBlock id="delete">
             </ng-template>
@@ -53,91 +46,3 @@
     </div>
 </section>
 
-
-<!-- 
-
-<section class="container internet-section gradient50" >
-    
-    <div class="row justify-content-md-center">
-        <h2 id="page-subtitle-text">Planes Internet {{this.internetList[1].Velocidad}}mb simétricos</h2>
-    </div>
-
-    <div class="row row-cols1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card text-center" >
-                <div class="card-header">
-                    Techsa 30@1
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">30mb</span>  </h5>
-            
-                    <h6 class="card-subtitle">$15000</h6>
-            
-                    <p class="card-text">
-                        <br>30mb de VELOCIDAD
-                        <br></p>
-            
-                    <a href="/internet-listing" class="btn">¡Lo quiero!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container internet-section gradient100" >
-    
-    <div class="row justify-content-md-center">
-        <h2 id="page-subtitle-text">Planes Internet {{this.internetList[2].Velocidad}}mb simétricos</h2>
-    </div>
-
-    <div class="row row-cols1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card text-center" >
-                <div class="card-header">
-                    Techsa 30@1
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">30mb</span>  </h5>
-            
-                    <h6 class="card-subtitle">$15000</h6>
-            
-                    <p class="card-text">
-                        <br>30mb de VELOCIDAD
-                        <br></p>
-            
-                    <a href="/internet-listing" class="btn">¡Lo quiero!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container internet-section gradient200" >
-    
-    <div class="row justify-content-md-center">
-        <h2 id="page-subtitle-text">Planes Internet {{this.internetList[3].Velocidad}}mb simétricos</h2>
-    </div>
-
-    <div class="row row-cols1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card text-center" >
-                <div class="card-header">
-                    Techsa 30@1
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">30mb</span>  </h5>
-            
-                    <h6 class="card-subtitle">$15000</h6>
-            
-                    <p class="card-text">
-                        <br>30mb de VELOCIDAD
-                        <br></p>
-            
-                    <a href="/internet-listing" class="btn">¡Lo quiero!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
- -->

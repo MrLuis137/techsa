@@ -43,12 +43,7 @@ export class DevicesListingComponent implements OnInit {
 
   addToCart(device:Dispositivo){
     console.log(device);
-    let p = new Dispositivo()
-    p.Almacenamiento = 100
-    p.Camara = 5
-    p.Color = "rojo"
-    p.Marca = "Samsung"
-    //this.car.addPhone(p)
+    //this.car.addPhone(device)
   }
 
 }
