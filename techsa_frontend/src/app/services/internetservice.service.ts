@@ -18,7 +18,7 @@ export class InternetserviceService {
     //Crea el request 
     private async request(method: string, url:string, data?:any, responseType?:any){
     
-      console.log('request' + JSON.stringify(data));
+      //console.log('request' + JSON.stringify(data));
       const result = this.http.request(method,url,{   //Escribe el body 
         body:data,
         responseType:responseType || 'json',
@@ -36,6 +36,11 @@ export class InternetserviceService {
     //Get Todos los planes de Internet
     async getPlanInternetAll(){
       return this.request('get',`${baseUrl}/planinternet`);
+    }
+
+    //Busca los planes fijos asociados a un plan de internet 
+    async getPlanInternet_idInternet(id:string){
+      return this.request('get',`${baseUrl}/planinternet/${id}`);
     }
 
     

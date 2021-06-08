@@ -278,14 +278,14 @@ router.get('/planmovil/:id',async function (req:Request, res:Response, next:Next
 });
 
 //GET todos los planes moviles del id de idservicioid 
-router.get('/planmovilallid/:id',async function (req:Request, res:Response, next:NextFunction){
+router.get('/planmovilallid/:TipoPlan',async function (req:Request, res:Response, next:NextFunction){
     console.log("get planmovil id servicio");
     try{
         const repository = await connect.getPlanMovilRepository();
         //const planmovil = await repository.findOne(req.params.id);
         const planmovil = await repository.find({
             where:[
-                {idServicioIdId:req.params.id}  //donde el id de servicio es el id que se le pasa
+                {TipoPlan:req.params.TipoPlan}  //donde el id de servicio es el id que se le pasa
             ]
         })
         res.send(planmovil);
@@ -324,6 +324,18 @@ router.get('/planfijo', async function(req: Request, res:Response, next:NextFunc
     }
 });
 
+router.get('/planfijo/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get plan fijo por id ");
+    try{
+        const todosInternetFijo = await getManager().query(
+            "SELECT * FROM plan_fijo where plan_fijo.ID = ?;",[req.params.id]);
+        res.send(todosInternetFijo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 ///////////////////////////  Servicio  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/servicio', async function(req: Request, res:Response, next:NextFunction){
@@ -349,6 +361,18 @@ router.get('/planinternet', async function(req: Request, res:Response, next:Next
     }
     catch(err){
             return next(err);
+    }
+});
+
+router.get('/planinternet/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get plan internet por id ");
+    try{
+        const todosInternetFijo = await getManager().query(
+            "SELECT * FROM plan_internet where plan_internet.ID = ?;",[req.params.id]);
+        res.send(todosInternetFijo);
+    }
+    catch(err){
+        return next(err);
     }
 });
 
@@ -404,7 +428,6 @@ router.get('/planinternetfijomovilallid/:idPlanInternetID',async function (req:R
         return next(err);
     }
 });
-
 
 ///////////////////////////  Carrito  //////////////////////////////////////
 router.get('/carrito/:idcliente', async function(req: Request, res:Response, next:NextFunction){

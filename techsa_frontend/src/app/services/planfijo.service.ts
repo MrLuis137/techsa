@@ -15,7 +15,7 @@ export class PlanfijoService {
   //Crea el request al backend
   private async request(method: string, url:string, data?:any, responseType?:any){
     
-    console.log('request' + JSON.stringify(data));
+    //console.log('request' + JSON.stringify(data));
     const result = this.http.request(method,url,{
       body:data,
       responseType:responseType || 'json',

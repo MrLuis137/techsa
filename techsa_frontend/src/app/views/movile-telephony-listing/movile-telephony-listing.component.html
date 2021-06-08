@@ -22,7 +22,7 @@
                         <br>₡{{prepago.CostoLlamada}}
                     </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.selectedItem(prepago.idServicioIdId)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <br>₡{{postpago.CostoLlamada}}
                     </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.selectedItem(postpago.idServicioIdId)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
                         <br>₡{{(this.tempMobilePlan[i]).CostoLlamada}}
                     </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.selectedItem(postpagoDispositivo.idServicioIdId)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ export class MovileTelephonyListingComponent implements OnInit {
   prepaidList = [];
   postpaidList = [];
   mobileDeviceList = [];
+
   tempMobilePlan = [];
   tempDevice = [];
 
@@ -30,8 +31,8 @@ export class MovileTelephonyListingComponent implements OnInit {
 
   async refresh() {
 
-    const prepaidData = await this.mobileService.getPlanMovilByIdAll('1202');
-    const postpaidData = await this.mobileService.getPlanMovilByIdAll('1201');
+    const prepaidData = await this.mobileService.getPlanMovilByIdAll('Prepago');
+    const postpaidData = await this.mobileService.getPlanMovilByIdAll('Postpago');
     const mobileDeviceData = await this.mobileDeviceService.getPlanMovilDispositivoAll();
 
     this.prepaidList = prepaidData;
@@ -43,6 +44,10 @@ export class MovileTelephonyListingComponent implements OnInit {
     // console.log(this.mobileDeviceList);
 
     this.fillTemps();
+  }
+
+  selectedItem(itemId:string){
+    console.log(itemId);
   }
 
   async fillTemps(){
