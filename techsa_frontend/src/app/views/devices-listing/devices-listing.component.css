@@ -1,9 +1,27 @@
+
+#page-title-text{
+    color: white;
+    font-family: Saira;
+    font-style: Bold;
+    font-size: 5rem;
+    margin-top: 1rem;
+    margin-left: 3rem ;
+}
+
+.device-section {
+    margin-top: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
 .card {
 
+    
     border-color: #219653;
     border-width: 2px;
     font-family: Saira;
     font-style: normal;
+    align-self: center;
 
     width: 20rem;
     /* text-align: center; */
@@ -11,6 +29,7 @@
     border-radius: 5px;
     background-color: #161916;
     color: white;
+    margin-bottom: 2rem;
 }
 
 .card-img-top{
