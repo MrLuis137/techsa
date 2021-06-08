@@ -43,6 +43,20 @@ export class InternetserviceService {
       return this.request('get',`${baseUrl}/planinternet/${id}`);
     }
 
+    createPlanInternet( planInternet:PlanInternet ){
+      console.log('createinternetService' + JSON.stringify(planInternet));
+      return this.request('post', `${baseUrl}/planinternet`, planInternet, 'text');
+    }
+  
+    deletePlanInternet( id:string ){
+      return this.request('delete', `${baseUrl}/planinternet/${id}`, null, 'text');
+    }
+  
+    updatePlanInternet(id:string, planInternet:PlanInternet){
+      console.log("servicio updateinternetService ")
+      return this.request('put', `${baseUrl}/planinternet/${id}`, planInternet,'text');
+    }
+
     
 
     /////////////////////////////////// Plan Internet Plan Fijo//////////////////////////

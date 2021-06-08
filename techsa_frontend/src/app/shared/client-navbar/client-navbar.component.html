@@ -51,9 +51,18 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="employees-managment">Gest. Empleados</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="seervices-managment">Gest. Servicios</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gest. Servicios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="landline-managment">Telefonía Fija</a></li>
+                        <li><a class="dropdown-item" routerLink="mobilephone-managment">Telefonía Móvil</a></li>
+                        <li><a class="dropdown-item" routerLink="internet-managment">Internet</a></li>
+                    </ul>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" routerLink="devices-managment">Gest. Dispositivos</a>
                 </li>

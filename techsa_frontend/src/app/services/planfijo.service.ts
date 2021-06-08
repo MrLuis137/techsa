@@ -34,7 +34,7 @@ export class PlanfijoService {
   }
 
   //Busca un plan fijo por id 
-  getPlanFijobyId(id:string){
+  async getPlanFijobyId(id:string){
     return this.request('get', `${baseUrl}/planfijo/${id}`);
   }
 
@@ -47,6 +47,11 @@ export class PlanfijoService {
   //Borra un plan fijo de la base de datos por id 
   deletePlanFijo( id:string ){
     return this.request('delete', `${baseUrl}/planfijo/${id}`, null, 'text');
+  }
+
+  updatePlanFijo(id:string, planFijo:PlanFijo){
+    console.log("servicio updateLandlineService ")
+    return this.request('put', `${baseUrl}/landline-managment/${id}`, planFijo,'text');
   }
 
 }

@@ -30,6 +30,14 @@ import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.compone
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ModifyInternetComponent } from './views/modify-internet/modify-internet.component';
+import { ModifyLandlineComponent } from './views/modify-landline/modify-landline.component';
+import { ModifyMobilePhoneComponent } from './views/modify-mobilephone/modify-mobilephone.component';
+import { InternetManagmentComponent } from './views/internet-managment/internet-managment.component';
+import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
+import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,10 +46,18 @@ import { HttpClientModule } from '@angular/common/http';
     TelephonyListingComponent,
     MovileTelephonyListingComponent,
     InternetListingComponent,
+    
+    MobilephoneManagmentComponent,
+    InternetManagmentComponent,
+    LandlineManagmentComponent,
+    ModifyMobilePhoneComponent,
+    ModifyInternetComponent,
+    ModifyLandlineComponent,
     NewInternetFormComponent,
     NewlandlineFormComponent,
     NewMobilePhoneFormComponent,
     DevicesListingComponent,
+
     ShopingCarComponent,
     MyServicesComponent,
     OnlinePayComponent,

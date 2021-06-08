@@ -1,0 +1,40 @@
+h1{
+    
+    color: rgb(255, 255, 255);
+    font-family: Sans-serif;
+}
+div{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+    background-color: black;
+}
+.table{
+    background-color: black;
+    color: white;
+    border-spacing: 50px;
+}
+.btn-delete{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    background-color: red;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border: 0vw;
+}
+
+.btn-verde{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 15px;
+    background: #219653;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    border: 0vw;
+}
