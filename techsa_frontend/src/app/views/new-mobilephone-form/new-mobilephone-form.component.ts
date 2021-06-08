@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { PlanMovil } from '../../models/PlanMovil';
-import { MovileTelephonyService } from '../../services/moviletelephony.service';
+import { PlanMovilService } from '../../services/plan-movil.service';
 
 
 @Component({
@@ -12,15 +12,15 @@ import { MovileTelephonyService } from '../../services/moviletelephony.service';
 export class NewMobilePhoneFormComponent implements OnInit {
 
   newMobilePhone: FormGroup;
-  constructor(private builder:FormBuilder, private planMovilService: MovileTelephonyService  ) { 
+  constructor(private builder:FormBuilder, private planMovilService: PlanMovilService  ) { 
     this.newMobilePhone =  this.builder.group({
       NombrePlan: [''],
+      Descripcion: [''],
       PrecioMensual: [''],
-      CantMinutos: [''],
-      TarifaAdicFijoTechsa: [''],
-      TarifaAdicFijoOtroOperador: [''],
-      TarifaAdicmovil: [''],
-      Tipo: ['']
+      Minutos: [''],
+      GBInternet: [''],
+      CostoLlamada: [''],
+      TipoPlan: ['']
     })
   }
 
@@ -28,16 +28,15 @@ export class NewMobilePhoneFormComponent implements OnInit {
   }
   async add(values){
     var plan= new PlanMovil;
-    plan.ID = values.ID;
     plan.NombrePlan= values.NombrePlan;
-    plan.Descripcion = values.Descripcion;
-    plan.PrecioMensual = values.PrecioMensual;
-    plan.Minutos=values.Minutos;
-    plan.GBInternet=values.GBInternet
+    plan.Descripcion=values.Descripcion;
+    plan.PrecioMensual=values.PrecioMensual;
+    plan.Minutos=values.Minutos
+    plan.GBInternet=values.GBInternet;
     plan.CostoLlamada=values.CostoLlamada;
-    //plan.TarifaAdicmovil=values.TarifaAdicmovil;
     plan.TipoPlan=values.TipoPlan;
     console.log(values)
     await this.planMovilService.createPlanMovil(plan)
+  
   }
 }

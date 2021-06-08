@@ -1,0 +1,36 @@
+<body>
+    <div>
+        <br>
+        <h1>Gestión de telefonía fija</h1>
+        <br>
+        <button routerLink="/new-landline" class='btn-verde' >Agregar telefonía fija</button>
+        <br>
+        <table class="table">
+            <thead >
+                <tr>
+                    <th scope="col">Nombre Plan</th>
+                    <th scope="col">Precio Mensual</th>
+                    <th scope="col">Minutos</th>
+                    <th scope="col">Número Techsa</th>
+                    <th scope="col">Número Fijo</th>
+                    <th scope="col">Otro número</th>
+                    <th scope="col">Función</th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let plan of planes'>
+                <tr>
+                <td>{{plan?.NombrePlan}}</td>
+                <td>{{plan?.PrecioMensual}}</td>
+                <td>{{plan?.Minutos}}</td>
+                <td>{{plan?.FijoTechsa}}</td>
+                <td>{{plan?.FijoOperador}}</td>
+                <td>{{plan?.MovilCualquiera}}</td>
+                <td>
+                    <button class='btn-delete' (click)='delete(plan?.ID,plan?.NombrePlan)'>Eliminar</button>
+                    <button class='btn-verde' routerLink="/modify-landline/{{plan?.ID}}" >Modificar</button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </body>

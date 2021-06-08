@@ -1,14 +1,11 @@
 <div class="div-ext-form">
+  <br>
+  <h1>Modificar telefonía fija</h1>
+
+  
+  <form  [formGroup] = "newLandlineForm" (ngSubmit)="modify(newLandlineForm.value)">
     <br>
-    <h1>Agregar servicio de Telefonía fija</h1>
-    <!--
-      Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
-      Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
-      newEmployeeForm.value obtiene los datos del form y los devuelve como un json
-    -->
-    <form  [formGroup] = "newLandlineForm" (ngSubmit)="add(newLandlineForm.value)" >
-      <br>
-      <div class="div-form">
+    <div class="div-form">
       <div >
         <div class="form-group">
           <label class="form-label">Nombre del plan</label>
@@ -25,7 +22,9 @@
             <input formControlName="Minutos" #Minutos type="int" class="form-control" id="Minutos" placeholder="" required="">
           
         </div><br>
-        <h2>Tarifa Adicional</h2>
+
+        <h2>Tarifa adicional por minuto</h2>
+
         <div class="form-group">
           <label class="form-label">Número Techsa</label>
             <input formControlName="FijoTechsa" #FijoTechsa type="int" class="form-control" id="FijoTechsa" placeholder="" required="">
@@ -42,9 +41,8 @@
         </div><br>
         
       </div>
-      </div>
-      <button  class="btn-forms" >Agregar</button>
-    </form>
-  
-  </div>
-  
+    </div>
+    <button  class="btn-forms" >Modificar</button>
+  </form>
+
+</div>

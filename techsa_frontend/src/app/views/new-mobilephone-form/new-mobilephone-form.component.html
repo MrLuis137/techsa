@@ -1,74 +1,71 @@
 <div class="div-ext-form">
+  <br>
+  <h1>Agregar servicio de Telefonía Móvil</h1>
+  <!--
+    Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
+    Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
+    newEmployeeForm.value obtiene los datos del form y los devuelve como un json
+  -->
+  <form  [formGroup] = "newMobilePhone" (ngSubmit)="add(newMobilePhone.value)">
     <br>
-    <h1>Agregar servicio de Telefonía Móvil</h1>
-    <!--
-      Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
-      Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
-      newEmployeeForm.value obtiene los datos del form y los devuelve como un json
-    -->
-    <form  [formGroup] = "newMobilePhone" >
-      <br>
-      <div class="div-form">
-      <div >
-        <div class="form-group">
-          <label class="form-label">Nombre del plan</label>
-          <input formControlName="Name" #Name type="text" class="form-control" id="Name" placeholder="" value="" required="">
-        </div><br>
-  
-        <div class="form-group">
-          <label  class="form-label">Monto mensual</label>
-          <input formControlName="Amount" #Amount type="int" class="form-control" id="Amount" placeholder="" value="" required="">
-        </div><br>
-          
-        <div class="form-group">
-          <label class="form-label">Minutos</label>
-            <input formControlName="Minutes" #Minutes type="int" class="form-control" id="Minutes" placeholder="" required="">
-          
-        </div><br>
+    <div class="div-form">
+    <div >
+      <div class="form-group">
+        <label class="form-label">Nombre del plan</label>
+        <input formControlName="NombrePlan" #NombrePlan type="text" class="form-control" id="NombrePlan" placeholder="" value="" required="">
+      </div><br>
 
-        <h2>Tarifa adicional por minuto</h2>
+      <div class="form-group">
+        <label  class="form-label">Descrpción</label>
+        <input formControlName="Descripcion" #Descripcion type="int" class="form-control" id="Descripcion" placeholder="" value="" required="">
+      </div><br>
+        
+      <div class="form-group">
+        <label class="form-label">Precio mensual</label>
+          <input formControlName="PrecioMensual" #PrecioMensual type="int" class="form-control" id="PrecioMensual" placeholder="" required="">
+        
+      </div><br>
+      <div class="form-group">
+        <label class="form-label">GB de internet</label>
+          <input formControlName="GBInternet" #GBInternet type="int" class="form-control" id="GBInternet" placeholder="" required="">
+        
+      </div><br>
+      <div class="form-group">
+        <label class="form-label">Costo de llamada</label>
+          <input formControlName="CostoLlamada" #CostoLlamada type="text" class="form-control" id="CostoLlamada" placeholder="" required="">
+        
+      </div><br>
+      <div class="form-group">
+        <label class="form-label">Minutos</label>
+          <input formControlName="Minutos" #Minutos type="text" class="form-control" id="Minutos" placeholder="" required="">
+      </div><br>
+    </div>
 
-        <div class="form-group">
-          <label class="form-label">Número Techsa</label>
-            <input formControlName="Numbertechsa" #workid type="Numbertechsa" class="form-control" id="Numbertechsa" placeholder="" required="">
-          
-        </div><br>
-        <div class="form-group">
-          <label class="form-label">Número fijo otro operador</label>
-            <input formControlName="AnotherOperator" #AnotherOperator type="text" class="form-control" id="AnotherOperator" placeholder="" required="">
-          
-        </div><br>
-        <div class="form-group">
-          <label class="form-label">Minutos</label>
-            <input formControlName="MinutesAnother" #MinutesAnother type="text" class="form-control" id="MinutesAnother" placeholder="" required="">
-        </div><br>
+    <div>
+      <label class="form-label">Tipo de linea</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="TipoPlan" id="TipoPlan" value="Prepago" checked>
+        <label class="form-check-label" for="exampleRadios1">Prepago</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="TipoPlan" id="TipoPlan" value="Postpago">
+        <label class="form-check-label" for="exampleRadios2">Postpago</label>
       </div>
 
-      <div>
-        <label class="form-label">Tipo de linea</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">Prepago</label>
+      <div class="input-group-prepend">
+        <label class="form-label">Dispositivo</label>
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ninguno</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Huawei</a>
+          <a class="dropdown-item" href="#">Sangsum</a>
+          <a class="dropdown-item" href="#">Iphone</a>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">Postpago</label>
-        </div>
-
-        <div class="input-group-prepend">
-          <label class="form-label">Dispositivo</label>
-          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ninguno</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Huawei</a>
-            <a class="dropdown-item" href="#">Sangsum</a>
-            <a class="dropdown-item" href="#">Iphone</a>
-          </div>
-        </div>
-
       </div>
-      </div>
-      <button  class="btn-forms" >Agregar</button>
-    </form>
-  
-  </div>
-  
+
+    </div>
+    </div>
+    <button  class="btn-forms" >Agregar</button>
+  </form>
+
+</div>
+

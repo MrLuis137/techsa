@@ -6,7 +6,7 @@
       Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
       newEmployeeForm.value obtiene los datos del form y los devuelve como un json
     -->
-    <form  [formGroup] = "newinternet" >
+    <form  [formGroup] = "newinternet" (ngSubmit)="add(newinternet.value)">
       <br>
       <div class="div-form">
       <div >
@@ -33,19 +33,19 @@
       
         <label class="form-label">Tipo de servicio</label>
           <div class="form-check">
-            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="option1" checked>
+            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="Internet" checked>
             <label class="form-check-label" for="exampleRadios1">
               Internet
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="option2">
+            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="Fija">
             <label class="form-check-label" for="exampleRadios2">
               Fija
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="option3">
+            <input class="form-check-input" formControlName="Tipo" #Tipo type="radio"  id="Tipo" value="Mobíl">
             <label class="form-check-label" for="exampleRadios3">
               Móbil
             </label>
