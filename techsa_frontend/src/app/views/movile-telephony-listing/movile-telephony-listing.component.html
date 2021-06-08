@@ -22,7 +22,7 @@
                         <br>₡{{prepago.CostoLlamada}}
                     </p>
             
-                    <a (click)="this.selectedItem(prepago.idServicioIdId)" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(prepago)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <br>₡{{postpago.CostoLlamada}}
                     </p>
             
-                    <a (click)="this.selectedItem(postpago.idServicioIdId)" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(postpago)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -68,22 +68,22 @@
     
     <div class="row row-cols1 row-cols-md-3 g-4">
 
-        <div *ngFor="let postpagoDispositivo of this.mobileDeviceList; index as i" class="col">
+        <div *ngFor="let postpagoDispositivo of this.tempMobilePlan; index as i" class="col">
             
             <div class="card text-center" >
                 <div class="card-header">
-                {{(this.tempMobilePlan[i]).NombrePlan}} + {{(this.tempDevice[i]).Marca}} 
+                    {{postpagoDispositivo.NombrePlan}} + {{(this.tempDevice[i]).Marca}} 
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">  <span class="badge rounded-pill">{{(this.tempDevice[i]).Modelo}}</span>  </h5>
             
-                    <h6 class="card-subtitle">₡{{postpagoDispositivo.Precio}} al mes</h6>
+                    <h6 class="card-subtitle">₡{{postpagoDispositivo.PrecioMensual}} al mes</h6>
             
                     <p class="card-text">Costo Llamada por minuto:
                         <br>₡{{(this.tempMobilePlan[i]).CostoLlamada}}
                     </p>
             
-                    <a (click)="this.selectedItem(postpagoDispositivo.idServicioIdId)" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(postpagoDispositivo)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>

@@ -315,8 +315,8 @@ router.get('/planmovildispositivo', async function(req: Request, res:Response, n
 //Falta agregar, modificar, eliminar y get:id
 router.get('/planfijo', async function(req: Request, res:Response, next:NextFunction){
     try{
-        const repository = await connect.getPlanFijoRepository();
-        const todosPlanFijo = await repository.find();
+        const todosPlanFijo = await getManager().query(
+            `SELECT * FROM plan_fijo;`);
         res.send(todosPlanFijo);
     }
     catch(err){

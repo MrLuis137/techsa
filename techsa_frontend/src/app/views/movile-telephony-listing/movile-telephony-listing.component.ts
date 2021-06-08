@@ -3,6 +3,8 @@ import { MobiledeviceService } from '../../services/mobiledevice.service';
 import { DeviceService } from '../../services/device.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { PlanMovil } from '../../models/PlanMovil';
+import { Dispositivo } from '../../models/Dispositivo';
+
 
 
 
@@ -18,7 +20,7 @@ export class MovileTelephonyListingComponent implements OnInit {
   postpaidList = [];
   mobileDeviceList = [];
 
-  tempMobilePlan = [];
+  tempMobilePlan:PlanMovil[] = [];
   tempDevice = [];
 
   constructor(public mobileService: MovileTelephonyService, 
@@ -39,38 +41,37 @@ export class MovileTelephonyListingComponent implements OnInit {
     this.postpaidList = postpaidData;
     this.mobileDeviceList = mobileDeviceData;
 
-    // console.log(this.prepaidList);
-    // console.log(this.postpaidList);
-    // console.log(this.mobileDeviceList);
+    console.log(this.mobileDeviceList);
 
-    this.fillTemps();
+    await this.fillTemps();
   }
 
-  selectedItem(itemId:string){
-    console.log(itemId);
+  addToCart(planMovil:PlanMovil){
+    console.log(planMovil);
   }
 
   async fillTemps(){
-    this.mobileDeviceList.forEach(element => {
-      this.getTempDevice(element.idDispositivoId);
-      this.getTempMobilePlan(element.idPlanID);
-    });
+    for( const element of  this.mobileDeviceList){
+      console.log(element.idServicioIdId);
 
-    console.log(this.tempDevice);
+      const mobilePlan = await this.mobileService.getPlanMovilById(element.idPlanID);
+      const device = await this.deviceService.getDispositivobyId(element.idDispositivoId);
+
+      let newMobilePlan = new PlanMovil;
+      newMobilePlan.ID = mobilePlan.ID;
+      newMobilePlan.NombrePlan = mobilePlan.NombrePlan;
+      newMobilePlan.TipoPlan = mobilePlan.TipoPlan;
+      newMobilePlan.PrecioMensual = element.Precio;
+      newMobilePlan.Minutos = mobilePlan.Minutos;
+      newMobilePlan.GBInternet = mobilePlan.GBInternet;
+      newMobilePlan.CostoLlamada = mobilePlan.CostoLlamada;
+      newMobilePlan.IdServicio = element.idServicioIdId;
+
+      this.tempMobilePlan.push(newMobilePlan);
+      this.tempDevice.push(device);
+    }
     console.log(this.tempMobilePlan);
-  }
 
-  //Retorna un plan movil para llenarlo en el html
-  async getTempMobilePlan(id:string){
-    const mobilePlan = await this.mobileService.getPlanMovilById(id);
-    this.tempMobilePlan.push(mobilePlan);
-
-  }
-
-  //Retorna 
-  async getTempDevice(id:string){
-    const device = await this.deviceService.getDispositivobyId(id);
-    this.tempDevice.push(device);
   }
 
 }
