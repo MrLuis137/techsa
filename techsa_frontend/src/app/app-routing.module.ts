@@ -21,6 +21,13 @@ import { NewInternetFormComponent } from './views/new-internet-form/new-internet
 import { NewlandlineFormComponent } from './views/new-landline-form/new-landline-form.component';
 import { NewMobilePhoneFormComponent } from './views/new-mobilephone-form/new-mobilephone-form.component';
 
+import { ModifyInternetComponent } from './views/modify-internet/modify-internet.component';
+import { ModifyLandlineComponent } from './views/modify-landline/modify-landline.component';
+import { ModifyMobilePhoneComponent } from './views/modify-mobilephone/modify-mobilephone.component';
+import { InternetManagmentComponent } from './views/internet-managment/internet-managment.component';
+import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
+import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
+
 
 const routes: Routes = [
 
@@ -41,6 +48,13 @@ const routes: Routes = [
   {path: 'new-internet', component: NewInternetFormComponent},
   {path: 'new-landline', component: NewlandlineFormComponent},
   {path: 'new-mobilephone', component: NewMobilePhoneFormComponent},
+
+  {path: 'internet-managment', component: InternetManagmentComponent},
+  {path: 'landline-managment', component: LandlineManagmentComponent},
+  {path: 'mobilephone-managment', component: MobilephoneManagmentComponent},
+  {path: 'modify-internet/:ID', component: ModifyInternetComponent},
+  {path: 'modify-landline/:ID', component: ModifyLandlineComponent},
+  {path: 'modify-mobilephone/:ID', component: ModifyMobilePhoneComponent},
   
   
 

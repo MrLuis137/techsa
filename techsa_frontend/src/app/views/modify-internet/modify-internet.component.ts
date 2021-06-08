@@ -3,9 +3,11 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 
 
-import { InternetService} from '../../services/internet-service';
+//import { InternetService} from '../../services/internet-service';
 import { ActivatedRoute } from '@angular/router';
 import { PlanInternet } from 'src/app/models/PlanInternet';
+import { InternetserviceService } from '../../services/internetservice.service';
+
 
 @Component({
   selector: 'app-modify-internet',
@@ -19,7 +21,7 @@ export class ModifyInternetComponent implements OnInit {
   PrecioMensual: '-1',Tipo: ''}];
 
   constructor(
-    private internetService:InternetService,
+    private internetService:InternetserviceService,
     private _ac:ActivatedRoute,
     private builder:FormBuilder,
     ){ 
@@ -29,7 +31,7 @@ export class ModifyInternetComponent implements OnInit {
       Descripcion:new FormControl(),
       Velocidad:new FormControl(),
       PrecioMensual:new FormControl(),
-      Tipo:new FormControl(),
+    //  Tipo:new FormControl(),
     })
   }
 
@@ -37,7 +39,7 @@ export class ModifyInternetComponent implements OnInit {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
       console.log("Id a modificar",id)
-      this.data = await this.internetService.getPlanInternetbyId(id)
+      this.data = await this.internetService.getPlanInternet_idInternet(id);
       console.log(this.data)
       this.newInternetForm.setValue(this.data)
     })
@@ -54,7 +56,7 @@ export class ModifyInternetComponent implements OnInit {
     plan.Descripcion=values.Descripcion;
     plan.Velocidad=values.Velocidad;
     plan.PrecioMensual=values.PrecioMensual;
-    plan.Tipo=values.Tipo;
+ //   plan.Tipo=values.Tipo;
     return plan
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 
-import { PlanFijoService} from '../../services/plan-fijo.service';
+import { PlanfijoService} from '../../services/planfijo.service';
 import { ActivatedRoute } from '@angular/router';
 import { PlanFijo } from 'src/app/models/PlanFijo';
 
@@ -15,7 +15,7 @@ export class ModifyLandlineComponent implements OnInit {
   newLandlineForm: FormGroup
   data=[{ID:0, NombrePlan:'',PrecioMensual:1, Minutos:1, FijoTechsa:'', FijoOperador:'', MovilCualquiera:''}]
   constructor(
-    private planFijoService:PlanFijoService,
+    private planfijoService:PlanfijoService,
     private _ac:ActivatedRoute,
     private builder:FormBuilder,
     ){ 
@@ -34,7 +34,7 @@ export class ModifyLandlineComponent implements OnInit {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
       console.log("Id a modificar",id)
-      this.data = await this.planFijoService.getPlanFijobyId(id)
+      this.data = await this.planfijoService.getPlanFijobyId(id)
       this.newLandlineForm.setValue(this.data)
     })
   }
@@ -42,7 +42,7 @@ export class ModifyLandlineComponent implements OnInit {
     console.log("Vamos a modificar Dipositivo componente")
     var plan = new PlanFijo();
     plan = this.setPlan(plan,values)
-    await this.planFijoService.updatePlanFijo(values.ID,plan);
+    await this.planfijoService.updatePlanFijo(values.ID,plan);
   }
   
   setPlan(plan:PlanFijo,values:any):PlanFijo {

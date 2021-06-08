@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {InternetService } from '../../services/internet-service';
+//import {InternetService } from '../../services/internet-service';
+import { InternetserviceService } from '../../services/internetservice.service';
+
+
 
 
 @Component({
@@ -11,7 +14,7 @@ export class InternetManagmentComponent implements OnInit {
   planes = []
 
   constructor( 
-    private internetService:InternetService,
+    private internetService:InternetserviceService,
     ) { }
 
   async ngOnInit() {

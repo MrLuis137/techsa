@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { PlanInternet } from 'src/app/models/PlanInternet';
-import { InternetService } from '../../services/internet-service';
+import { InternetserviceService } from '../../services/internetservice.service';
 
 
 @Component({
@@ -12,13 +12,13 @@ import { InternetService } from '../../services/internet-service';
 export class NewInternetFormComponent implements OnInit {
 
   newinternet: FormGroup;
-  constructor(private builder:FormBuilder, private internetService: InternetService ) { 
+  constructor(private builder:FormBuilder, private internetService: InternetserviceService ) { 
     this.newinternet =  this.builder.group({
       NombrePlan: [''],
       Descripcion: [''],
       Velocidad: [''],
       PrecioMensual: [''],
-      Tipo: ['']
+//      Tipo: ['']
     })
   }
 
@@ -31,7 +31,7 @@ export class NewInternetFormComponent implements OnInit {
     plan.Descripcion=values.Descripcion;
     plan.Velocidad=values.Velocidad;
     plan.PrecioMensual=values.PrecioMensual;
-    plan.Tipo=values.Tipo;
+ //   plan.Tipo=values.Tipo;
     console.log(values)
     await this.internetService.createPlanInternet(plan)
     

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 
-import { PlanMovilService} from '../../services/plan-movil.service';
 import { ActivatedRoute } from '@angular/router';
 import { PlanMovil } from 'src/app/models/PlanMovil';
+import { MovileTelephonyService } from '../../services/moviletelephony.service';
 
 @Component({
   selector: 'app-modify-mobilephone',
@@ -15,7 +15,7 @@ export class ModifyMobilePhoneComponent implements OnInit {
   newMobiePhoneForm: FormGroup
   data=[{ID: 0, NombrePlan:'',Descripcion:'',PrecioMensual:1, Minutos:1, GBInternet:1, CostoLlamada:1, TipoPlan:''}]
   constructor(
-    private planMovilService:PlanMovilService,
+    private planMovilService:MovileTelephonyService,
     private _ac:ActivatedRoute,
     private builder:FormBuilder,
     ){ 
@@ -34,10 +34,10 @@ export class ModifyMobilePhoneComponent implements OnInit {
   ngOnInit(): void {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
-      console.log("Id a modificar",id)
-      this.data = await this.planMovilService.getPlanMovilbyId(id)
-      this.newMobiePhoneForm.setValue(this.data)
-    })
+      console.log("Id a modificar",id);
+      this.data = await this.planMovilService.getPlanMovilById(id);
+      this.newMobiePhoneForm.setValue(this.data);
+    });
   }
   async modify(values){
     console.log("Vamos a modificar Dipositivo componente")
@@ -51,9 +51,9 @@ export class ModifyMobilePhoneComponent implements OnInit {
     plan.Descripcion=values.Descripcion;
     plan.PrecioMensual=values.PrecioMensual;
     plan.Minutos=values.Minutos
-    plan.GBInternet=values.TarifaAdicFijoOtroOperador;
-    plan.CostoLlamada=values.TarifaAdicmovil;
-    plan.TipoPlan=values.Tipo;
+    plan.GBInternet=values.GBInternet;
+    plan.CostoLlamada=values.CostoLlamada;
+    plan.TipoPlan=values.TipoPlan;
     return plan
   }
 

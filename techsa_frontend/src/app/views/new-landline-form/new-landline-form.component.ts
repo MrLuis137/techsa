@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { PlanFijo } from '../../models/PlanFijo';
-import { PlanFijoService } from '../../services/plan-fijo.service';
+//import { PlanFijoService } from '../../services/plan-fijo.service';
+import { PlanfijoService } from '../../services/planfijo.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { PlanFijoService } from '../../services/plan-fijo.service';
 export class NewlandlineFormComponent implements OnInit {
   
   newLandlineForm: FormGroup;
-  constructor(private builder:FormBuilder, private planFijoService: PlanFijoService ) { 
+  constructor(private builder:FormBuilder, private planFijoService: PlanfijoService ) { 
     this.newLandlineForm =  this.builder.group({
       NombrePlan: [''],
       PrecioMensual: [''],

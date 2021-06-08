@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { PlanMovil } from '../../models/PlanMovil';
-import { PlanMovilService } from '../../services/plan-movil.service';
+//import { PlanMovilService } from '../../services/plan-movil.service';
+import { MovileTelephonyService } from '../../services/moviletelephony.service';
+
 
 
 @Component({
@@ -12,7 +14,7 @@ import { PlanMovilService } from '../../services/plan-movil.service';
 export class NewMobilePhoneFormComponent implements OnInit {
 
   newMobilePhone: FormGroup;
-  constructor(private builder:FormBuilder, private planMovilService: PlanMovilService  ) { 
+  constructor(private builder:FormBuilder, private planMovilService: MovileTelephonyService  ) { 
     this.newMobilePhone =  this.builder.group({
       NombrePlan: [''],
       Descripcion: [''],

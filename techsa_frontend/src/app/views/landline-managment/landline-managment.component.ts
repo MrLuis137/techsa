@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {PlanFijoService } from '../../services/plan-fijo.service';
+//import {PlanFijoService } from '../../services/plan-fijo.service';
+import { PlanfijoService } from '../../services/planfijo.service';
+
+
 
 
 @Component({
@@ -11,7 +14,7 @@ export class LandlineManagmentComponent implements OnInit {
   planes = []
 
   constructor( 
-    private planFijoService:PlanFijoService,
+    private planFijoService:PlanfijoService,
     ) { }
 
   async ngOnInit() {

@@ -8,7 +8,7 @@ export class PlanMovil{
     ID: number;
 
     @ManyToOne(type => Servicio)
-    idServicioId:Servicio
+    idServicio:Servicio
 
     @Column()
     TipoPlan: String;
@@ -30,8 +30,5 @@ export class PlanMovil{
 
     @Column()
     CostoLlamada: number;
-
-    @Column()
-    idServicioIdId: number;
 
 }

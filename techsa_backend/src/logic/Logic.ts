@@ -8,6 +8,10 @@ import { CarritoCompras } from '../entity/CarritoCompras';
 import { DispositivoXCarrito } from '../entity/DispositivoXCarrito';
 import { ServicioXCarrito } from '../entity/ServicioXCarrito';
 import { Servicio } from '../entity/Servicio';
+import { PlanMovil } from '../entity/PlanMovil';
+import { PlanInternet } from '../entity/PlanInternet';
+import {PlanFijo} from '../entity/PlanFijo';
+
  
 
 export const router: Router = Router();
@@ -319,6 +323,68 @@ router.get('/planmovilTipoPlan/:TipoPlan',async function (req:Request, res:Respo
     }
 });
 
+//*UPDATE mobilephone
+router.put('/planmovil/:id', async function (req, res, next:NextFunction) {
+    try{
+        console.log("update plan mobilephone")
+        console.log(req.body)
+        const repository = await connect.getPlanMovilRepository();
+        let planUpdate = await repository.findOne(req.params.id);
+        planUpdate.NombrePlan = req.body.NombrePlan;
+        planUpdate.Descripcion = req.body.Descripcion;
+        planUpdate.PrecioMensual = req.body.PrecioMensual;
+        planUpdate.Minutos = req.body.Minutos;
+        planUpdate.GBInternet = req.body.GBInternet;
+        planUpdate.CostoLlamada = req.body.CostoLlamada;
+        planUpdate.TipoPlan = req.body.TipoPlan;
+        await repository.save(planUpdate);
+        res.send('OK');
+    } 
+    catch(err){
+        console.log(err)
+    }
+}); 
+//*DELETE mobilephone
+router.delete('/planmovil/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete plan mobilephone");
+    try{
+        const repository = await connect.getPlanMovilRepository();
+        await repository.delete(req.params.id)
+        res.send('OK');
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//CREATE mobilephone
+router.post('/planmovil',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create plan mobilephone");
+    try{
+        const repositorioServicio = await connect.getServicioRepository();
+        const servicio = new Servicio();
+        servicio.Nombre= req.body.NombrePlan;
+        repositorioServicio.save(servicio);
+        console.log(servicio)
+        const repository = await connect.getPlanMovilRepository();
+        const plan = new PlanMovil();
+        console.log(req.body)
+        plan.idServicio = servicio;
+        plan.NombrePlan = req.body.NombrePlan;
+        plan.Descripcion = req.body.Descripcion;
+        plan.PrecioMensual = req.body.PrecioMensual;
+        plan.Minutos = req.body.Minutos;
+        plan.GBInternet = req.body.GBInternet;
+        plan.CostoLlamada = req.body.CostoLlamada;
+        plan.TipoPlan = req.body.TipoPlan;
+        const resultado = await repository.save(plan);
+        res.send(resultado);;
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 
 ///////////////////////////  Plan Móvil Dispositivo //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
@@ -360,6 +426,83 @@ router.get('/planfijo/:id',async function (req:Request, res:Response, next:NextF
     }
 });
 
+//CREATE landline
+router.post('/planfijo',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create plan landline");
+    try{
+        const repositorioServicio = await connect.getServicioRepository();
+        const servicio = new Servicio();
+        servicio.Nombre= req.body.NombrePlan;
+        repositorioServicio.save(servicio);
+        console.log(servicio)
+        const repository = await connect.getPlanFijoRepository();
+        const plan = new PlanFijo();
+        console.log(req.body)
+        plan.IdServicio= servicio;
+        plan.NombrePlan = req.body.NombrePlan;
+        plan.PrecioMensual = req.body.PrecioMensual;
+        plan.Minutos = req.body.Minutos;
+        plan.FijoTechsa = req.body.FijoTechsa;
+        plan.FijoOperador = req.body.FijoOperador;
+        plan.MovilCualquiera = req.body.MovilCualquiera;
+        const resultado = await repository.save(plan);
+        res.send(resultado);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+//*UPDATE landline
+router.put('/planfijo/:id', async function (req, res, next:NextFunction) {
+    try{
+        console.log("update plan landline")
+        console.log(req.body)
+        const repository = await connect.getPlanFijoRepository();
+        let planUpdate = await repository.findOne(req.params.id);
+        planUpdate.NombrePlan = req.body.NombrePlan;
+        planUpdate.PrecioMensual = req.body.PrecioMensual;
+        planUpdate.Minutos = req.body.Minutos;
+        planUpdate.FijoTechsa = req.body.FijoTechsa;
+        planUpdate.FijoOperador = req.body.FijoOperador;
+        planUpdate.MovilCualquiera = req.body.MovilCualquiera;
+        await repository.save(planUpdate);
+        res.send('OK');
+    } 
+    catch(err){
+        console.log(err)
+    }
+}); 
+//*DELETE landline
+router.delete('/planfijo/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete plan landline");
+    try{
+        // const repository = await connect.getPlanFijoRepository();
+        // const repositorioServicio = await connect.getServicioRepository();
+        // let planDelete = await repository.findOne(req.params.id);
+        // let servicio = await repositorioServicio.findOne(planDelete.IdServicio);
+        // console.log(servicio.Id);
+
+        // await repository.delete(planDelete);
+
+        const planfijo = await getManager().query(
+            "SELECT * FROM plan_fijo where plan_fijo.ID = ?;",[req.params.id]);
+        
+        const planfijoDelete = await getManager().query(
+            "DELETE FROM plan_fijo WHERE plan_fijo.ID = ?;",[req.params.id]);
+            
+        const servicio = await getManager().query(
+            "DELETE FROM servicio where servicio.Id = ?;",[planfijo[0].idServicioId]);
+    
+        // await repositorioServicio.delete(servicio.Id);
+ 
+        res.send('OK');
+    }
+    catch(err){
+        return next(err);
+    }
+});
+////////////////
+
 ///////////////////////////  Servicio  //////////////////////////////////////
 //Falta agregar, modificar, eliminar y get:id
 router.get('/servicio', async function(req: Request, res:Response, next:NextFunction){
@@ -394,6 +537,65 @@ router.get('/planinternet/:id',async function (req:Request, res:Response, next:N
         const todosInternetFijo = await getManager().query(
             "SELECT * FROM plan_internet where plan_internet.ID = ?;",[req.params.id]);
         res.send(todosInternetFijo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//*UPDATE internet
+router.put('/planinternet/:id', async function (req, res, next:NextFunction) {
+    try{
+        console.log("update plan internet")
+        console.log(req.body)
+        const repository = await connect.getPlanInternetRepository();
+        let planUpdate = await repository.findOne(req.params.id);
+        planUpdate.NombrePlan = req.body.NombrePlan;
+        planUpdate.Velocidad = req.body.Velocidad;
+        planUpdate.Descripcion = req.body.Descripcion;
+        planUpdate.PrecioMensual = req.body.PrecioMensual;
+        // planUpdate.Tipo = req.body.Tipo;
+        await repository.save(planUpdate);
+        res.send('OK');
+    } 
+    catch(err){
+        console.log(err)
+    }
+}); 
+
+//*DELETE techsa
+router.delete('/planinternet/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("delete plan internet");
+    try{
+        const repository = await connect.getPlanInternetRepository();
+        await repository.delete(req.params.id)
+        res.send('OK');
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//CREATE internet
+router.post('/planinternet',async function (req:Request, res:Response, next:NextFunction){
+    console.log("create plan internet");
+    try{
+        const repositorioServicio = await connect.getServicioRepository();
+        const servicio = new Servicio();
+        servicio.Nombre= req.body.NombrePlan;
+        repositorioServicio.save(servicio);
+        console.log(servicio)
+        const repository = await connect.getPlanInternetRepository();
+        const plan = new PlanInternet();
+        console.log(req.body)
+        plan.IdServicio= servicio;
+        plan.NombrePlan = req.body.NombrePlan;
+        plan.Velocidad = req.body.Velocidad;
+        plan.Descripcion = req.body.Descripcion;
+        plan.PrecioMensual = req.body.PrecioMensual;
+        //plan.Tipo = req.body.Tipo;
+        const resultado = await repository.save(plan);
+        res.send(resultado);;
     }
     catch(err){
         return next(err);

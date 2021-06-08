@@ -44,8 +44,17 @@ export class MovileTelephonyService {
   }
 
   //Guarda un plan móvil en la base de datos. 
-  async createPlanMovil( planMovil:PlanMovil ){
-    console.log('createPlanMovil' + JSON.stringify(planMovil));
-    return this.request('post', `${baseUrl}/planmovil`, planMovil);
+  async createPlanMovil( PlanMovil:PlanMovil ){
+    console.log('mobilephone' + JSON.stringify(PlanMovil));
+    return await this.request('post', `${baseUrl}/planmovil`, PlanMovil, 'text');
+  }
+
+  async deletePlanMovil( id:string ){
+    return await this.request('delete', `${baseUrl}/planmovil/${id}`, null, 'text');
+  }
+
+  async updatePlanMovil(id:string, planMovil:PlanMovil){
+    console.log("servicio mobilephone ")
+    return await this.request('put', `${baseUrl}/planmovil/${id}`, planMovil,'text');
   }
 }

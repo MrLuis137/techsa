@@ -1,0 +1,38 @@
+<body>
+    <div>
+        <br>
+        <h1>Gestión de telefonía móvil</h1>
+        <br>
+        <button routerLink="/new-mobilephone" class='btn-verde' >Agregar telefonía móvil</button>
+        <br>
+        <table class="table">
+            <thead >
+                <tr>
+                    <th scope="col">Nombre Plan</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio Mensual</th>
+                    <th scope="col">Minutos</th>
+                    <th scope="col">Gigas Internet</th>
+                    <th scope="col">Costo de llamada</th>
+                    <th scope="col">Línea</th>
+                    <th scope="col">Función</th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let plan of planes'>
+                <tr>
+                <td>{{plan?.NombrePlan}}</td>
+                <td>{{plan?.Descripcion}}</td>
+                <td>{{plan?.PrecioMensual}}</td>
+                <td>{{plan?.Minutos}}</td>
+                <td>{{plan?.GBInternet}}</td>
+                <td>{{plan?.CostoLlamada}}</td>
+                <td>{{plan?.TipoPlan}}</td>
+                <td>
+                    <button class='btn-delete' (click)='delete(plan?.ID,plan?.Puesto)'>Eliminar</button>
+                    <button class='btn-verde' routerLink="/modify-mobilephone/{{plan?.ID}}">Modificar</button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </body>
