@@ -16,7 +16,7 @@ export class DevicesListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.refresh();
-    this.addToCart()
+    //this.addToCart()
     console.log(this.deviceList);
   }
 
@@ -41,15 +41,13 @@ export class DevicesListingComponent implements OnInit {
 
   }
 
-
-  addToCart(){
-    console.log("HOLA");
+  addToCart(device:Dispositivo){
+    console.log(device);
     let p = new Dispositivo()
     p.Almacenamiento = 100
     p.Camara = 5
     p.Color = "rojo"
     p.Marca = "Samsung"
-
     //this.car.addPhone(p)
   }
 
