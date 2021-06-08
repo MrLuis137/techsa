@@ -31,8 +31,8 @@ export class Dispositivo{
     @Column()
     Cantidad: number;
 
-    @Column({type: "blob"})
-    Imagen: Buffer;
+    @Column()
+    Imagen: String;
 
 
 

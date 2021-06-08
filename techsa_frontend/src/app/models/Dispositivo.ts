@@ -9,5 +9,5 @@ export class Dispositivo{
     Almacenamiento : number;
     Precio: number;
     Cantidad: number;
-    Imagen: String; //Antes estaba en Buffer pero me daba error atte:Josue
+    Imagen: String;
 }

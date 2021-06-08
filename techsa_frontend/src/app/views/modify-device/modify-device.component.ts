@@ -46,7 +46,8 @@ export class ModifyDeviceComponent implements OnInit {
     console.log("Vamos a modificar Dipositivo componente")
     var device = new Dispositivo();
     device = this.setDevice(device,values)
-    await this.deviceService.updateDispositivo(values.Id_laboral,device);
+    console.log(values)
+    await this.deviceService.updateDispositivo(values.Id,device);
   }
   
   setDevice(device:Dispositivo,values:any):Dispositivo {
@@ -58,7 +59,7 @@ export class ModifyDeviceComponent implements OnInit {
     device.Almacenamiento = values.Almacenamiento;
     device.Precio = values.Precio;
     device.Cantidad = values.Cantidad;
-    //device.Imagen = Buffer.from(values.Imagen);
+    device.Imagen = values.Imagen;
     return device
   }
 
