@@ -4,21 +4,7 @@
     <h1 class="titulo-carrito">Carrito de compras</h1>
 </div>
 <div class=shoping-car-elements>
-    <div *ngFor="let device of devicesList" class="movile-phone" >
-    
-        <div class="car-element-title">
-            <h2 id="element-title-text">{{device.Model}}</h2>
-        </div>
-        <div class="device-cart-content">
-           <p class="price-text">Precio:₡</p>
-           <div class="cuantity-selector">
-            <p class="cuantity-text" >Cantidad:</p>
-            <input type="number" value="1" min="1" max="10" step="1"/>
-            <button class='btn-delete' (click)='tempCallback()'>Eliminar</button>
-           </div>
-           
-        </div>
-    </div>
+   
 </div>
 
 
@@ -27,7 +13,8 @@
     <div class="row justify-content-md-center">
         <h2 id="page-subtitle-text">Planes Internet 30mb simétricos</h2>
     </div>
-
+    <template #deviceContainer></template>
+    
     <div class="row row-cols1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card text-center" >

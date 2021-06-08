@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import * as bodyParser from 'body-parser';
 import { DeviceService } from '../../services/device.service';
+import { CartDeviceElementComponent } from '../cart-device-element/cart-device-element.component';
 
 
 @Component({
@@ -10,10 +11,11 @@ import { DeviceService } from '../../services/device.service';
   styleUrls: ['./shoping-car.component.css']
 })
 export class ShopingCarComponent implements OnInit {
-   
+  @ViewChild("deviceContainer", { read: ViewContainerRef }) deviceContainer;
+  
   devicesList
   servicesList
-  constructor(public car:CartService, public devices: DeviceService) {
+  constructor(private car:CartService, private devices: DeviceService, private resolver: ComponentFactoryResolver) {
    }
 
   ngOnInit(): void {
@@ -41,6 +43,12 @@ export class ShopingCarComponent implements OnInit {
     })
     console.log(data)
     return data
+  }
+  
+  createComponent() {
+    this.deviceContainer.clear(); 
+    const factory = this.resolver.resolveComponentFactory(CartDeviceElementComponent);
+    const nt = this.deviceContainer.createComponent(factory);
   }
   
   tempCallback(){

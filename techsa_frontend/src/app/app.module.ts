@@ -29,6 +29,7 @@ import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.comp
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CartDeviceElementComponent } from './views/cart-device-element/cart-device-element.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     CoverageAreasComponent,
     ClientNavbarComponent,
     AdminNavbarComponent,
-    ModifyEmployeeComponent
+    ModifyEmployeeComponent,
+    CartDeviceElementComponent
   ],
   imports: [
     BrowserModule,
