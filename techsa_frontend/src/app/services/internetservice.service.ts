@@ -62,9 +62,5 @@ export class InternetserviceService {
       return this.request('get',`${baseUrl}/planinternetfijomovil`);
     }
 
-    //Busca los planes moviles y fijos asociados a un plan de internet 
-    async getPlanInternetFijoMovil_IdInternet(id:string){
-      return this.request('get',`${baseUrl}/planinternetfijomovilallid/${id}`);
-    }
 
 }

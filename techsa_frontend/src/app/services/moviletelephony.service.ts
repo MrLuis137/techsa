@@ -35,7 +35,7 @@ export class MovileTelephonyService {
 
   //Retorna una lista de planes moviles de cierto tipo, prepago o postpago 
   async getPlanMovilByIdAll(id:string){
-    return await this.request('get', `${baseUrl}/planmovilallid/${id}`)
+    return await this.request('get', `${baseUrl}/planmovilTipoPlan/${id}`)
   }
 
   //Retorna el plan móvil correspondiente al id 
