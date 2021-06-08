@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Dispositivo } from '../models/Dispositivo';
 
+
 const baseUrl = "http://localhost:4201"
 
 @Injectable({
@@ -13,7 +14,7 @@ export class DeviceService {
 //Hace el request al backend
   private async request(method: string, url:string, data?:any, responseType?:any){
       
-    console.log('request' + JSON.stringify(data));
+    //console.log('request' + JSON.stringify(data));
     const result = this.http.request(method,url,{
       body:data,
       responseType:responseType || 'json',

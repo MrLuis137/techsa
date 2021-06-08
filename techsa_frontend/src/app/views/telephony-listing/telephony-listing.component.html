@@ -1,25 +1,24 @@
-
 <h1 id="page-title-text">Telefonía Fija</h1>
 
 <section class="d-flex justify-content-center phone-section" >
 
-    <div class="row row-cols1 row-cols-md-3 g-4">
+    <div *ngFor="let planfijo of this.telephonyListingData" class="row row-cols1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card text-center" >
                 <div class="card-header">
-                    Plan Básico
+                    {{planfijo.NombrePlan}}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">700 Minutos</span>  </h5>
+                    <h5 class="card-title">  <span class="badge rounded-pill">{{planfijo.Minutos}} Minutos</span>  </h5>
             
-                    <h6 class="card-subtitle">$4000 Mensuales</h6>
+                    <h6 class="card-subtitle">₡{{planfijo.PrecioMensual}} Mensuales</h6>
             
                     <p class="card-text">Tarifas Adicionales por minuto:
-                        <br>Fijos TECHSA              ₡34
-                        <br>Fijos otro operador       ₡40
-                        <br>Móvil cualquier operador  ₡36</p>
+                        <br>Fijos TECHSA              ₡{{planfijo.FijoTechsa}}
+                        <br>Fijos otro operador       ₡{{planfijo.FijoOperador}}
+                        <br>Móvil cualquier operador  ₡{{planfijo.MovilCualquiera}}</p>
             
-                    <a href="/telephony-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(planfijo)"  class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>

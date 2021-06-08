@@ -1,0 +1,52 @@
+<div class="div-ext-form">
+    <br>
+    <h1>Agregar servicio de Telefonía fija</h1>
+    <!--
+      Se agrega la etiqueta [FormGroup] = " " y se le pone el nombre que se le dio en el .ts
+      Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
+      newEmployeeForm.value obtiene los datos del form y los devuelve como un json
+    -->
+    <form  [formGroup] = "newlandline" >
+      <br>
+      <div class="div-form">
+      <div >
+        <div class="form-group">
+          <label class="form-label">Nombre del plan</label>
+          <input formControlName="Name" #Name type="text" class="form-control" id="Name" placeholder="" value="" required="">
+        </div><br>
+  
+        <div class="form-group">
+          <label  class="form-label">Monto mensual</label>
+          <input formControlName="Amount" #Amount type="int" class="form-control" id="Amount" placeholder="" value="" required="">
+        </div><br>
+          
+        <div class="form-group">
+          <label class="form-label">Minutos</label>
+            <input formControlName="Minutes" #Minutes type="int" class="form-control" id="Minutes" placeholder="" required="">
+          
+        </div><br>
+
+        <h2>Tarifa adicional por minuto</h2>
+
+        <div class="form-group">
+          <label class="form-label">Número Techsa</label>
+            <input formControlName="Numbertechsa" #workid type="Numbertechsa" class="form-control" id="Numbertechsa" placeholder="" required="">
+          
+        </div><br>
+        <div class="form-group">
+          <label class="form-label">Número fijo otro operador</label>
+            <input formControlName="AnotherOperator" #AnotherOperator type="text" class="form-control" id="AnotherOperator" placeholder="" required="">
+          
+        </div><br>
+        <div class="form-group">
+          <label class="form-label">Minutos</label>
+            <input formControlName="MinutesAnother" #MinutesAnother type="text" class="form-control" id="MinutesAnother" placeholder="" required="">
+        </div><br>
+        
+      </div>
+      </div>
+      <button  class="btn-forms" >Agregar</button>
+    </form>
+  
+  </div>
+  

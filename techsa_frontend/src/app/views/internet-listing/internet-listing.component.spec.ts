@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InternetListingComponent } from './internet-listing.component';
 
+
 describe('InternetListingComponent', () => {
   let component: InternetListingComponent;
   let fixture: ComponentFixture<InternetListingComponent>;

@@ -1,25 +1,27 @@
-<p>devices-listing works!</p>
+<h1 id="page-title-text">Dispositivos</h1>
 
-<div class="row row-cols1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card text-center" >
-    
-            <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-purple-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1617130317000" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">  <span class="badge rounded-pill">iPhone12</span>  </h5>
-                <h6 class="card-subtitle">$4000</h6>
-                <p class="card-text">
-                    Almacenamiento: 64GB
-                    <br>RAM: 4GB
-                    <br>Cámara: 12MP
-                    <br>Color: Purple
-                    <br>Cantidad 20</p>
-        
-                <button type="button"  class="btn" (click)="addToCart()">¡Lo quiero!</button>
+<section class="device-section">
+
+    <div  class="row row-cols1 row-cols-md-3 g-4">
+        <div *ngFor="let device of this.deviceList" class="col">
+            <div class="card text-center" >
+                <div class="align-center">
+                <img src="{{device.Imagen}}" class="card-img-top imgHeight">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">  <span class="badge rounded-pill">{{device.Modelo}}</span>  </h5>
+                    <h6 class="card-subtitle">₡{{device.Precio}}</h6>
+                    <p class="card-text">
+                        Almacenamiento: {{device.Almacenamiento}}GB
+                        <br>RAM: {{device.Ram}}GB
+                        <br>Cámara: {{device.Camara}}MP
+                        <br>Color: {{device.Color}}
+                        <br>Cantidad {{device.Cantidad}}</p>
+                    <button type="button"  class="btn" (click)="addToCart(device)">¡Lo quiero!</button>
+                </div>
             </div>
-        </div>
+        </div>  
     </div>
 
-    
-</div>
+</section>
 

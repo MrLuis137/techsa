@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne, PrimaryCol
 import { CarritoCompras } from './CarritoCompras';
 import { Servicio } from './Servicio';
 
+
 @Entity()
 export class ServicioXCarrito{
     @PrimaryGeneratedColumn("increment")

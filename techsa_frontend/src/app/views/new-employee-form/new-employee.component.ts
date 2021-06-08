@@ -8,6 +8,7 @@ import { AgenteVentas } from '../../models/AgenteVentas';
 import { Gerente } from '../../models/Gerente';
 import { GerenteService } from '../../services/gerente.service';
 
+
 @Component({
   selector: 'app-new-employee',
   templateUrl: './new-employee.component.html',

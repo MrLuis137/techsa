@@ -1,5 +1,6 @@
 import{Entity, PrimaryGeneratedColumn, Column, Double} from "typeorm";
 
+
 @Entity()
 export class Dispositivo{
 
@@ -32,7 +33,4 @@ export class Dispositivo{
 
     @Column()
     Imagen: String;
-
-
-
 }

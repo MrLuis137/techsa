@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gerente } from '.././models/Gerente';
 
+
 const baseUrl = "http://localhost:4201"
 
 @Injectable({
@@ -25,7 +26,7 @@ export class GerenteService {
     });
   }
 
-  getGerenteAll(){
+  async getGerenteAll(){
     return this.request('get', `${baseUrl}/gerente`);
   }
 
@@ -33,16 +34,16 @@ export class GerenteService {
     return await this.request('get', `${baseUrl}/gerente/${id}`)
   }
 
-  createGerente( gerente:Gerente ){
+  async createGerente( gerente:Gerente ){
     console.log('createAgenteVentas' + JSON.stringify(gerente));
     return this.request('post', `${baseUrl}/gerente`, gerente);
   }
 
-  deleteGerente( id:string ){
+  async deleteGerente( id:string ){
     return this.request('delete', `${baseUrl}/gerente/${id}`, null, 'text');
   }
 
-  updateGerente(id:string, gerente:Gerente){
+  async updateGerente(id:string, gerente:Gerente){
     return this.request('put', `${baseUrl}/gerente/${id}`, gerente,'text');
   }
 }

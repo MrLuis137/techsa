@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoverageAreasComponent } from './coverage-areas.component';
 
+
 describe('CoverageAreasComponent', () => {
   let component: CoverageAreasComponent;
   let fixture: ComponentFixture<CoverageAreasComponent>;

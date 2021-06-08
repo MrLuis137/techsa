@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from "typeorm";
 import { CarritoCompras } from './CarritoCompras';
 
+
 @Entity()
 export class Cliente{
     @PrimaryGeneratedColumn('increment')

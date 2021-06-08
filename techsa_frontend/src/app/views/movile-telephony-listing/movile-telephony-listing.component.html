@@ -7,22 +7,22 @@
     
     <div class="row row-cols1 row-cols-md-3 g-4">
 
-        <div class="col">
+        
+        <div *ngFor="let prepago of this.prepaidList" class="col">
             <div class="card text-center" >
                 <div class="card-header">
-                    TechsaChip
+                    {{prepago.NombrePlan}}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">Prepago</span>  </h5>
+                    <h5 class="card-title">  <span class="badge rounded-pill">{{prepago.TipoPlan}}</span>  </h5>
             
-                    <h6 class="card-subtitle">$1000</h6>
+                    <h6 class="card-subtitle">₡{{prepago.PrecioMensual}}</h6>
             
-                    <p class="card-text">Tarifas por minuto:
-                        <br>Fijos TECHSA              ₡34
-                        <br>Fijos otro operador       ₡40
-                        <br>Móvil cualquier operador  ₡36</p>
+                    <p class="card-text">Costo Llamada por minuto:
+                        <br>₡{{prepago.CostoLlamada}}
+                    </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(prepago)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -30,29 +30,30 @@
     </div>
 </section>
 
-<section class=" postpaid-section" >
+<section class="postpaid-section" >
     <div>
         <h2 id="page-subtitle-text">Planes PostPago</h2>
     </div>
     
     <div class="row row-cols1 row-cols-md-3 g-4">
 
-        <div class="col">
+        <div *ngFor="let postpago of this.postpaidList" class="col">
             <div class="card text-center" >
                 <div class="card-header">
-                    TechsaChip
+                    {{postpago.NombrePlan}}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">Prepago</span>  </h5>
+                    <h5 class="card-title">  
+                        <span class="badge rounded-pill">{{postpago.Minutos}}min + {{postpago.GBInternet}}gb</span>  
+                    </h5>
             
-                    <h6 class="card-subtitle">$1000</h6>
+                    <h6 class="card-subtitle">₡{{postpago.PrecioMensual}} al mes</h6>
             
-                    <p class="card-text">Tarifas por minuto:
-                        <br>Fijos TECHSA              ₡34
-                        <br>Fijos otro operador       ₡40
-                        <br>Móvil cualquier operador  ₡36</p>
+                    <p class="card-text">Costo Llamada por minuto:
+                        <br>₡{{postpago.CostoLlamada}}
+                    </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(postpago)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>
@@ -67,22 +68,22 @@
     
     <div class="row row-cols1 row-cols-md-3 g-4">
 
-        <div class="col">
+        <div *ngFor="let postpagoDispositivo of this.tempMobilePlan; index as i" class="col">
+            
             <div class="card text-center" >
                 <div class="card-header">
-                    TechsaChip
+                    {{postpagoDispositivo.NombrePlan}} + {{(this.tempDevice[i]).Marca}} 
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">  <span class="badge rounded-pill">Prepago</span>  </h5>
+                    <h5 class="card-title">  <span class="badge rounded-pill">{{(this.tempDevice[i]).Modelo}}</span>  </h5>
             
-                    <h6 class="card-subtitle">$1000</h6>
+                    <h6 class="card-subtitle">₡{{postpagoDispositivo.PrecioMensual}} al mes</h6>
             
-                    <p class="card-text">Tarifas por minuto:
-                        <br>Fijos TECHSA              ₡34
-                        <br>Fijos otro operador       ₡40
-                        <br>Móvil cualquier operador  ₡36</p>
+                    <p class="card-text">Costo Llamada por minuto:
+                        <br>₡{{(this.tempMobilePlan[i]).CostoLlamada}}
+                    </p>
             
-                    <a href="/movile-listing" class="btn">¡Lo quiero!</a>
+                    <a (click)="this.addToCart(postpagoDispositivo)" class="btn">¡Lo quiero!</a>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { CartService } from '../../services/cart.service';
 import * as bodyParser from 'body-parser';
 import { DeviceService } from '../../services/device.service';
 
+
 @Component({
   selector: 'app-shoping-car',
   templateUrl: './shoping-car.component.html',
