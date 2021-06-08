@@ -35,7 +35,7 @@ export async function connect(){
         entities: [
             PlanMovil,Servicio, AgenteVentas, Gerente, Cliente, 
             Contrato, PlanFijo,PlanInternet, PlanInternetPlanFijo,
-            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo,CarritoCompras
+            PlanInternetPlanMovilPlanFijo, PlanMovilDispositivo,Dispositivo,CarritoCompras,ServicioXCarrito, DispositivoXCarrito
         ],
     });
 }
@@ -143,7 +143,7 @@ export async function getServicioRepository(): Promise<Repository<Servicio>>{
 }
 
 export async function getCarritoRepository(): Promise<Repository<CarritoCompras>>{
-    console.log("getServicioRepository")
+    console.log("getCarritoRepository")
     if(connection == undefined){
         await connect();
     }
@@ -151,7 +151,7 @@ export async function getCarritoRepository(): Promise<Repository<CarritoCompras>
 }
 
 export async function getDispositivoXCarritoRepository(): Promise<Repository<DispositivoXCarrito>>{
-    console.log("getServicioRepository")
+    console.log("getDispositivoXCarritoRepository")
     if(connection == undefined){
         await connect();
     }
@@ -159,7 +159,7 @@ export async function getDispositivoXCarritoRepository(): Promise<Repository<Dis
 }
 
 export async function getServicioXCarritoRepository(): Promise<Repository<ServicioXCarrito>>{
-    console.log("getServicioRepository")
+    console.log("getServicioXCarritoRepository")
     if(connection == undefined){
         await connect();
     }

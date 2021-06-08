@@ -17,12 +17,11 @@ export class CartService {
   private async request(method: string, url:string, data?:any, responseType?:any){
     
     console.log('request' + JSON.stringify(data));
-    const result = this.http.request(method,url,{
-      body:data,
-      responseType:responseType || 'json',
-      observe:'body',
-      headers:{
-      }
+    const result = this.http.request(method, url, {
+      body: data,
+      responseType: responseType || 'json',
+      observe: 'body',
+      headers: {}
     });
     return new Promise<any>((resolve,reject) =>{
       result.subscribe(resolve as any, reject as any);
@@ -33,15 +32,21 @@ export class CartService {
     return this.request('get', `${baseUrl}/agenteventas`);
   }
 */
-  getDispositivosById(id:string){
-    return this.request('get', `${baseUrl}/carritodispositivos`,id);
+  getDispositivosByUserId(id:string){
+    return this.request('get', `${baseUrl}/carrito/dispositivos/${id}`);
     //return this.request('get', `${baseUrl}/agenteventas`);
   }
 
 
-  getServiciosById(id:string){
-    return this.request('get', `${baseUrl}/carrito/servicios`,id);
-    //return this.request('get', `${baseUrl}/agenteventas`);
+  getServiciosByUserId(id:string){
+    return this.request('get', `${baseUrl}/carrito/servicios/${id}`);
+  }
+  setServicioByUserId(idUsuario:String, idServicio){
+    return this.request('put', `${baseUrl}/carrito/servicios/${idUsuario}`, {servicio: idServicio});
+  }_
+
+  setDispositivoByUserId(idUsuario:String, idDispositivo){
+    return this.request('put', `${baseUrl}/carrito/dispositivos/${idUsuario}`, {dispositivo: idDispositivo});
   }
 /*
   createAgenteVentas( agenteVentas:AgenteVentas ){

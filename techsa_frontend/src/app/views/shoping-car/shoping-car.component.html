@@ -4,10 +4,10 @@
     <h1 class="titulo-carrito">Carrito de compras</h1>
 </div>
 <div class=shoping-car-elements>
-    <div class="movile-phone" >
+    <div *ngFor="let device of devicesList" class="movile-phone" >
     
         <div class="car-element-title">
-            <h2 id="element-title-text">Planes Internet 30mb simétricos</h2>
+            <h2 id="element-title-text">{{device.Model}}</h2>
         </div>
         <div class="device-cart-content">
            <p class="price-text">Precio:₡</p>
