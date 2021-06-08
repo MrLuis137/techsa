@@ -33,7 +33,4 @@ export class Dispositivo{
 
     @Column()
     Imagen: String;
-
-
-
 }

@@ -16,7 +16,6 @@ export class DevicesListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.refresh();
-    //this.addToCart()
     console.log(this.deviceList);
   }
 

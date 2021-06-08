@@ -8,6 +8,11 @@
     margin-left: 3rem ;
 }
 
+.imgHeight{
+    height: 300px;
+    width: auto;
+}
+
 .device-section {
     margin-top: 5rem;
     margin-left: 5rem;

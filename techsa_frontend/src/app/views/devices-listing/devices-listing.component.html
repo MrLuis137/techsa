@@ -6,7 +6,7 @@
         <div *ngFor="let device of this.deviceList" class="col">
             <div class="card text-center" >
                 <div class="align-center">
-                <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-purple-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1617130317000" class="card-img-top">
+                <img src="{{device.Imagen}}" class="card-img-top imgHeight">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">  <span class="badge rounded-pill">{{device.Modelo}}</span>  </h5>
