@@ -7,7 +7,7 @@ export class DispositivoXCarrito{
     @PrimaryGeneratedColumn("increment")
     ID:number
     @ManyToOne(type => CarritoCompras)
-    carrto: CarritoCompras;
+    IdCarrito: CarritoCompras;
     @ManyToOne(type => Dispositivo)
     IdDispositivo:Dispositivo
 }

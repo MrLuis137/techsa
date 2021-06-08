@@ -14,6 +14,9 @@ import { PlanInternet } from './entity/PlanInternet';
 import { PlanInternetPlanMovilPlanFijo } from './entity/PlanIntertnetPlanMovilPlanFijo';
 import { PlanMovil } from './entity/PlanMovil';
 import { PlanMovilDispositivo } from './entity/PlanMovilDispositivo';
+import { DispositivoXCarrito } from './entity/DispositivoXCarrito';
+import { ServicioXCarrito } from './entity/ServicioXCarrito';
+import { CarritoCompras } from './entity/CarritoCompras';   
 
 createConnection().then(async connection => {
     const clienteRepository = connection.getRepository(Cliente);
