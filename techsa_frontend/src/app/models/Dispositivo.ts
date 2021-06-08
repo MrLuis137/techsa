@@ -9,5 +9,5 @@ export class Dispositivo{
     Almacenamiento : number;
     Precio: number;
     Cantidad: number;
-    Imagen: Buffer;
+    Imagen: String;
 }

@@ -236,6 +236,30 @@ router.post('/dispositivo',async function (req:Request, res:Response, next:NextF
 });
 
 //*DELETE dispositivo
+router.put('/dispositivo/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("update dispositivo");
+    console.log(req.body)
+    try{
+    const repository = await connect.getDispositivoRepository();
+    let dispositivosUpdate = await repository.findOne(req.params.id);
+
+    dispositivosUpdate.Modelo = req.body.Modelo;
+    dispositivosUpdate.Marca = req.body.Marca;
+    dispositivosUpdate.Color = req.body.Color;
+    dispositivosUpdate.Camara = req.body.Camara;
+    dispositivosUpdate.Ram = req.body.Ram;
+    dispositivosUpdate.Almacenamiento = req.body.Almacenamiento;
+    dispositivosUpdate.Precio = req.body.Precio;
+    dispositivosUpdate.Cantidad = req.body.Cantidad;
+    dispositivosUpdate.Imagen = req.body.Imagen;
+    await repository.save(dispositivosUpdate);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//*DELETE dispositivo
 router.delete('/dispositivo/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete dispositivo");
     try{
