@@ -21,9 +21,9 @@ export class ShopingCarComponent implements OnInit {
   ngOnInit(): void {
     
   this.servicesList = this.getCarServices()
-  this.devicesList = this.getCarDevices()
-  this.car.setDispositivoByUserId('2201', '5403')
-  this.car.setServicioByUserId('2201','1207')
+  //this.devicesList = this.getCarDevices()
+  //this.car.setDispositivoByUserId('2201', '5403')
+  //this.car.setServicioByUserId('2201','1207')
   console.log(this.devicesList)
   }
 
@@ -31,24 +31,32 @@ export class ShopingCarComponent implements OnInit {
     let data = []
     await this.car.getServiciosByUserId('2201').then(function (res){
      data = res
-      
+     for(let i = 0; i< data.length; i++){
+      //this.createComponent(data[i])
+      console.log(data[i])
+    }
     })
     return data
   
   }
 
   async getCarDevices(){
-    let data = await this.car.getDispositivosByUserId('2221').then(function (res){
+    let data = await this.car.getDispositivosByUserId('2201').then(function (res){
       return res
     })
     console.log(data)
+    for(let i = 0; i< data.length; i++){
+      this.createComponent(data[i])
+      console.log(data[i])
+    }
     return data
   }
   
-  createComponent() {
-    this.deviceContainer.clear(); 
+  createComponent(device) {
+    //this.deviceContainer.clear(); 
     const factory = this.resolver.resolveComponentFactory(CartDeviceElementComponent);
-    const nt = this.deviceContainer.createComponent(factory);
+    const nt:ComponentRef<CartDeviceElementComponent> = this.deviceContainer.createComponent(factory);
+    nt.instance.device = device
   }
   
   tempCallback(){

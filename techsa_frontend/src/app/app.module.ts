@@ -30,6 +30,7 @@ import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.compone
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CartDeviceElementComponent } from './views/cart-device-element/cart-device-element.component';
+import { CartServiceElementComponent } from './views/cart-service-element/cart-service-element.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CartDeviceElementComponent } from './views/cart-device-element/cart-dev
     ClientNavbarComponent,
     AdminNavbarComponent,
     ModifyEmployeeComponent,
-    CartDeviceElementComponent
+    CartDeviceElementComponent,
+    CartServiceElementComponent
   ],
   imports: [
     BrowserModule,

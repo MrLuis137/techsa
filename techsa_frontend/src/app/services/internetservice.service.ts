@@ -43,7 +43,9 @@ export class InternetserviceService {
       return this.request('get',`${baseUrl}/planinternet/${id}`);
     }
 
-    
+    async getPlanInternet_IdServicio(id:string){
+      return this.request('get',`${baseUrl}/servicio/planinternet/${id}`);
+    }
 
     /////////////////////////////////// Plan Internet Plan Fijo//////////////////////////
     //Get todos los planes con plan fijo
