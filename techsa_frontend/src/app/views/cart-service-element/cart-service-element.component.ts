@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartServiceElementComponent implements OnInit {
 
+  service
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   delete(){
-    
+
   }
 
 }

@@ -583,6 +583,18 @@ router.get('/planinternet/:id',async function (req:Request, res:Response, next:N
     }
 });
 
+router.get('/servicio/planinternet/:id',async function (req:Request, res:Response, next:NextFunction){
+    console.log("get plan internet por ServiceId ");
+    try{
+        const todosInternetFijo = await getManager().query(
+            "SELECT * FROM plan_internet where plan_internet.idServicioId = ?;",[req.params.id]);
+        res.send(todosInternetFijo);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 //*UPDATE internet
 router.put('/planinternet/:id', async function (req, res, next:NextFunction) {
     try{
