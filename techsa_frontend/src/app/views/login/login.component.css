@@ -1,12 +1,22 @@
 
+.input {
+    margin-top: 1rem;
+    font-family: Saira;
+    font-size: 2rem;
+}
+
+.btn {
+    margin-top: 2rem;
+}
 
 .login{
     margin-top: 3rem;
     align-content: center;
 }
 
-.h1 {
+.pageTitle {
     font-family: Saira;
+    font-size: 4rem;
 }
 
 .custom-form {
