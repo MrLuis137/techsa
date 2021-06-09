@@ -29,6 +29,8 @@ import { ClientNavbarComponent } from './shared/client-navbar/client-navbar.comp
 import { AdminNavbarComponent } from './shared/admin-navbar/admin-navbar.component';
 import { ModifyEmployeeComponent } from './views/modify-employee/modify-employee.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CartDeviceElementComponent } from './views/cart-device-element/cart-device-element.component';
+import { CartServiceElementComponent } from './views/cart-service-element/cart-service-element.component';
 
 import { ModifyInternetComponent } from './views/modify-internet/modify-internet.component';
 import { ModifyLandlineComponent } from './views/modify-landline/modify-landline.component';
@@ -70,7 +72,9 @@ import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mob
     CoverageAreasComponent,
     ClientNavbarComponent,
     AdminNavbarComponent,
-    ModifyEmployeeComponent
+    ModifyEmployeeComponent,
+    CartDeviceElementComponent,
+    CartServiceElementComponent
   ],
   imports: [
     BrowserModule,

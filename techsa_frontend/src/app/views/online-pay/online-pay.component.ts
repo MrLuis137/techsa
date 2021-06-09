@@ -11,7 +11,7 @@ export class OnlinePayComponent implements OnInit {
   constructor(private contratoService:ContratoService) { }
 
   async ngOnInit() {
-    this.services=await this.contratoService.getAllContratosByIdCliente(2201)
+    this.services=await this.contratoService.getAllContratosPendientesByIdCliente(2201)
      console.log(this.services)
      
   }

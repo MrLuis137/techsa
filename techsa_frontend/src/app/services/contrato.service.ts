@@ -26,19 +26,35 @@ export class ContratoService {
     });
   }
 
-  async getAllContratosByIdCliente(idCliente:number){
+  async getAllContratosPendientesByIdCliente(idCliente:number){
     var services=[]
-    services = (await this.request('get', `${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`)).concat(services);
-    services = (await this.request('get',`${baseUrl}/pagoEnLinea/plan_internet_plan_movil_plan_fijo/${idCliente}`)).concat(services);
-    services = (await this.request('get',`${baseUrl}/pagoEnLinea/plan_fijo/${idCliente}`)).concat(services);
-    services = (await this.request('get',`${baseUrl}/pagoEnLinea/plan_internet_plan_fijo/${idCliente}`)).concat(services);
-    services = (await this.request('get',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`)).concat(services);
-    services = (await this.request('get',`${baseUrl}/pagoEnLinea/plan_movil_dispositivo/${idCliente}`)).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`,{"Estado":false})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_movil_plan_fijo/${idCliente}`,{"Estado":false})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_fijo/${idCliente}`,{"Estado":false})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_fijo/${idCliente}`,{"Estado":false})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`,{"Estado":false})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil_dispositivo/${idCliente}`,{"Estado":false})).concat(services);
     
     console.log(services)
     return services
     
   }
+
+  async getAllContratosByIdCliente(idCliente:number){
+    var services=[]
+    services = (await (this.getAllContratosPendientesByIdCliente(idCliente))).concat(services)
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_movil_plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil_dispositivo/${idCliente}`,{"Estado":true})).concat(services);
+    
+    console.log(services)
+    return services
+    
+  }
+
   async pay(idContrato){
     return await this.request('put', `${baseUrl}/pagoEnLinea/pagar/${idContrato}`);
   }

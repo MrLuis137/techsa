@@ -3,9 +3,8 @@
 <div>
     <h1>Planes retrasados</h1>
     
-    <section *ngFor="let service of this.services"  >
-    <div class="container">
-    <div class="card text-center" >
+    <div class="container" >
+    <div class="card text-center" *ngFor="let service of this.services">
         <div class="card-header">
             {{service.NombrePlan}}{{service?.nombreFijo}}{{service?.dispositivo}}{{service?.nombreInternet}}
             
@@ -19,9 +18,14 @@
             <p *ngIf="service.Velocidad">Velocidad:{{service?.Velocidad}} WTF con esto</p>
     
             <a (click)="pay(service.Id)" class="btn">Pagar</a>
+           
         </div>
+        
     </div>
+    
 </div>
-</section>
 </div>
+<br>
+<br>
+<br>
 
