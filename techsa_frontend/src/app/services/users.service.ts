@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import {User} from '../models/User'
+import { Cliente } from '../models/Cliente';
 
 const baseUrl = "http://localhost:4201"
 
@@ -10,7 +10,7 @@ const baseUrl = "http://localhost:4201"
 })
 export class UsersService {
 
-  private async request(method: string, url: string, data?: any) {
+  private async request(method: string, url: string, data?: any, responseType?:any) {
 
     console.log('request ' + JSON.stringify(data));
     const result = this.http.request(method, url, {
@@ -29,18 +29,31 @@ export class UsersService {
   constructor(private http: HttpClient) {
     
    }
-/*
-   createUser(user:User){
-    return this.request('post', `${baseUrl}/users`, user);
-   }
 
-   getUsers(){
-     return this.request('post',`${baseUrl}/users`);
-   }*/
+  getClientes(){
+    return this.request('get',`${baseUrl}/cliente`);
+  }
+
+  createCliente(user:Cliente){
+    return this.request('post', `${baseUrl}/cliente`, user);
+  }
+
+  getClienteById(id:string){
+    return this.request('get', `${baseUrl}/cliente/${id}`);
+  }
+
+  deleteCliente( id:string ){
+    return this.request('delete', `${baseUrl}/cliente/${id}`, null, 'text');
+  }
+
+  updatePlanFijo(id:string, cliente:Cliente){
+    console.log("servicio updateCliente ");
+    return this.request('put', `${baseUrl}/cliente/${id}`, cliente,'text');
+  }
 
 
    //-------------------------------------------------------------Empleados
-   getEmployee(pid_laboral:String){
+  getEmployee(pid_laboral:String){
     //Nose sabe si es gerente o agente de ventas. Hacer la logica de eso
    return [{id : 0,id_laboral: 1,nombre: 'Allison',usuario: 'Alli',cedula: 117980761,
    fechaNacimiento: '2000-12-13',puesto: 'Gerente',contrasenia: 'Allispw'}]
@@ -123,9 +136,5 @@ export class UsersService {
     }
     deleteDevice(DeviceId:number){
       return 'dispositivo borrado'
-    }
-
-   
-   
-    
+    } 
 }

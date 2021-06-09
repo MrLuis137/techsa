@@ -40,6 +40,16 @@ export async function connect(){
     });
 }
 
+///////////////////////////  Cliente //////////////////////////////////////
+//Falta modificar
+export async function getClienteRepository(): Promise<Repository<Cliente>>{
+    console.log("getClienteRepository");
+    if(connection == undefined){  //Si la coneccion es indefinida, llama a la función de arriba para conectarse
+        await connect();
+    }
+    return connection.getRepository(Cliente);  //Retorna el repositorio
+}
+
 ///////////////////////////  Gerente //////////////////////////////////////
 //Falta modificar
 export async function getGerenteRepository(): Promise<Repository<Gerente>>{

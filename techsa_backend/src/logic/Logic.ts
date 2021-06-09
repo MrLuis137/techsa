@@ -16,6 +16,46 @@ import {PlanFijo} from '../entity/PlanFijo';
 
 export const router: Router = Router();
 
+///////////////////////////  Cliente  ////////////////////////////////////////////
+router.post("/cliente" , async function (req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const user = await clienteRepository.create(req.body);
+    const results = await clienteRepository.save(user);
+    return res.send(results);
+    
+} )
+
+//Ver todos los usuarios
+router.get("/cliente", async function(req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const results = await clienteRepository.find();
+    return res.send(results);
+});
+
+//Usuario por id
+router.get("/cliente/:id", async function(req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const cliente = await clienteRepository.findOne(req.params.id);
+    return res.send(cliente);
+});
+
+//Actualizar usuario por id
+router.put("/cliente/:id", async function(req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const user = await clienteRepository.findOne(req.params.id);
+    clienteRepository.merge(user, req.body)
+    const results = await clienteRepository.save(user)
+    return res.send(results);
+});
+
+//Delete user by id
+router.delete("/cliente/:id", async function(req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const results = await clienteRepository.delete(req.params.id);
+    return res.send(results);
+});
+
+
 ///////////////////////////  Agente Ventas  //////////////////////////////////////
 //Falta modificar
 //GET Agentes de Ventas

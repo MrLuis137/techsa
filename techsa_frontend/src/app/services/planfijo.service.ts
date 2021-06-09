@@ -29,7 +29,7 @@ export class PlanfijoService {
   }
 
   //Retorna todos los planes fijos de la base de datos 
-  getPlanFijoAll(){
+  async getPlanFijoAll(){
     return this.request('get', `${baseUrl}/planfijo`);
   }
 
@@ -51,7 +51,7 @@ export class PlanfijoService {
 
   updatePlanFijo(id:string, planFijo:PlanFijo){
     console.log("servicio updateLandlineService ")
-    return this.request('put', `${baseUrl}/landline-managment/${id}`, planFijo,'text');
+    return this.request('put', `${baseUrl}/planfijo/${id}`, planFijo,'text');
   }
 
 }
