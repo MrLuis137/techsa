@@ -2,6 +2,26 @@
 <div class="div-ext-form"><h1>Pago en línea</h1></div>
 <div>
     <h1>Planes retrasados</h1>
-    <p>Desplegar las cajitas</p>
+    
+    <section *ngFor="let service of this.services"  >
+    <div class="container">
+    <div class="card text-center" >
+        <div class="card-header">
+            {{service.NombrePlan}}{{service?.nombreFijo}}{{service?.dispositivo}}{{service?.nombreInternet}}
+            
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">  <span class="badge rounded-pill">₡{{service.PrecioMensual}}</span>  </h5>
+            <p *ngIf="service.Descripcion">{{service?.Descripcion}}</p>
+            <p *ngIf="service.Minutos">Minutos:{{service?.Minutos}}</p>
+            <p *ngIf="service.FijoTechsa">Monto a techsa:{{service?.FijoTechsa}}</p>
+            <p *ngIf="service.FijoOperador">Monto otro operador:{{service?.FijoOperador}}</p>
+            <p *ngIf="service.Velocidad">Velocidad:{{service?.Velocidad}} WTF con esto</p>
+    
+            <a (click)="pay(service.Id)" class="btn">Pagar</a>
+        </div>
+    </div>
+</div>
+</section>
 </div>
 

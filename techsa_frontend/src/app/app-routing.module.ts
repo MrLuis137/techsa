@@ -72,7 +72,6 @@ const routes: Routes = [
   //My Services Section
   {path:'my-services', component: MyServicesComponent},
   {path:'online-pay', component: OnlinePayComponent},
-
   //others
   {path:'coverage-areas', component: CoverageAreasComponent},
   {path:'shoping-car', component: ShopingCarComponent},
