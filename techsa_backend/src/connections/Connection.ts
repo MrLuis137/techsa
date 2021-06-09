@@ -165,3 +165,12 @@ export async function getServicioXCarritoRepository(): Promise<Repository<Servic
     }
     return connection.getRepository(ServicioXCarrito);
 }
+
+///////////////////////////  Contrato  //////////////////////////////////////
+export async function getContratoRepository(): Promise<Repository<Contrato>>{
+    console.log("getContratoRepository")
+    if(connection == undefined){
+        await connect();
+    }
+    return connection.getRepository(Contrato);
+}
