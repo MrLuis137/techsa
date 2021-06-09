@@ -779,12 +779,12 @@ router.put('/carrito/servicios/:idcliente', async function(req: Request, res:Res
 });
 
 ///////////////////////////  Contrato y pago en linea /////////////////////////////////
-router.get('/pagoEnLinea/plan_internet/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_internet/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id,pi.NombrePlan,pi.Descripcion,pi.PrecioMensual FROM contrato c '
         query += 'INNER JOIN plan_internet pi ON pi.idServicioId = c.idServicioId '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
@@ -794,12 +794,12 @@ router.get('/pagoEnLinea/plan_internet/:idcliente', async function(req: Request,
             return next(err);
     }
 });
-router.get('/pagoEnLinea/plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id,pf.NombrePlan,pf.Minutos,pf.FijoTechsa,pf.FijoOperador,pf.PrecioMensual FROM contrato c '
         query += 'INNER JOIN plan_fijo pf ON pf.idServicioId = c.idServicioId '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
@@ -809,14 +809,14 @@ router.get('/pagoEnLinea/plan_fijo/:idcliente', async function(req: Request, res
             return next(err);
     }
 });
-router.get('/pagoEnLinea/plan_internet_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_internet_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id,pf.NombrePlan AS "nombreFijo" ,pi.NombrePlan AS "nombreInternet" ,pf.Minutos,pf.FijoTechsa,pf.FijoOperador,pipmpf.PrecioMensual,pi.Velocidad,pi.Descripcion FROM contrato c '
         query += 'INNER JOIN plan_internet_plan_fijo pipmpf ON pipmpf.idServicioId = c.idServicioId '
         query += 'INNER JOIN plan_fijo pf ON pipmpf.idPlanFijoID = pf.ID '
         query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
@@ -826,7 +826,7 @@ router.get('/pagoEnLinea/plan_internet_plan_fijo/:idcliente', async function(req
             return next(err);
     }
 });
-router.get('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id, pf.Minutos, pf.FijoTechsa,pf.FijoOperador,pipmpf.PrecioMensual,pf.NombrePlan AS "nombreFijo",pi.Velocidad,pi.Descripcion,pm.NombrePlan FROM contrato c '
@@ -834,7 +834,7 @@ router.get('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async f
         query += 'INNER JOIN plan_fijo pf ON pipmpf.idPlanFijoID = pf.ID '
         query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
         query += 'INNER JOIN plan_movil pm ON pipmpf.idPlanMovilID = pm.ID '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
@@ -845,12 +845,12 @@ router.get('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async f
     }
 });
 
-router.get('/pagoEnLinea/plan_movil/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_movil/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id,pm.Minutos,pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet  FROM contrato c '
         query += 'INNER JOIN plan_movil pm ON c.idServicioId = pm.idServicioId '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
@@ -862,14 +862,15 @@ router.get('/pagoEnLinea/plan_movil/:idcliente', async function(req: Request, re
 });
 
 
-router.get('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
+router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
+        console.log(req.body)
         const repository = await connect.getContratoRepository();
         let query = 'SELECT c.Id,pm.Minutos,d.Modelo AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca FROM contrato c '
         query += 'INNER JOIN plan_movil_dispositivo pmd ON c.idServicioId = pmd.idServicioIdId '
         query += 'INNER JOIN plan_movil pm ON pmd.idPlanID = pm.ID '
         query += 'INNER JOIN dispositivo d  ON pmd.idDispositivoID = d.ID '
-        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=false and c.FechaContratado <= (Select NOW())`
+        query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
         const services = await repository.query(query)
         console.log(services)
         
