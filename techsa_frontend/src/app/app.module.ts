@@ -39,6 +39,7 @@ import { InternetManagmentComponent } from './views/internet-managment/internet-
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
 import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
+import { ModifyContratoComponent } from './views/modify-contrato/modify-contrato.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ModifyDeviceComponent } from './views/modify-device/modify-device.compo
     AdminNavbarComponent,
     ModifyEmployeeComponent,
     CartDeviceElementComponent,
-    CartServiceElementComponent
+    CartServiceElementComponent,
+    ModifyContratoComponent
   ],
   imports: [
     BrowserModule,

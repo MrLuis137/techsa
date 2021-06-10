@@ -1,0 +1,102 @@
+h1{
+    color: #ffffff;
+    display:flex;
+    float: center;
+    font-family: Sans-serif;
+}
+
+#page-title-text{
+    color: white;
+    font-family: Saira;
+    font-style: Bold;
+    font-size: 5rem;
+    margin-top: 1rem;
+    margin-left: 3rem ;
+}
+
+#page-subtitle-text{
+    color: white;
+    font-family: Saira;
+    font-style: medium;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.container{
+    display:ruby-base-container;
+    background-color: rgb(0, 0, 0);
+    width: 500px;
+}
+.internet-section {
+    align-items: center;
+    border-radius: 1rem;
+    margin-top: 3rem;
+}
+
+
+.card {
+
+    border-color: #7B61FF;
+    
+    font-family: Saira;
+    font-style: normal;
+
+
+    border-radius: 5px;
+    color: #212529;
+}
+
+.card-header{
+
+    font-size: 28px;
+    /* text-align: center; */
+
+    
+    color: #219653;
+    background-color: #161925;
+
+}
+
+.badge{
+
+    color: white;
+    background: linear-gradient(111.17deg,#0056D7 -21.16%, #7B61FF 71.91%);
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
+
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card-subtitle{
+    margin-top: 0.5rem;
+}
+
+.card-text{
+    margin-top: 0.5rem;
+}
+
+.btn{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    background-color: #219653;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border: 0vw;
+}
+
+.btn-delete{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    background-color: rgb(231, 56, 56);
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border: 0vw;
+}

@@ -20,14 +20,14 @@ import { NewServicesFormComponent } from './views/new-services-form/new-services
 import { NewInternetFormComponent } from './views/new-internet-form/new-internet-form.component';
 import { NewlandlineFormComponent } from './views/new-landline-form/new-landline-form.component';
 import { NewMobilePhoneFormComponent } from './views/new-mobilephone-form/new-mobilephone-form.component';
-
+import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
 import { ModifyInternetComponent } from './views/modify-internet/modify-internet.component';
 import { ModifyLandlineComponent } from './views/modify-landline/modify-landline.component';
 import { ModifyMobilePhoneComponent } from './views/modify-mobilephone/modify-mobilephone.component';
 import { InternetManagmentComponent } from './views/internet-managment/internet-managment.component';
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
-import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
+import { ModifyContratoComponent } from './views/modify-contrato/modify-contrato.component'
 
 
 const routes: Routes = [
@@ -62,7 +62,7 @@ const routes: Routes = [
   //Devices-Management
   {path:'devices-managment',component: DevicesManagmentComponent},
   {path:'new-device', component: NewDeviceFormComponent},
-  {path: 'device/:id', component: ModifyDeviceComponent},
+  {path:'device/:id', component: ModifyDeviceComponent},
 
   //*Client*
   //Services Info Section 
@@ -77,6 +77,7 @@ const routes: Routes = [
   //others
   {path:'coverage-areas', component: CoverageAreasComponent},
   {path:'shoping-car', component: ShopingCarComponent},
+  {path: 'modify-contrato/:id',component:ModifyContratoComponent}
 ];
 
 @NgModule({

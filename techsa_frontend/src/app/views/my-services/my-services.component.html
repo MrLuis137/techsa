@@ -1,6 +1,5 @@
 <div class="div-ext-form"><h1>Gestión de mis planes</h1></div>
 <div>
-    <h1>Planes retrasados</h1>
     
     <div class="container" >
     <div class="card text-center" *ngFor="let service of this.services">
@@ -12,12 +11,11 @@
             <h5 class="card-title">  <span class="badge rounded-pill">₡{{service.PrecioMensual}}</span>  </h5>
             <p *ngIf="service.Descripcion">{{service?.Descripcion}}</p>
             <p *ngIf="service.Minutos">Minutos:{{service?.Minutos}}</p>
-            <p *ngIf="service.FijoTechsa">Monto a techsa:{{service?.FijoTechsa}}</p>
-            <p *ngIf="service.FijoOperador">Monto otro operador:{{service?.FijoOperador}}</p>
-            <p *ngIf="service.Velocidad">Velocidad:{{service?.Velocidad}} WTF con esto</p>
-            <p>Todavia no funciona</p>
+            <p *ngIf="service.FijoTechsa">Fijo TECHSA: ₡{{service?.FijoTechsa}}</p>
+            <p *ngIf="service.FijoOperador">Fijo otro operador: ₡{{service?.FijoOperador}}</p>
+            
             <a (click)='cancel(service?.Id)' class="btn-delete">Cancelar</a>
-            <a  class="btvn">Modificar</a>
+            <a routerLink="/modify-contrato/{{service?.Id}}" class="btvn">Modificar</a>
         </div>
     </div>
 </div>
