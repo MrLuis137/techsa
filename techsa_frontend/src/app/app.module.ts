@@ -70,6 +70,7 @@ export function tokenGetter(){
     NewlandlineFormComponent,
     NewMobilePhoneFormComponent,
     DevicesListingComponent,
+    ModifyDeviceComponent,
 
     ShopingCarComponent,
     MyServicesComponent,
