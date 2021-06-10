@@ -33,7 +33,6 @@ export class AuthService {
   async login( username:string, password:string ){
     //console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
     const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
-    
     localStorage.setItem('access_token', response);
     console.log(localStorage.getItem('access_token'));
     return true;

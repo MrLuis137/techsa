@@ -67,7 +67,8 @@
                     <a class="nav-link" routerLink="devices-managment">Gest. Dispositivos</a>
                 </li>
             </ul>
-            <button class="btn btn-outline-success" routerLink="login">Log In</button>
+            <button *ngIf="!auth.loggedIn" class="btn btn-outline-success" routerLink="login">Log In</button>
+            <button *ngIf="auth.loggedIn" class="btn btn-outline-success" (click)="this.logout()" >Log Out</button>
         </div>
     </div>
   </nav>

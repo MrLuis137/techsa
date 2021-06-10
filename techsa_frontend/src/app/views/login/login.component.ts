@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
   
   }
 
-  SubmitLogin(){
-
-    if(this.auth.login(this.username, this.password)){
-      this.router.navigate(['my-services'])
+  async submit(){
+    const submit = await this.auth.login(this.username, this.password);
+    if(submit){
+      this.router.navigate(['my-services']);
     }else{
       this.error = 'No se pudo autenticar';
     };

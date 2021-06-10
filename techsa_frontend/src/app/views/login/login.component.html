@@ -1,12 +1,12 @@
 <div class="login">
-  <form class="custom-form" method="post">
+  <form (ngSubmit)="submit()" class="custom-form" >
     <h1 class="pageTitle">Login</h1>
     <input
       class="input"
       type="text"
       [(ngModel)]="username"
       name="username"
-      placeholder="Username"
+      placeholder="username"
       required="required"
     />
     <input
@@ -17,7 +17,7 @@
       placeholder="Password"
       required="required"
     />
-    <button type="submit" (click)="SubmitLogin()" class="btn btn-success btn-lg"  >Iniciar Sesión</button>
+    <button  class="btn btn-success btn-lg" type="submit">Iniciar Sesión</button>
     <button class="btn btn-success btn-lg" routerLink="/register">Registrarse</button>
   </form>
 </div>
