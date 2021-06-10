@@ -1,5 +1,6 @@
 import {NextFunction, query, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
+import jwt_decode from "jwt-decode";
 import {getConnectionManager, Repository, getManager} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
@@ -11,6 +12,7 @@ import { Servicio } from '../entity/Servicio';
 import { PlanMovil } from '../entity/PlanMovil';
 import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
+
 //import * as jwt from 'jsonwebtoken';
 
  
@@ -19,15 +21,7 @@ export const router: Router = Router();
 
 const jwt = require('jsonwebtoken');
 
-
-///////////////////////////  Cliente  ////////////////////////////////////////////
-router.post("/cliente" , async function (req: Request, res: Response) {
-    const clienteRepository = await connect.getClienteRepository();
-    const user = await clienteRepository.create(req.body);
-    const results = await clienteRepository.save(user);
-    return res.send(results);
-    
-} )
+///////////////////////////  AUTORIZACION  ////////////////////////////////////////////
 
 router.post("/auth" , async function (req: Request, res: Response) {
     const body = req.body;
@@ -40,13 +34,30 @@ router.post("/auth" , async function (req: Request, res: Response) {
         ]
     });
     if (usuario[0]) {
-        var token = jwt.sign({userID:usuario[0].Id}, 'MENSAJESECRETO', {expiresIn:'2h'});
-        //console.log(token);
-        return res.send(token);
+        var token = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token: token,rol:"cliente"});
     }else{
         return res.send(401);
     }    
 })
+
+//Prueba para decodificar el token, si funciona.. 
+router.get("/todos/:token", async function(req: Request, res: Response) {
+    let token = req.params.token;
+    let decoded = jwt_decode(token);
+    console.log(decoded);
+});
+
+///////////////////////////  Cliente  ////////////////////////////////////////////
+router.post("/cliente" , async function (req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const user = await clienteRepository.create(req.body);
+    const results = await clienteRepository.save(user);
+    return res.send(results);
+    
+} );
+
+
 
 router.post("/cliente" , async function (req: Request, res: Response) {
     const clienteRepository = await connect.getClienteRepository();
@@ -54,7 +65,7 @@ router.post("/cliente" , async function (req: Request, res: Response) {
     const results = await clienteRepository.save(user);
     return res.send(results);
     
-} )
+} );
 
 //Ver todos los usuarios
 router.get("/cliente", async function(req: Request, res: Response) {
