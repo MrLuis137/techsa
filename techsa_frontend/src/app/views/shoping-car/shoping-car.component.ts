@@ -21,6 +21,7 @@ export class ShopingCarComponent implements OnInit {
   
   devicesList
   servicesList
+  total = 0
   constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver) {
    }
 
@@ -29,6 +30,7 @@ export class ShopingCarComponent implements OnInit {
   this.servicesList = this.getCarServices()
   this.devicesList = this.getCarDevices()
   console.log(this.devicesList)
+  console.log(this.total)
   }
 
   async getCarServices(){
@@ -42,14 +44,14 @@ export class ShopingCarComponent implements OnInit {
       switch(data[i].Nombre) {
         case "PlanInternet": {
           this.getInternetSercive(data[i].IdServicio)
-           
+          
           }
           
         case "PlanInternetPlanFijo": {
-
+          //this.get
         }
         case "Prepago": {
-
+          //this.getP
         }
 
       }
@@ -66,6 +68,7 @@ export class ShopingCarComponent implements OnInit {
     console.log(data)
     for(let i = 0; i< data.length; i++){
       this.createDeviceComponent(data[i])
+      this.total += data[i].Precio
       console.log(data[i])
     }
     return data
@@ -78,11 +81,13 @@ export class ShopingCarComponent implements OnInit {
       console.log(service)
      })
      console.log(service)
+     this.total += service.PrecioMensual
      this.createServiceComponent(service)
   }
 
   createDeviceComponent(device) {
     //this.deviceContainer.clear(); 
+    console.log(this.total)
     const factory = this.resolver.resolveComponentFactory(CartDeviceElementComponent);
     const nt:ComponentRef<CartDeviceElementComponent> = this.deviceContainer.createComponent(factory);
     nt.instance.device = device
@@ -97,8 +102,8 @@ export class ShopingCarComponent implements OnInit {
     nt.instance.service = service
   }
   
-  tempCallback(){
-    console.log("Eliminado :3")
+  confirmOrder(){
+    console.log(this.servicesList)
   }
 
 }

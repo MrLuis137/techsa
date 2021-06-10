@@ -8,9 +8,17 @@
 </div>
 
 
-<section class="container internet-section gradient50" >
+<div class="cart-elements" >
 
     <template #deviceContainer class="device"></template>
     <template #serviceContainer class="service"></template>
     
-</section>
+</div>
+<div Class="total">
+    <h2 class="total-lbl">Total: {{this.total}} </h2>
+</div>
+
+<div class="cart-buttons">
+    <button Class="acept-btn" (click)="confirmOrder()" > Confirmar</button>
+    <button Class="delete-all-btn">Vaciar Carrio</button>
+</div>
