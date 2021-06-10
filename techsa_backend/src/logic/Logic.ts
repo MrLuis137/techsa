@@ -324,7 +324,6 @@ router.put('/dispositivo/:id',async function (req:Request, res:Response, next:Ne
     try{
     const repository = await connect.getDispositivoRepository();
     let dispositivosUpdate = await repository.findOne(req.params.id);
-
     dispositivosUpdate.Modelo = req.body.Modelo;
     dispositivosUpdate.Marca = req.body.Marca;
     dispositivosUpdate.Color = req.body.Color;
