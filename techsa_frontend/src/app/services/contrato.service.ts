@@ -26,6 +26,12 @@ export class ContratoService {
     });
   }
 
+  async newContrato(services){ 
+    for (let i = 0; i <  services.length){
+      services = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id, '2201'}));
+    }
+  }
+
   //Toma los contratos en los que un cliente está moroso
   async getAllContratosPendientesByIdCliente(idCliente:number){
     var services=[]

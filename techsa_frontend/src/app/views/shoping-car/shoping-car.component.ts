@@ -8,6 +8,7 @@ import { PlanInternetPlanFijo } from '../../../../../techsa_backend/src/entity/P
 import { InternetserviceService } from '../../services/internetservice.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { CartServiceElementComponent } from '../cart-service-element/cart-service-element.component';
+import { ContratoService } from '../../services/contrato.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ShopingCarComponent implements OnInit {
   devicesList
   servicesList
   total = 0
-  constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver) {
+  constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver
+    , private contract: ContratoService) {
    }
 
   ngOnInit(): void {
@@ -104,6 +106,7 @@ export class ShopingCarComponent implements OnInit {
   
   confirmOrder(){
     console.log(this.servicesList)
+    this.contract.newContrato(this.servicesList)
   }
 
 }

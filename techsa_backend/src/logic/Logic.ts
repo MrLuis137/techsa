@@ -789,6 +789,15 @@ router.put('/carrito/servicios/:idcliente', async function(req: Request, res:Res
             return next(err);
     }
 });
+////////////////////////////////  Nuevo contrato ///////////////////////////////////////
+
+router.put('/contrato/'), async function(req: Request, res:Response, next:NextFunction){
+    const repository = await connect.getContratoRepository();
+    repository.query(`INSERT INTO contrato(FechaContratado, Estado, idServicioId, idClienteId) values(curdate() , 1, ${req.body.IdServicio}, ${req.body.IdCliente}) `)
+    
+}
+
+
 
 ///////////////////////////  Contrato y pago en linea /////////////////////////////////
 router.put('/pagoEnLinea/plan_internet/:idcliente', async function(req: Request, res:Response, next:NextFunction){
