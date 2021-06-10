@@ -939,3 +939,26 @@ router.put('/pagoEnLinea/pagar/:idContrato', async function(req: Request, res:Re
             return next(err);
     }
 });
+router.get('/pagoEnLinea/get/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const contratoRepository = await connect.getContratoRepository();
+        const contrato = await contratoRepository.findOne({where:{Id : req.params.idContrato }})
+        res.send(contrato);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+router.delete('/pagoEnLinea/cancelar/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const contratoRepository = await connect.getContratoRepository();
+        
+         await contratoRepository.delete(req.params.idContrato)
+        
+        res.send('OK');
+    
+    }
+    catch(err){
+            return next(err);
+    }
+});

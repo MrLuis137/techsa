@@ -26,6 +26,7 @@ export class ContratoService {
     });
   }
 
+  //Toma los contratos en los que un cliente está moroso
   async getAllContratosPendientesByIdCliente(idCliente:number){
     var services=[]
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`,{"Estado":false})).concat(services);
@@ -39,7 +40,7 @@ export class ContratoService {
     return services
     
   }
-
+  //Toma todos los contratos de un cliente
   async getAllContratosByIdCliente(idCliente:number){
     var services=[]
     services = (await (this.getAllContratosPendientesByIdCliente(idCliente))).concat(services)
@@ -54,9 +55,22 @@ export class ContratoService {
     return services
     
   }
-
+  //Hace un pago a un contrato por id
   async pay(idContrato){
     return await this.request('put', `${baseUrl}/pagoEnLinea/pagar/${idContrato}`);
+  }
+
+  //Eliminar un contrado por id y si ya esta pagado
+  async delete(idContrato){
+    const contra=await this.request('get', `${baseUrl}/pagoEnLinea/get/${idContrato}`);
+    if (contra && contra.Estado==1){
+      await this.request('delete', `${baseUrl}/pagoEnLinea/cancelar/${idContrato}`);
+      return 'OK'
+    }
+    else{
+      return 'Debe paga el servicio antes de cancelarlo'
+    }
+    
   }
 
 }

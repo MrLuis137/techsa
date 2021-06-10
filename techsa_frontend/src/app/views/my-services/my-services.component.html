@@ -1,4 +1,4 @@
-<div class="div-ext-form"><h1>Pago en línea</h1></div>
+<div class="div-ext-form"><h1>Gestión de mis planes</h1></div>
 <div>
     <h1>Planes retrasados</h1>
     
@@ -16,8 +16,8 @@
             <p *ngIf="service.FijoOperador">Monto otro operador:{{service?.FijoOperador}}</p>
             <p *ngIf="service.Velocidad">Velocidad:{{service?.Velocidad}} WTF con esto</p>
             <p>Todavia no funciona</p>
-            <a  class="btn">Cancelar</a>
-            <a  class="btn">Modificar</a>
+            <a (click)='cancel(service?.Id)' class="btn-delete">Cancelar</a>
+            <a  class="btvn">Modificar</a>
         </div>
     </div>
 </div>

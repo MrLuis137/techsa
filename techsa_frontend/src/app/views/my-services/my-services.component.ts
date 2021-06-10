@@ -15,5 +15,13 @@ export class MyServicesComponent implements OnInit {
      console.log(this.services)
     
   }
+  async cancel(idContrato:number){
+    await this.contratoService.delete(idContrato).then((data)=>{
+        console.log(data)
+    })
+  }
+  async modify(){
+    
+  }
 
 }
