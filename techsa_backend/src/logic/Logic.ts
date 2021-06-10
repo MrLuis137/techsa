@@ -11,12 +11,43 @@ import { Servicio } from '../entity/Servicio';
 import { PlanMovil } from '../entity/PlanMovil';
 import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
+//import * as jwt from 'jsonwebtoken';
 
  
 
 export const router: Router = Router();
 
+const jwt = require('jsonwebtoken');
+
+
 ///////////////////////////  Cliente  ////////////////////////////////////////////
+router.post("/cliente" , async function (req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const user = await clienteRepository.create(req.body);
+    const results = await clienteRepository.save(user);
+    return res.send(results);
+    
+} )
+
+router.post("/auth" , async function (req: Request, res: Response) {
+    const body = req.body;
+    console.log(body);
+
+    const clienteRepository = await connect.getClienteRepository();
+    const usuario = await clienteRepository.find({
+        where:[
+            {NombreUsuario:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+    if (usuario[0]) {
+        var token = jwt.sign({userID:usuario[0].Id}, 'MENSAJESECRETO', {expiresIn:'2h'});
+        //console.log(token);
+        return res.send(token);
+    }else{
+        return res.send(401);
+    }    
+})
+
 router.post("/cliente" , async function (req: Request, res: Response) {
     const clienteRepository = await connect.getClienteRepository();
     const user = await clienteRepository.create(req.body);
@@ -36,7 +67,11 @@ router.get("/cliente", async function(req: Request, res: Response) {
 router.get("/cliente/:id", async function(req: Request, res: Response) {
     const clienteRepository = await connect.getClienteRepository();
     const cliente = await clienteRepository.findOne(req.params.id);
-    return res.send(cliente);
+    if(cliente){
+        return res.send(cliente);
+    }else{
+        return res.send('No existe Cliente');
+    }
 });
 
 //Actualizar usuario por id
@@ -355,7 +390,7 @@ router.get('/planmovilTipoPlan/:TipoPlan',async function (req:Request, res:Respo
             where:[
                 {TipoPlan:req.params.TipoPlan}  //donde el id de servicio es el id que se le pasa
             ]
-        })
+        });
         res.send(planmovil);
     }
     catch(err){

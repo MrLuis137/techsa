@@ -39,6 +39,16 @@ import { InternetManagmentComponent } from './views/internet-managment/internet-
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
 
+//Authorization
+import {JwtModule} from '@auth0/angular-jwt';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './services/auth.service';
+
+
+//Para buscar el token de autorizacion
+export function tokenGetter(){
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -83,9 +93,16 @@ import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mob
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains:['localhost:4201'],
+        // disallowedRoutes:['localhost:4201/auth']
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import {first} from 'rxjs/operators';
 
 
 
@@ -10,19 +13,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  email:string;
-  password:string;
+  public username:string;
+  public password:string;
+  public error:string;
 
 
-  constructor () {}
+
+  constructor (private auth: AuthService, private router:Router) {}
 
 
   ngOnInit(): void {
   
   }
 
-  login(){
-    console.log(this.email);
+  SubmitLogin(){
+
+    if(this.auth.login(this.username, this.password)){
+      this.router.navigate(['my-services'])
+    }else{
+      this.error = 'No se pudo autenticar';
+    };
+      
+    console.log(this.username);
     console.log(this.password);
   }
 
