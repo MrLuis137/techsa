@@ -27,6 +27,7 @@ import { ModifyMobilePhoneComponent } from './views/modify-mobilephone/modify-mo
 import { InternetManagmentComponent } from './views/internet-managment/internet-managment.component';
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
+import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
   //Devices-Management
   {path:'devices-managment',component: DevicesManagmentComponent},
   {path:'new-device', component: NewDeviceFormComponent},
+  {path: 'device/:id', component: ModifyDeviceComponent},
 
   //*Client*
   //Services Info Section 
