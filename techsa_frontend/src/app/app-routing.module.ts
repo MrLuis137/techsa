@@ -29,6 +29,8 @@ import { LandlineManagmentComponent } from './views/landline-managment/landline-
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
 import { ModifyContratoComponent } from './views/modify-contrato/modify-contrato.component'
 
+import { AuthGuard } from './guard/auth.guard';
+
 
 const routes: Routes = [
 
@@ -71,12 +73,12 @@ const routes: Routes = [
   {path:'internet-listing', component: InternetListingComponent},
   {path:'devices-listing', component: DevicesListingComponent},
 
-  //My Services Section
-  {path:'my-services', component: MyServicesComponent},
-  {path:'online-pay', component: OnlinePayComponent},
+  //My Services Section   SOLO PUEDE ACCEDER CON AUTORIZACION
+  {path:'my-services', component: MyServicesComponent, canActivate: [AuthGuard]},
+  {path:'online-pay', component: OnlinePayComponent, canActivate: [AuthGuard]},
   //others
   {path:'coverage-areas', component: CoverageAreasComponent},
-  {path:'shoping-car', component: ShopingCarComponent},
+  {path:'shoping-car', component: ShopingCarComponent,canActivate: [AuthGuard]},
   {path: 'modify-contrato/:id',component:ModifyContratoComponent}
 ];
 

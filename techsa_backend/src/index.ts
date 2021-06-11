@@ -77,7 +77,7 @@ createConnection().then(async connection => {
     app.post("/planmovil", async function(req: Request, res: Response){
         const servicio = await  servicioRepository.create({Nombre:'Plan_Movil'});
         let planMovil = await planMovilRepository.create(req.body);
-        planMovil[0].idServicioId = servicio;
+        planMovil[0].idServicio = servicio;
         servicioRepository.save(servicio);
         const result = planMovilRepository.save(planMovil);
         res.send(result)
