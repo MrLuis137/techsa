@@ -39,6 +39,7 @@ export class ModifyMobilePhoneComponent implements OnInit {
       this.newMobiePhoneForm.setValue(this.data);
     });
   }
+  
   async modify(values){
     console.log("Vamos a modificar Dipositivo componente")
     var plan = new PlanMovil();

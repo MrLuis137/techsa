@@ -17,11 +17,11 @@ export class NewInternetFormComponent implements OnInit {
       NombrePlan: [''],
       Descripcion: [''],
       Velocidad: [''],
-      PrecioMensual: [''],
-//      Tipo: ['']
-    })
+      PrecioMensual: ['']
+    });
   }
 
+  
   ngOnInit(): void {
   }
   async add(values){
@@ -30,8 +30,7 @@ export class NewInternetFormComponent implements OnInit {
     plan.Descripcion=values.Descripcion;
     plan.Velocidad=values.Velocidad;
     plan.PrecioMensual=values.PrecioMensual;
- //   plan.Tipo=values.Tipo;
-    console.log(values)
+    console.log(values);
     await this.internetService.createPlanInternet(plan)
     
   }

@@ -13,7 +13,7 @@ import { PlanFijo } from 'src/app/models/PlanFijo';
 })
 export class ModifyLandlineComponent implements OnInit {
   newLandlineForm: FormGroup
-  data=[{ID:0, NombrePlan:'',PrecioMensual:1, Minutos:1, FijoTechsa:'', FijoOperador:'', MovilCualquiera:''}]
+  data=[{ID:0,IdServicio:'',NombrePlan:'',PrecioMensual:1, Minutos:1, FijoTechsa:'', FijoOperador:'', MovilCualquiera:''}];
   constructor(
     private planfijoService:PlanfijoService,
     private _ac:ActivatedRoute,
@@ -26,33 +26,47 @@ export class ModifyLandlineComponent implements OnInit {
       Minutos:new FormControl(),
       FijoTechsa:new FormControl(),
       FijoOperador:new FormControl(),
-      MovilCualquiera:new FormControl()
+      MovilCualquiera:new FormControl(),
+      idServicioId:new FormControl()
+    });
+  }
+
+  ngOnInit():  void {
+     this.loadData();
+  }
+
+  async loadData(){
+    this._ac.paramMap.subscribe(async param =>{
+      const id =param.get('ID');
+      console.log("Id a modificar",id);
+      this.data = await this.planfijoService.getPlanFijobyId(id);
+      console.log("data", this.data[0]);
+      this.newLandlineForm.setValue(this.data[0]);
     })
   }
 
-  ngOnInit(): void {
-    this._ac.paramMap.subscribe(async param =>{
-      const id =param.get('ID');
-      console.log("Id a modificar",id)
-      this.data = await this.planfijoService.getPlanFijobyId(id)
-      this.newLandlineForm.setValue(this.data)
-    })
-  }
+  
+
+  
   async modify(values){
     console.log("Vamos a modificar Dipositivo componente")
     var plan = new PlanFijo();
-    plan = this.setPlan(plan,values)
+    plan = this.setPlan(plan,values);
     await this.planfijoService.updatePlanFijo(values.ID,plan);
   }
   
   setPlan(plan:PlanFijo,values:any):PlanFijo {
+    console.log("VALORES DEL BACKEND");
+    console.log(values);
+    plan.ID=values.ID;
     plan.NombrePlan= values.NombrePlan;
     plan.PrecioMensual=values.PrecioMensual;
     plan.Minutos=values.Minutos;
     plan.FijoTechsa=values.FijoTechsa
     plan.FijoOperador=values.FijoOperador;
     plan.MovilCualquiera=values.MovilCualquiera;
-    return plan
+    plan.IdServicio = values.idServicioId;
+    return plan;
   }
 
 }
