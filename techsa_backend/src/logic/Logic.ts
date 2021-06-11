@@ -34,9 +34,29 @@ router.post("/auth" , async function (req: Request, res: Response) {
         ]
     });
 
+    const gerenteRepository = await connect.getGerenteRepository();
+    const gerente = await gerenteRepository.find({
+        where:[
+            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+
+    const agenteVentasRepo = await connect.getAgenteVentasRepository();
+    const agenteVentas = await agenteVentasRepo.find({
+        where:[
+            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+
     if (usuario[0]) {
-        var token = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
-        return res.send({token: token,rol:"cliente"});
+        var tokenID = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
+    }if (gerente[0]) {
+        var tokenID = jwt.sign({userID:gerente[0].Id_laboral, role:"gerente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
+    }if (agenteVentas[0]) {
+        var tokenID = jwt.sign({userID:agenteVentas[0].Id_laboral, role:"agenteventas"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
     }else{
         return res.send(401);
     }    
@@ -45,15 +65,18 @@ router.post("/auth" , async function (req: Request, res: Response) {
 //Prueba para decodificar el token, si funciona.. 
 router.get("/auth/id/:token", async function(req: Request, res: Response) {
     let token = req.params.token;
-    let decoded = jwt_decode(token);
-    return res.send(decoded);
+    let decoded = JSON.stringify(jwt_decode(token));
+    var decodedJson = JSON.parse(decoded);
+    console.log(decodedJson.userID);
+    return res.send({userId:decodedJson.userID});
 });
 
 //Prueba para decodificar el token, si funciona.. 
 router.get("/auth/role/:token", async function(req: Request, res: Response) {
     let token = req.params.token;
-    let decoded = jwt_decode(token);
-    return res.send(decoded);
+    let decoded = JSON.stringify(jwt_decode(token));
+    var decodedJson = JSON.parse(decoded);
+    return res.send({role:decodedJson.role});
 });
 
 ///////////////////////////  Cliente  ////////////////////////////////////////////

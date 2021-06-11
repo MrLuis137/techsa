@@ -17,7 +17,7 @@ export class AuthService {
 
   private async request(method: string, url:string, data?:any, responseType?:any){
     
-    console.log('request' + JSON.stringify(data));
+    //console.log('request' + JSON.stringify(data));
     const result = this.http.request(method,url,{
       body:data,
       responseType:responseType || 'text',
@@ -33,27 +33,18 @@ export class AuthService {
   async login( username:string, password:string ){
     //console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
     const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
-    localStorage.setItem('access_token', response.token);
-    console.log(response);
-    console.log(localStorage.getItem('access_token'));
+    const jsonResponse = JSON.parse(response);
 
-  
+    localStorage.setItem('access_token', jsonResponse.token);
     return true;
   }
 
-  // login(username:string, password:string):Observable<boolean>{
-  //   return this.http.post<{token:string}>(baseUrl + '/auth', {username:username, password:password})
-  //     .pipe(
-  //       map(result => {
-  //         localStorage.setItem('access_token',result.token);
-  //         console.log(result.token);
-  //         return true;
-  //       })
-  //     );
-  // }
+  async getUserRole( token:string ){
+    return this.request('get',`${baseUrl}/auth/role/${token}`);
+  }
 
   //Quita el access token del local storage 
-  logout(){
+  async logout(){
     localStorage.removeItem('access_token');
   }
 

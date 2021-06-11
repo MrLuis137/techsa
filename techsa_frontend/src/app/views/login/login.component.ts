@@ -29,13 +29,27 @@ export class LoginComponent implements OnInit {
   async submit(){
     const submit = await this.auth.login(this.username, this.password);
     if(submit){
-      this.router.navigate(['my-services']);
+      console.log(submit);
+      this.redirect();
+      //this.router.navigate(['my-services']);
     }else{
       this.error = 'No se pudo autenticar';
     };
-      
-    console.log(this.username);
-    console.log(this.password);
+  }
+
+  async redirect(){
+    const token = localStorage.getItem('access_token');
+    const role = await this.auth.getUserRole(token);
+
+    if (JSON.parse(role).role == "cliente" ){
+      console.log("ES UN CLIENTE");
+    };
+    if (JSON.parse(role).role == "gerente" ){
+      console.log("ES UN GERENTE");
+    };
+    if (JSON.parse(role).role == "agenteventas" ){
+      console.log("ES UN AGENTEVENTAS");
+    };
   }
 
 }
