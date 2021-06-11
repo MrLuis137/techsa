@@ -41,9 +41,10 @@ export class ModifyInternetComponent implements OnInit {
       console.log("Id a modificar",id);
       this.data = await this.internetService.getPlanInternet_idInternet(id);
       console.log(this.data);
-      this.newInternetForm.setValue(this.data);
+      this.newInternetForm.setValue(this.data[0]);
     })
   }
+  
   async modify(values){
     console.log("Vamos a modificar Dipositivo componente")
     var plan = new PlanInternet();
