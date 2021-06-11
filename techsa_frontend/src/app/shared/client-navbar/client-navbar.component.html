@@ -12,7 +12,7 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
-                <li class="nav-item dropdown">
+                <li *ngIf="auth.isCliente" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Información y Adquisición
                     </a>
@@ -23,7 +23,7 @@
                         <li><a class="dropdown-item" routerLink="devices-listing">Dispositivos</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+                <li *ngIf="auth.isCliente" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Mis Planes
                     </a>
@@ -35,11 +35,11 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li *ngIf="auth.isCliente" class="nav-item">
                     <a class="nav-link" routerLink="coverage-areas">Zonas Cobertura</a>
                 </li>
 
-                <li class="nav-item">
+                <li *ngIf="auth.isCliente" class="nav-item">
                     <a class="nav-link" routerLink="shoping-car">Carrito Compras</a>
                 </li>
 
@@ -48,11 +48,11 @@
                     <a class="nav-link disabled" routerLink="#" tabindex="-1" aria-disabled="true">TEMPORAL</a>
                 </li>
 
-                <li class="nav-item">
+                <li  *ngIf="auth.isGerente" class="nav-item">
                     <a class="nav-link" routerLink="employees-managment">Gest. Empleados</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li *ngIf="auth.isGerente || (!auth.isGerente && !auth.isCliente)" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Gest. Servicios
                     </a>
@@ -63,7 +63,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li *ngIf="auth.isGerente || (!auth.isGerente && !auth.isCliente)" class="nav-item">
                     <a class="nav-link" routerLink="devices-managment">Gest. Dispositivos</a>
                 </li>
             </ul>

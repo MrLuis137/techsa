@@ -43,13 +43,19 @@ export class LoginComponent implements OnInit {
 
     if (JSON.parse(role).role == "cliente" ){
       console.log("ES UN CLIENTE");
+      this.auth.isCliente = true;
+      this.auth.isGerente = false;
       this.router.navigate(['my-services']);
     };
     if (JSON.parse(role).role == "gerente" ){
       console.log("ES UN GERENTE");
+      this.auth.isCliente = false;
+      this.auth.isGerente = true;
       this.router.navigate(['employees-managment']);
     };
     if (JSON.parse(role).role == "agenteventas" ){
+      this.auth.isCliente = false;
+      this.auth.isGerente = false;
       console.log("ES UN AGENTEVENTAS");
       this.router.navigate(['landline-managment']);
     };

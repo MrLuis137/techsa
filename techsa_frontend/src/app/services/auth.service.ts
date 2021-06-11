@@ -11,12 +11,16 @@ const baseUrl = "http://localhost:4201"
 })
 export class AuthService {
 
+  public isCliente:boolean = true;
+  public isGerente:boolean = false;
+  public isAgenteV:boolean = false;
+
   constructor(private http:HttpClient) { }
 
   //envia la peticion de login al backend
 
   private async request(method: string, url:string, data?:any, responseType?:any){
-    
+        
     //console.log('request' + JSON.stringify(data));
     const result = this.http.request(method,url,{
       body:data,
@@ -34,7 +38,6 @@ export class AuthService {
     //console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
     const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
     const jsonResponse = JSON.parse(response);
-
     localStorage.setItem('access_token', jsonResponse.token);
     return true;
   }
@@ -43,8 +46,15 @@ export class AuthService {
     return this.request('get',`${baseUrl}/auth/role/${token}`);
   }
 
+  async getUserId( token:string ){
+    return this.request('get',`${baseUrl}/auth/id/${token}`);
+  }
+
   //Quita el access token del local storage 
   async logout(){
+    this.isCliente = true;
+    this.isGerente = false;
+    this.isAgenteV = false;
     localStorage.removeItem('access_token');
   }
 

@@ -9,6 +9,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ClientNavbarComponent implements OnInit {
 
+  isCliente:boolean = true;
+  isGerente:boolean = false;
+  isAgente:boolean = false;
+  
+
   
   constructor(public auth:AuthService, private router:Router) { }
 
