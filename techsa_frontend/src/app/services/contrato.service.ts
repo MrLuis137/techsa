@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Contrato } from '../models/Contrato';
+import { PlanfijoService } from './planfijo.service';
+import { InternetserviceService } from 'src/app/services/internetservice.service';
+import { MovileTelephonyService } from './moviletelephony.service';
+import { MobiledeviceService } from './mobiledevice.service';
+
 
 const baseUrl = "http://localhost:4201"
 
@@ -9,7 +14,12 @@ const baseUrl = "http://localhost:4201"
 })
 export class ContratoService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private internetService:InternetserviceService,
+    private planFijoService:PlanfijoService,
+    private mobileService: MovileTelephonyService,
+    private  mobileDeviceService: MobiledeviceService ) { }
 
   private async request(method: string, url:string, data?:any, responseType?:any){
       
@@ -55,6 +65,44 @@ export class ContratoService {
     return services
     
   }
+   
+   
+   
+  async getPlanesTipo(idContrato:number){
+    let options=[]
+    const tipo = await this.request('get', `${baseUrl}/pagoEnLinea/todosTipoPlanes/${idContrato}`);
+    switch(tipo[0].Nombre) {
+      case 'PlanFijo':
+        console.log("PlanFijo")
+        options = await this.planFijoService.getPlanFijoAll();
+        break;
+      case 'PlanInternetPlanFijo':
+        options = await this.internetService.getPlanInternetFijoAll();
+        console.log("PlanInternetPlanFijo")
+        break;
+      case 'PlanInternetPlanMovilPlanFijo':
+        console.log("PlanInternetPlanMovilPlanFijo")
+        options  = await this.internetService.getPlanInternetFijoMovilAll();
+        break;
+      case 'PlanMovilDispositivo':
+        console.log("PlanMovilDispositivo")
+        options = await this.mobileDeviceService.getPlanMovilDispositivoAll();
+        break;
+      case 'Prepago':
+        console.log("Prepago")
+        options = await this.mobileService.getPlanMovilByIdAll('Prepago');
+        break;
+      case 'PostPago':
+        console.log("PostPago")
+        options = await this.mobileService.getPlanMovilByIdAll('Postpago');
+        break;
+      default:
+        options = await this.internetService.getPlanInternetAll();
+        console.log("internet")
+    }
+    return options
+  }
+
   //Hace un pago a un contrato por id
   async pay(idContrato){
     return await this.request('put', `${baseUrl}/pagoEnLinea/pagar/${idContrato}`);
@@ -71,6 +119,9 @@ export class ContratoService {
       return 'Debe paga el servicio antes de cancelarlo'
     }
     
+  }
+  async actualizarContrato(idContrato:number,idservicioid:number){
+    await this.request('put', `${baseUrl}/pagoEnLinea/actualizar/${idContrato}`,{"idservicioid":idservicioid});
   }
 
 }

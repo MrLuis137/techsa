@@ -12,16 +12,16 @@ export class MyServicesComponent implements OnInit {
 
   async ngOnInit() {
     this.services=await this.contratoService.getAllContratosByIdCliente(2201)
-     console.log(this.services)
+    console.log(this.services)
+    
     
   }
+  
   async cancel(idContrato:number){
     await this.contratoService.delete(idContrato).then((data)=>{
         console.log(data)
     })
   }
-  async modify(){
-    
-  }
+ 
 
 }

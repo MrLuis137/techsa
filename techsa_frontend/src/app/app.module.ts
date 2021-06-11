@@ -39,6 +39,7 @@ import { InternetManagmentComponent } from './views/internet-managment/internet-
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
 import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
+import { ModifyContratoComponent } from './views/modify-contrato/modify-contrato.component';
 
 //Authorization
 import {JwtModule} from '@auth0/angular-jwt';
@@ -87,7 +88,8 @@ export function tokenGetter(){
     ModifyEmployeeComponent,
     ModifyDeviceComponent,
     CartDeviceElementComponent,
-    CartServiceElementComponent
+    CartServiceElementComponent,
+    ModifyContratoComponent
   ],
   imports: [
     BrowserModule,

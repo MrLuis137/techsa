@@ -923,7 +923,7 @@ router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req:
     try{
         console.log(req.body)
         const repository = await connect.getContratoRepository();
-        let query = 'SELECT c.Id,pm.Minutos,d.Modelo AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca FROM contrato c '
+        let query = 'SELECT c.Id,pm.Minutos,d.Marca AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca FROM contrato c '
         query += 'INNER JOIN plan_movil_dispositivo pmd ON c.idServicioId = pmd.idServicioIdId '
         query += 'INNER JOIN plan_movil pm ON pmd.idPlanID = pm.ID '
         query += 'INNER JOIN dispositivo d  ON pmd.idDispositivoID = d.ID '
@@ -932,6 +932,24 @@ router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req:
         console.log(services)
         
         res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/pagoEnLinea/todosTipoPlanes/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{    
+        console.log("pagoEnLinea/todosTipoPlanes")
+        const repository = await connect.getContratoRepository();
+        let query = 'SELECT s.Nombre FROM contrato c '
+        query += 'INNER JOIN servicio s ON c.idServicioId = s.Id '
+        query += `WHERE c.Id = ${req.params.idContrato} ;`
+        
+        const tipo = await repository.query(query)
+        console.log(tipo);
+        
+        res.send(tipo);
     }
     catch(err){
             return next(err);
@@ -966,6 +984,21 @@ router.delete('/pagoEnLinea/cancelar/:idContrato', async function(req: Request, 
          await contratoRepository.delete(req.params.idContrato)
         
         res.send('OK');
+    
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.put('/pagoEnLinea/actualizar/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        
+        const repository = await connect.getContratoRepository();
+        let contratoUpdate = await repository.findOne(req.params.idContrato);
+
+        contratoUpdate.IdServicio = req.body.idservicioid;
+        await repository.save(contratoUpdate);
     
     }
     catch(err){
