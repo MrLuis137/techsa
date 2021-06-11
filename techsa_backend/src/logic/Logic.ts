@@ -33,6 +33,7 @@ router.post("/auth" , async function (req: Request, res: Response) {
             {NombreUsuario:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
         ]
     });
+
     if (usuario[0]) {
         var token = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
         return res.send({token: token,rol:"cliente"});
@@ -42,10 +43,17 @@ router.post("/auth" , async function (req: Request, res: Response) {
 })
 
 //Prueba para decodificar el token, si funciona.. 
-router.get("/todos/:token", async function(req: Request, res: Response) {
+router.get("/auth/id/:token", async function(req: Request, res: Response) {
     let token = req.params.token;
     let decoded = jwt_decode(token);
-    console.log(decoded);
+    return res.send(decoded);
+});
+
+//Prueba para decodificar el token, si funciona.. 
+router.get("/auth/role/:token", async function(req: Request, res: Response) {
+    let token = req.params.token;
+    let decoded = jwt_decode(token);
+    return res.send(decoded);
 });
 
 ///////////////////////////  Cliente  ////////////////////////////////////////////

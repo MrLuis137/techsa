@@ -17,8 +17,8 @@ import { InternetserviceService } from '../../services/internetservice.service';
 export class ModifyInternetComponent implements OnInit {
   
   newInternetForm: FormGroup;
-  data= [{ID: 0 , NombrePlan: '',Descripcion: '',Velocidad: -1,
-  PrecioMensual: '-1',Tipo: ''}];
+  data= [{ID: ' ', NombrePlan: ' ',Descripcion: ' ',Velocidad: ' ',
+  PrecioMensual: ' '}];
 
   constructor(
     private internetService:InternetserviceService,
@@ -27,27 +27,27 @@ export class ModifyInternetComponent implements OnInit {
     ){ 
     this.newInternetForm =  this.builder.group({
       ID:new FormControl(),
+      idServicioId:new FormControl(),
       NombrePlan:new FormControl(),
       Descripcion:new FormControl(),
       Velocidad:new FormControl(),
-      PrecioMensual:new FormControl(),
-    //  Tipo:new FormControl(),
-    })
+      PrecioMensual:new FormControl()
+    });
   }
 
   ngOnInit(): void {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
-      console.log("Id a modificar",id)
+      console.log("Id a modificar",id);
       this.data = await this.internetService.getPlanInternet_idInternet(id);
-      console.log(this.data)
-      this.newInternetForm.setValue(this.data)
+      console.log(this.data);
+      this.newInternetForm.setValue(this.data);
     })
   }
   async modify(values){
     console.log("Vamos a modificar Dipositivo componente")
     var plan = new PlanInternet();
-    plan = this.setPlan(plan,values)
+    plan = this.setPlan(plan,values);
     await this.internetService.updatePlanInternet(values.ID,plan);
   }
   
@@ -56,8 +56,7 @@ export class ModifyInternetComponent implements OnInit {
     plan.Descripcion=values.Descripcion;
     plan.Velocidad=values.Velocidad;
     plan.PrecioMensual=values.PrecioMensual;
- //   plan.Tipo=values.Tipo;
-    return plan
+    return plan;
   }
 
 }

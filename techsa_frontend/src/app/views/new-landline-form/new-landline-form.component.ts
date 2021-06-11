@@ -18,13 +18,12 @@ export class NewlandlineFormComponent implements OnInit {
       NombrePlan: [''],
       PrecioMensual: [''],
       Minutos: [''],
-      TarifaAdicFijoTechsa: [''],
-      TarifaAdicFijoOtroOperador: [''],
-      TarifaAdicmovil: ['']
-    })
+      FijoTechsa: [''],
+      FijoOperador: [''],
+      MovilCualquiera: ['']
+    });
   }
 
-  
   ngOnInit(): void {
   }
   async add(values){
@@ -35,8 +34,8 @@ export class NewlandlineFormComponent implements OnInit {
     plan.FijoTechsa=values.FijoTechsa
     plan.FijoOperador=values.FijoOperador;
     plan.MovilCualquiera=values.MovilCualquiera;
-    console.log(values)
-    await this.planFijoService.createPlanFijo(plan)
+    console.log(values);
+    await this.planFijoService.createPlanFijo(plan);
     
   }
 

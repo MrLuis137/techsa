@@ -17,29 +17,28 @@ export class NewMobilePhoneFormComponent implements OnInit {
   constructor(private builder:FormBuilder, private planMovilService: MovileTelephonyService  ) { 
     this.newMobilePhone =  this.builder.group({
       NombrePlan: [''],
+      Descripcion: [''],
       PrecioMensual: [''],
-      CantMinutos: [''],
-      TarifaAdicFijoTechsa: [''],
-      TarifaAdicFijoOtroOperador: [''],
-      TarifaAdicmovil: [''],
-      Tipo: ['']
+      Minutos: [''],
+      GBInternet: [''],
+      CostoLlamada: [''],
+      TipoPlan: ['']
     })
   }
 
   ngOnInit(): void {
   }
   async add(values){
-    var plan= new PlanMovil;
-    plan.ID = values.ID;
+    var plan = new PlanMovil;
     plan.NombrePlan= values.NombrePlan;
-    plan.Descripcion = values.Descripcion;
-    plan.PrecioMensual = values.PrecioMensual;
-    plan.Minutos=values.Minutos;
-    plan.GBInternet=values.GBInternet
+    plan.Descripcion=values.Descripcion;
+    plan.PrecioMensual=values.PrecioMensual;
+    plan.Minutos=values.Minutos
+    plan.GBInternet=values.GBInternet;
     plan.CostoLlamada=values.CostoLlamada;
-    //plan.TarifaAdicmovil=values.TarifaAdicmovil;
     plan.TipoPlan=values.TipoPlan;
-    console.log(values)
-    await this.planMovilService.createPlanMovil(plan)
+    console.log(values);
+    await this.planMovilService.createPlanMovil(plan);
+  
   }
 }

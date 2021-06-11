@@ -6,41 +6,39 @@
       Además, se utiliza (ngSubmit) = "funcion()" para llamar a la función y darle los datos
       newEmployeeForm.value obtiene los datos del form y los devuelve como un json
     -->
-    <form  [formGroup] = "newLandlineForm" >
+    <form  [formGroup] = "newLandlineForm" (ngSubmit)="add(newLandlineForm.value)" >
       <br>
       <div class="div-form">
       <div >
         <div class="form-group">
           <label class="form-label">Nombre del plan</label>
-          <input formControlName="Name" #Name type="text" class="form-control" id="Name" placeholder="" value="" required="">
+          <input formControlName="NombrePlan" #NombrePlan type="text" class="form-control" id="NombrePlan" placeholder="" value="" required="">
         </div><br>
   
         <div class="form-group">
           <label  class="form-label">Monto mensual</label>
-          <input formControlName="Amount" #Amount type="int" class="form-control" id="Amount" placeholder="" value="" required="">
+          <input formControlName="PrecioMensual" #PrecioMensual type="int" class="form-control" id="PrecioMensual" placeholder="" value="" required="">
         </div><br>
           
         <div class="form-group">
           <label class="form-label">Minutos</label>
-            <input formControlName="Minutes" #Minutes type="int" class="form-control" id="Minutes" placeholder="" required="">
+            <input formControlName="Minutos" #Minutos type="int" class="form-control" id="Minutos" placeholder="" required="">
           
         </div><br>
-
-        <h2>Tarifa adicional por minuto</h2>
-
+        <h2>Tarifa Adicional</h2>
         <div class="form-group">
           <label class="form-label">Número Techsa</label>
-            <input formControlName="Numbertechsa" #workid type="Numbertechsa" class="form-control" id="Numbertechsa" placeholder="" required="">
+            <input formControlName="FijoTechsa" #FijoTechsa type="int" class="form-control" id="FijoTechsa" placeholder="" required="">
           
         </div><br>
         <div class="form-group">
           <label class="form-label">Número fijo otro operador</label>
-            <input formControlName="AnotherOperator" #AnotherOperator type="text" class="form-control" id="AnotherOperator" placeholder="" required="">
+            <input formControlName="FijoOperador" #FijoOperador type="int" class="form-control" id="FijoOperador" placeholder="" required="">
           
         </div><br>
         <div class="form-group">
-          <label class="form-label">Minutos</label>
-            <input formControlName="MinutesAnother" #MinutesAnother type="text" class="form-control" id="MinutesAnother" placeholder="" required="">
+          <label class="form-label">Cualquier número</label>
+            <input formControlName="MovilCualquiera" #MovilCualquiera type="int" class="form-control" id="MovilCualquiera" placeholder="" required="">
         </div><br>
         
       </div>
