@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 
-
+// URL Para conectarse al Backend
 const baseUrl = "http://localhost:4201"
 
 @Injectable({
@@ -11,14 +11,14 @@ const baseUrl = "http://localhost:4201"
 })
 export class AuthService {
 
+  //Variables para detectar que rol de usuario está logueado
   public isCliente:boolean = true;
   public isGerente:boolean = false;
   public isAgenteV:boolean = false;
 
   constructor(private http:HttpClient) { }
 
-  //envia la peticion de login al backend
-
+  //Envía una petición al backend
   private async request(method: string, url:string, data?:any, responseType?:any){
         
     //console.log('request' + JSON.stringify(data));
@@ -34,33 +34,65 @@ export class AuthService {
     });
   }
 
+  //LOGIN
+  //Función que envía las credenciales al backend /auth, y si existe el usuario 
+  //el backend responde con un Token generado de JWT.
   async login( username:string, password:string ){
     //console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
-    const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
-    const jsonResponse = JSON.parse(response);
-    localStorage.setItem('access_token', jsonResponse.token);
-    return true;
+    try {
+      console.log("Auth.Service:Enviando Petición de login al backend");
+      const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
+      const jsonResponse = JSON.parse(response);  //Parsea la respuesta del backend 
+      localStorage.setItem('access_token', jsonResponse.token);  //Guarda el token dentro del local storage "Acá loguea al usuario "
+      console.log("Auth.Service:Usuario logueado");
+      return true;
+    } catch (error) {
+      console.log("Auth.Service:Usuario no ha sido encontrado");
+      return false;
+    }
+  
   }
 
+  //getUserRole
+  //Envía el token al backend, para que el backend retorne el rol del usuario 
   async getUserRole( token:string ){
-    return this.request('get',`${baseUrl}/auth/role/${token}`);
+    try {
+      console.log("Auth.Service:Enviando Petición de getRole al backend");
+      return this.request('get',`${baseUrl}/auth/role/${token}`); //Envia el token y recibe el rol del usuario logueado
+    } catch (error) {
+      console.log("Auth.Service:Usuario no ha sido encontrado");
+      return false;  //Retorna falso si recibe algún error 
+    }
   }
 
+  //getUserId
+  //Envía el token al backend, para que el backend retorne el id del usuario logueado
   async getUserId( token:string ){
-    return this.request('get',`${baseUrl}/auth/id/${token}`);
+    try {
+      console.log("Auth.Service:Enviando Petición de getUserId al backend");
+      return this.request('get',`${baseUrl}/auth/id/${token}`); //Envía la petición al backend
+    } catch (error) {
+      console.log("Auth.Service:Usuario no ha sido encontrado");
+      return false; //Retorna falo si recibe algún error 
+    }
   }
 
-  //Quita el access token del local storage 
+  //logout
+  //Cierra la sesión del usuario, remueve el access_token del local storafe
   async logout(){
-    this.isCliente = true;
+    console.log("Auth.Service:Cerrando sesión del usuario");
+    //Indica que el rol actual es el cliente, para que muestre la barra de
+    //navegacion del cliente.
+    this.isCliente = true;  
     this.isGerente = false;
     this.isAgenteV = false;
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('access_token');  //Remueve el token del localstorage, "cierra sesión"
   }
 
-  //Retorna si el token existe o no 
+  //LoggedIn
+  //Retorna si el token existe o no, para saber si hay un usuario loggueado o no. 
   public get loggedIn(): boolean{
-    return (localStorage.getItem('access_token') != null);
+    return (localStorage.getItem('access_token') != null); //Quita el token del local storage
   }
 
 }

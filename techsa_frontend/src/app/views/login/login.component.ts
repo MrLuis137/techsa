@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
   async submit(){
     const submit = await this.auth.login(this.username, this.password);
     if(submit){
-      console.log(submit);
       this.redirect();
       //this.router.navigate(['my-services']);
     }else{
       this.error = 'No se pudo autenticar';
+      alert(this.error);
     };
   }
 
