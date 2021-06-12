@@ -92,7 +92,7 @@ router.get("/auth/role/:token", async function(req: Request, res: Response) {
 ///////////////////////////  Cliente  ////////////////////////////////////////////
 
 
-
+//Crea el cliente y su correspondiente carrito de compras
 router.post("/cliente" , async function (req: Request, res: Response) {
 
     const clienteRepository = await connect.getClienteRepository();
@@ -536,7 +536,6 @@ router.post('/planmovil',async function (req:Request, res:Response, next:NextFun
 
 
 ///////////////////////////  Plan Móvil Dispositivo //////////////////////////////////////
-//Falta agregar, modificar, eliminar y get:id
 router.get('/planmovildispositivo', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getPlanMovilDispositivoRepository();
@@ -551,7 +550,6 @@ router.get('/planmovildispositivo', async function(req: Request, res:Response, n
 });
 
 ///////////////////////////  Plan Fijo  //////////////////////////////////////
-//Falta agregar, modificar, eliminar y get:id
 router.get('/planfijo', async function(req: Request, res:Response, next:NextFunction){
     try{
         const todosPlanFijo = await getManager().query(
@@ -1003,15 +1001,17 @@ router.put('/contrato/', async function(req: Request, res:Response, next:NextFun
  
 
 
-router.post('/factura/',  async function(req: Request, res:Response, next:NextFunction){
-    console.log(req.body)
+router.post('/factura/:idUsuario',  async function(req: Request, res:Response, next:NextFunction){
+    const clienteRepository = await connect.getClienteRepository();
     const services = req.body.services;
     const devices = req.body.devices;
+    console.log(req.params.idUsuario)
+    const user = await clienteRepository.findOne(req.params.idUsuario)
     let total = 0;
     let message = {
         from: 'tucorreo@gmail.com',
-        to: 'mi-amigo@yahoo.com',
-        subject: 'Asunto Del Correo',
+        to: (await user).Correo,
+        subject: 'Factura TECH.SA',
         text: req.body.resumen,
       };
       transport.sendMail(message, function(err, info) {
@@ -1240,6 +1240,7 @@ router.delete('/pagoEnLinea/cancelar/:idContrato', async function(req: Request, 
             return next(err);
     }
 });
+
 
 router.put('/pagoEnLinea/actualizar/:idContrato', async function(req: Request, res:Response, next:NextFunction){
     try{
