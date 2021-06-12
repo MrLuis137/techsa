@@ -44,7 +44,7 @@ export class ContratoService {
     resume += "\n" 
     for (let i = 0; i <  PlanList.length; i++){
       console.log(services[i])
-      //this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].IdServicio ,IdCliente: idCliente});
+      this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].IdServicio ,IdCliente: idCliente});
       console.log(PlanList[i].PrecioMensual)
       resume += `  ${PlanList[i].NombrePlan} costo: ${PlanList[i].PrecioMensual}\n`
     }
@@ -135,6 +135,11 @@ export class ContratoService {
   
   async actualizarContrato(idContrato:number,idservicioid:number){
     await this.request('put', `${baseUrl}/pagoEnLinea/actualizar/${idContrato}`,{"idservicioid":idservicioid});
+  }
+
+  async isMoroso(idContrato:number){
+    const a=await this.request('get', `${baseUrl}/pagoEnLinea/isMoroso/${idContrato}`);
+    return a;
   }
 
 }

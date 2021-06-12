@@ -31,11 +31,8 @@ export class PlanfijoService {
   //Le dice al backend que le envíe la lista de planes fijos 
   //Retorna false si hay algún problema en el request
   async getPlanFijoAll(){
-    try {
       return await this.request('get', `${baseUrl}/planfijo`);
-    } catch (error) {
-      return false;
-    }
+
   }
 
   //getPlanFijobyId

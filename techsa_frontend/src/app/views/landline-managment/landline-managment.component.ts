@@ -18,7 +18,11 @@ export class LandlineManagmentComponent implements OnInit {
     ) { }
 
   async ngOnInit() {
-    this.planes = await this.planFijoService.getPlanFijoAll();
+    try {
+      this.planes = await this.planFijoService.getPlanFijoAll();
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
     console.log(this.planes);
   }
 

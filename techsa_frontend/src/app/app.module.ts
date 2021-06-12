@@ -102,7 +102,7 @@ export function tokenGetter(){
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains:['localhost:4201'],
+        allowedDomains:['localhost:4201', 'localhost:4200/Mapa/Mapa.html'],
         disallowedRoutes:['localhost:4201/auth']
       }
     })

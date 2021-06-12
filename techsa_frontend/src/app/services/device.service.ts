@@ -31,40 +31,36 @@ export class DeviceService {
   //Le dice al backend que le envíe la lista de dispositivos 
   //Retorna false si hay algún problema en el request
   async getDispositivoAll(){
-    try {
-      return await this.request('get', `${baseUrl}/dispositivo`);
-    } catch (error) {
-      return false;
-    } 
+    return await this.request('get', `${baseUrl}/dispositivo`);
   }
 
   //getDispositivobyId
   //Solicita al back end que retorne un dispositivo, buscandolo por el id
   //Retorna false si hay algún problema en el request
-  getDispositivobyId(id:string){
-    return this.request('get', `${baseUrl}/dispositivo/${id}`);
+  async getDispositivobyId(id:string){
+    return await this.request('get', `${baseUrl}/dispositivo/${id}`);
   }
 
   //createDispositivo
   //Envía el cliente un nuevo dispositivo
   //Retorna 
-  createDispositivo( dispositivo:Dispositivo ){
+  async createDispositivo( dispositivo:Dispositivo ){
     console.log('createDispositivo' + JSON.stringify(dispositivo));
-    return this.request('post', `${baseUrl}/dispositivo`, dispositivo);
+    return await this.request('post', `${baseUrl}/dispositivo`, dispositivo);
   }
 
   //deleteDispositivo
   //solicita al backend que elimine un dispositivo, buscandolo por el id
   //Retorna 
-  deleteDispositivo( id:string ){
-    return this.request('delete', `${baseUrl}/dispositivo/${id}`, null, 'text');
+  async deleteDispositivo( id:string ){
+    return await this.request('delete', `${baseUrl}/dispositivo/${id}`, null, 'text');
   }
 
   //updateDispositivo
   //Envía al backend un dispositivo y le pide que lo actualice en la base de datos 
   //Retorna 
-  updateDispositivo(id:string, dispositivo:Dispositivo){
-    return this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
+  async updateDispositivo(id:string, dispositivo:Dispositivo){
+    return await this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
   }
 
 }

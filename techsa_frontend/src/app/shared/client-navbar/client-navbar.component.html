@@ -36,17 +36,17 @@
                 </li>
 
                 <li *ngIf="auth.isCliente" class="nav-item">
-                    <a class="nav-link" routerLink="coverage-areas">Zonas Cobertura</a>
+                    <a class="nav-link" href="file:///Users/d4n11083/Desktop/Proyecto2/techsa/Mapa/Mapa.html" target="_blank" >Zonas Cobertura</a>
                 </li>
+
+                <!-- <li class="nav-item">
+                    <a class="nav-link" (click)="this.mostrar_mapa()">Zonas Cobertura</a>
+                </li> -->
 
                 <li *ngIf="auth.isCliente" class="nav-item">
                     <a class="nav-link" routerLink="shoping-car">Carrito Compras</a>
                 </li>
 
-
-                <li class="nav-item">
-                    <a class="nav-link disabled" routerLink="#" tabindex="-1" aria-disabled="true">TEMPORAL</a>
-                </li>
 
                 <li  *ngIf="auth.isGerente" class="nav-item">
                     <a class="nav-link" routerLink="employees-managment">Gest. Empleados</a>

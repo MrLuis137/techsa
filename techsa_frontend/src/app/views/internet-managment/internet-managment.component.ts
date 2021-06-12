@@ -18,14 +18,24 @@ export class InternetManagmentComponent implements OnInit {
     ) { }
 
   async ngOnInit() {
-    this.planes = await this.internetService.getPlanInternetAll();
+    try {
+      this.planes = await this.internetService.getPlanInternetAll();
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
     console.log(this.planes);
   }
 
   async delete (ID:string,NombrePlan:String){
-    console.log("Eliminando empleado: ",ID,NombrePlan)
-    await this.internetService.deletePlanInternet(ID)
-  
+    if(confirm("¿Eliminar este producto?")){
+      console.log("Eliminando Plan de Internet: ",ID,NombrePlan)
+      try {
+        await this.internetService.deletePlanInternet(ID)
+        alert("Plan de Internet Eliminado");  
+      } catch (err) {
+        alert("Error eliminando este plan. \n Puede estar asociado a otros planes");
+      }
+    }
   }
 
 }

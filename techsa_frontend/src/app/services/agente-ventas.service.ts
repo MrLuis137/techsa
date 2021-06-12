@@ -28,17 +28,19 @@ export class AgenteVentasService {
     });
   }
 
-  getAgenteVentasAll(){
-    return this.request('get', `${baseUrl}/agenteventas`);
+  async getAgenteVentasAll(){
+    return await this.request('get', `${baseUrl}/agenteventas`);
   }
 
   async getAgenteVentasbyId(id:string){
     return await this.request('get', `${baseUrl}/agenteventas/${id}`);
+
   }
 
   createAgenteVentas( agenteVentas:AgenteVentas ){
     console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
     return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
+
   }
 
   deleteAgenteVentas( id:string ){

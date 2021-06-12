@@ -18,8 +18,14 @@ export class DevicesManagmentComponent implements OnInit {
   }
   async delete(deviceId:string){
     console.log(deviceId)
-    this.base.deleteDispositivo(deviceId)
-    this.data=await this.base.getDispositivoAll();
+    try {
+      await this.base.deleteDispositivo(deviceId);
+      alert("Dispositivo Eliminado")
+      location.reload();
+    } catch (err) {
+      alert("El dispositivo no se pudo eliminar.\ Hubo un error, o está asociado a un plan")
+    }
+    this.data = await this.base.getDispositivoAll();
   }
 
 }
