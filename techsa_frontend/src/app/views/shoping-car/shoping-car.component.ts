@@ -8,6 +8,7 @@ import { PlanInternetPlanFijo } from '../../../../../techsa_backend/src/entity/P
 import { InternetserviceService } from '../../services/internetservice.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { CartServiceElementComponent } from '../cart-service-element/cart-service-element.component';
+import { ContratoService } from '../../services/contrato.service';
 
 
 @Component({
@@ -21,14 +22,17 @@ export class ShopingCarComponent implements OnInit {
   
   devicesList
   servicesList
-  constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver) {
+  PlanList = []
+  total = 0
+  constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver
+    , private contract: ContratoService) {
    }
 
   ngOnInit(): void {
-    
-  this.servicesList = this.getCarServices()
+  this.servicesList =this.getCarServices()
   this.devicesList = this.getCarDevices()
   console.log(this.devicesList)
+  console.log(this.total)
   }
 
   async getCarServices(){
@@ -38,21 +42,7 @@ export class ShopingCarComponent implements OnInit {
     })
     for(let i = 0; i< data.length; i++){
       //this.createComponent(data[i])
-      let service
-      switch(data[i].Nombre) {
-        case "PlanInternet": {
-          this.getInternetSercive(data[i].IdServicio)
-           
-          }
-          
-        case "PlanInternetPlanFijo": {
-
-        }
-        case "Prepago": {
-
-        }
-
-      }
+      this.getService(data[i].IdServicio)
       console.log(data[i])
     }
     return data
@@ -66,23 +56,21 @@ export class ShopingCarComponent implements OnInit {
     console.log(data)
     for(let i = 0; i< data.length; i++){
       this.createDeviceComponent(data[i])
-      console.log(data[i])
+      this.total += data[i].Precio
     }
     return data
   }
 
-  async getInternetSercive(id){
-    let service = await this.internet.getPlanInternet_IdServicio(id).then(function (res){
-      return res[0]
-      
-      console.log(service)
-     })
-     console.log(service)
-     this.createServiceComponent(service)
+  async getService(id){
+    let service = await this.car.getServicesByServiceID(id)
+      this.total += service.PrecioMensual
+      this.createServiceComponent(service)
+      this.PlanList.push(service)
   }
 
   createDeviceComponent(device) {
     //this.deviceContainer.clear(); 
+    console.log(this.total)
     const factory = this.resolver.resolveComponentFactory(CartDeviceElementComponent);
     const nt:ComponentRef<CartDeviceElementComponent> = this.deviceContainer.createComponent(factory);
     nt.instance.device = device
@@ -97,8 +85,9 @@ export class ShopingCarComponent implements OnInit {
     nt.instance.service = service
   }
   
-  tempCallback(){
-    console.log("Eliminado :3")
+  confirmOrder(){
+    console.log(this.servicesList, this.devicesList)
+    this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total)
   }
 
 }

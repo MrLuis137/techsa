@@ -37,7 +37,11 @@ export class CartService {
   }
   setServicioByUserId(idUsuario:String, idServicio){
     return this.request('put', `${baseUrl}/carrito/servicios/${idUsuario}`, {servicio: idServicio});
-  }_
+  }
+
+  getServicesByServiceID(id:String){
+    return this.request('get',`${baseUrl}/servicio/${id}`) 
+  }
 
   setDispositivoByUserId(idUsuario:String, idDispositivo){
     return this.request('put', `${baseUrl}/carrito/dispositivos/${idUsuario}`, {dispositivo: idDispositivo});

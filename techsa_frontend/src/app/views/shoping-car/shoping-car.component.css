@@ -22,7 +22,51 @@
     width: 100%;
 }
 
+.cart-elements{
+    text-align: center;
+    width: 100%;
+}
+
 
 .device{
     margin-top: 10rem;
+    
+}
+
+.total{
+    text-align: center;
+}
+
+.total-lbl{
+    color: #FFFFFF;
+}
+
+.acept-btn{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    background-color: #219653;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border: 0vw;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+}
+
+.delete-all-btn{
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    background-color: red;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border: 0vw;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+}
+
+.cart-buttons{
+    text-align: center;
 }
