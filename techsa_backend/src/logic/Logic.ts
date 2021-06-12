@@ -508,10 +508,10 @@ router.post('/planmovil',async function (req:Request, res:Response, next:NextFun
         const servicio = new Servicio();
         servicio.Nombre= req.body.NombrePlan;
         repositorioServicio.save(servicio);
-        console.log(servicio)
+        console.log(servicio);
         const repository = await connect.getPlanMovilRepository();
         const plan = new PlanMovil();
-        console.log(req.body)
+        console.log(req.body);
         plan.idServicio = servicio;
         plan.NombrePlan = req.body.NombrePlan;
         plan.Descripcion = req.body.Descripcion;
@@ -521,7 +521,7 @@ router.post('/planmovil',async function (req:Request, res:Response, next:NextFun
         plan.CostoLlamada = req.body.CostoLlamada;
         plan.TipoPlan = req.body.TipoPlan;
         const resultado = await repository.save(plan);
-        res.send(resultado);;
+        res.send(resultado);
     }
     catch(err){
         return next(err);
@@ -577,10 +577,10 @@ router.post('/planfijo',async function (req:Request, res:Response, next:NextFunc
         const servicio = new Servicio();
         servicio.Nombre= req.body.NombrePlan;
         repositorioServicio.save(servicio);
-        console.log(servicio)
+        console.log(servicio);
         const repository = await connect.getPlanFijoRepository();
         const plan = new PlanFijo();
-        console.log(req.body)
+        console.log(req.body);
         plan.IdServicio= servicio;
         plan.NombrePlan = req.body.NombrePlan;
         plan.PrecioMensual = req.body.PrecioMensual;
