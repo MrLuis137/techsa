@@ -5,7 +5,7 @@
     <div class="row justify-content-md-center">
         <h2 id="page-subtitle-text">Planes Internet {{planInternet.Velocidad}}mb simétricos</h2>
     </div>
-
+    
     <div class="container">
         <div class="card text-center" >
             <div class="card-header">
@@ -18,7 +18,7 @@
                     <br>{{planInternet.Descripcion}}
                     <br></p>
         
-                <a (click)="addToCart(planInternet)" class="btn">¡Lo quiero!</a>
+                <a (click)="addToCart(planInternet)" class="btn btn-success" role="button">¡Lo quiero!</a>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                             <p class="card-text">
                                 <br>{{otroPlan.Descripcion}}
                                 <br></p>
-                            <a (click)="addToCart(otroPlan)" class="btn">¡Lo quiero!</a>
+                            <a (click)="addToCart(otroPlan)" class="btn btn-success" role="button">¡Lo quiero!</a>
                         </div>
                     </div>
             </div>

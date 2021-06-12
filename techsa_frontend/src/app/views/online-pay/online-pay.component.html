@@ -13,10 +13,9 @@
             <h5 class="card-title">  <span class="badge rounded-pill">₡{{service.PrecioMensual}}</span>  </h5>
             <p *ngIf="service.Descripcion">{{service?.Descripcion}}</p>
             <p *ngIf="service.Minutos">Minutos:{{service?.Minutos}}</p>
-            <p *ngIf="service.FijoTechsa">Monto a techsa:{{service?.FijoTechsa}}</p>
-            <p *ngIf="service.FijoOperador">Monto otro operador:{{service?.FijoOperador}}</p>
-            <p *ngIf="service.Velocidad">Velocidad:{{service?.Velocidad}} WTF con esto</p>
-    
+            <p *ngIf="service.FijoTechsa">Fijo TECHSA: ₡{{service?.FijoTechsa}}</p>
+            <p *ngIf="service.FijoOperador">Fijo otro operador: ₡{{service?.FijoOperador}}</p>
+            
             <a (click)="pay(service.Id)" class="btn">Pagar</a>
            
         </div>

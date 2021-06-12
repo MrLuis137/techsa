@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Contrato } from '../models/Contrato';
+import { PlanfijoService } from './planfijo.service';
+import { InternetserviceService } from 'src/app/services/internetservice.service';
+import { MovileTelephonyService } from './moviletelephony.service';
+import { MobiledeviceService } from './mobiledevice.service';
+
 
 const baseUrl = "http://localhost:4201"
 
@@ -9,7 +14,12 @@ const baseUrl = "http://localhost:4201"
 })
 export class ContratoService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private internetService:InternetserviceService,
+    private planFijoService:PlanfijoService,
+    private mobileService: MovileTelephonyService,
+    private  mobileDeviceService: MobiledeviceService ) { }
 
   private async request(method: string, url:string, data?:any, responseType?:any){
 
@@ -55,25 +65,53 @@ export class ContratoService {
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`,{"Estado":false})).concat(services);
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil_dispositivo/${idCliente}`,{"Estado":false})).concat(services);
     
-    console.log(services)
     return services
-    
   }
+
   //Toma todos los contratos de un cliente
   async getAllContratosByIdCliente(idCliente:number){
     var services=[]
-    services = (await (this.getAllContratosPendientesByIdCliente(idCliente))).concat(services)
-    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`,{"Estado":true})).concat(services);
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_movil_plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
-    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet_plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
-    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`,{"Estado":true})).concat(services);
     services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil_dispositivo/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_movil/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_fijo/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await this.request('put',`${baseUrl}/pagoEnLinea/plan_internet/${idCliente}`,{"Estado":true})).concat(services);
+    services = (await (this.getAllContratosPendientesByIdCliente(idCliente))).concat(services)
     
-    console.log(services)
     return services
-    
   }
+   
+  //Get de todos los planes del mismo tipo del relacionado a ese id de contrato
+  //Los trae "bonitos" (Los que son de planes combinados)
+  async getPlanesTipo(idContrato:number){
+    let options=[]
+    const tipo = await this.request('get', `${baseUrl}/pagoEnLinea/todosTipoPlanes/${idContrato}`);
+    switch(tipo[0].Nombre) {
+      case 'PlanFijo':
+        options = await this.planFijoService.getPlanFijoAll();
+        break;
+      case 'PlanInternetPlanFijo':
+        options = await this.request('get', `${baseUrl}/pagoEnLinea/plan_internet_plan_fijo`);
+        break;
+      case 'PlanInternetPlanMovilPlanFijo':
+        options  = await this.request('get', `${baseUrl}/pagoEnLinea/plan_internet_plan_movil_plan_fijo`);
+        break;
+      case 'PlanMovilDispositivo':
+        options = await this.request('get', `${baseUrl}/pagoEnLinea/plan_movil_dispositivo`);
+        break;
+      case 'Prepago':
+        options = await this.mobileService.getPlanMovilByIdAll('Prepago');
+        break;
+      case 'PostPago':
+        options = await this.mobileService.getPlanMovilByIdAll('Postpago');
+        break;
+      default:
+        options = await this.internetService.getPlanInternetAll();
+    }
+    return options
+  }
+
   //Hace un pago a un contrato por id
   async pay(idContrato){
     return await this.request('put', `${baseUrl}/pagoEnLinea/pagar/${idContrato}`);
@@ -90,6 +128,10 @@ export class ContratoService {
       return 'Debe paga el servicio antes de cancelarlo'
     }
     
+  }
+  
+  async actualizarContrato(idContrato:number,idservicioid:number){
+    await this.request('put', `${baseUrl}/pagoEnLinea/actualizar/${idContrato}`,{"idservicioid":idservicioid});
   }
 
 }

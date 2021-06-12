@@ -30,6 +30,8 @@ export class NewDeviceFormComponent implements OnInit {
   
   ngOnInit(): void {
   }
+
+  //Crear un objeto Dispositivo y lo envia a la base de datos
   async add(values){
     var device = new Dispositivo;
     device.Modelo =values.Modelo;

@@ -2,6 +2,7 @@
 
 <section class="d-flex justify-content-center phone-section" >
 
+    <!-- Hace un for por todos los planes fijos en la lista del componente  -->
     <div *ngFor="let planfijo of this.telephonyListingData" class="row row-cols1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card text-center" >
@@ -17,8 +18,8 @@
                         <br>Fijos TECHSA              ₡{{planfijo.FijoTechsa}}
                         <br>Fijos otro operador       ₡{{planfijo.FijoOperador}}
                         <br>Móvil cualquier operador  ₡{{planfijo.MovilCualquiera}}</p>
-            
-                    <a (click)="this.addToCart(planfijo)"  class="btn">¡Lo quiero!</a>
+                    <!-- Ejecuta añadir al carrito  -->
+                    <a (click)="this.addToCart(planfijo)"  class="btn btn-success" role="button">¡Lo quiero!</a>
                 </div>
             </div>
         </div>

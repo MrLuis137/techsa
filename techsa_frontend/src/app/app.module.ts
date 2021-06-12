@@ -38,7 +38,19 @@ import { ModifyMobilePhoneComponent } from './views/modify-mobilephone/modify-mo
 import { InternetManagmentComponent } from './views/internet-managment/internet-managment.component';
 import { LandlineManagmentComponent } from './views/landline-managment/landline-managment.component';
 import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mobilephone-managment.component';
+import { ModifyDeviceComponent } from './views/modify-device/modify-device.component';
+import { ModifyContratoComponent } from './views/modify-contrato/modify-contrato.component';
 
+//Authorization
+import {JwtModule} from '@auth0/angular-jwt';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './services/auth.service';
+
+
+//Para buscar el token de autorizacion
+export function tokenGetter(){
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -59,6 +71,7 @@ import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mob
     NewlandlineFormComponent,
     NewMobilePhoneFormComponent,
     DevicesListingComponent,
+    ModifyDeviceComponent,
 
     ShopingCarComponent,
     MyServicesComponent,
@@ -73,8 +86,10 @@ import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mob
     ClientNavbarComponent,
     AdminNavbarComponent,
     ModifyEmployeeComponent,
+    ModifyDeviceComponent,
     CartDeviceElementComponent,
-    CartServiceElementComponent
+    CartServiceElementComponent,
+    ModifyContratoComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +98,16 @@ import { MobilephoneManagmentComponent } from './views/mobilephone-managment/mob
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains:['localhost:4201'],
+        disallowedRoutes:['localhost:4201/auth']
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

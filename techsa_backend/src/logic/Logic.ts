@@ -1,5 +1,6 @@
 import {NextFunction, query, Request, Response, Router} from 'express';
 import * as connect from '../connections/Connection';
+import jwt_decode from "jwt-decode";
 import {getConnectionManager, Repository, getManager} from "typeorm";
 import { AgenteVentas } from '../entity/AgenteVentas';
 import { Gerente } from '../entity/Gerente';
@@ -11,6 +12,8 @@ import { Servicio } from '../entity/Servicio';
 import { PlanMovil } from '../entity/PlanMovil';
 import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
+
+//import * as jwt from 'jsonwebtoken';
 
  
 
@@ -25,6 +28,66 @@ let transport =  nodemailer.createTransport({
     }
   });
 
+const jwt = require('jsonwebtoken');
+
+///////////////////////////  AUTORIZACION  ////////////////////////////////////////////
+
+router.post("/auth" , async function (req: Request, res: Response) {
+    const body = req.body;
+    console.log(body);
+
+    const clienteRepository = await connect.getClienteRepository();
+    const usuario = await clienteRepository.find({
+        where:[
+            {NombreUsuario:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+
+    const gerenteRepository = await connect.getGerenteRepository();
+    const gerente = await gerenteRepository.find({
+        where:[
+            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+
+    const agenteVentasRepo = await connect.getAgenteVentasRepository();
+    const agenteVentas = await agenteVentasRepo.find({
+        where:[
+            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+        ]
+    });
+
+    if (usuario[0]) {
+        var tokenID = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
+    }if (gerente[0]) {
+        var tokenID = jwt.sign({userID:gerente[0].Id_laboral, role:"gerente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
+    }if (agenteVentas[0]) {
+        var tokenID = jwt.sign({userID:agenteVentas[0].Id_laboral, role:"agenteventas"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+        return res.send({token:tokenID});
+    }else{
+        return res.send(401);
+    }    
+})
+
+//Prueba para decodificar el token, si funciona.. 
+router.get("/auth/id/:token", async function(req: Request, res: Response) {
+    let token = req.params.token;
+    let decoded = JSON.stringify(jwt_decode(token));
+    var decodedJson = JSON.parse(decoded);
+    console.log(decodedJson.userID);
+    return res.send({userId:decodedJson.userID});
+});
+
+//Prueba para decodificar el token, si funciona.. 
+router.get("/auth/role/:token", async function(req: Request, res: Response) {
+    let token = req.params.token;
+    let decoded = JSON.stringify(jwt_decode(token));
+    var decodedJson = JSON.parse(decoded);
+    return res.send({role:decodedJson.role});
+});
+
 ///////////////////////////  Cliente  ////////////////////////////////////////////
 router.post("/cliente" , async function (req: Request, res: Response) {
     const clienteRepository = await connect.getClienteRepository();
@@ -32,7 +95,17 @@ router.post("/cliente" , async function (req: Request, res: Response) {
     const results = await clienteRepository.save(user);
     return res.send(results);
     
-} )
+} );
+
+
+
+router.post("/cliente" , async function (req: Request, res: Response) {
+    const clienteRepository = await connect.getClienteRepository();
+    const user = await clienteRepository.create(req.body);
+    const results = await clienteRepository.save(user);
+    return res.send(results);
+    
+} );
 
 //Ver todos los usuarios
 router.get("/cliente", async function(req: Request, res: Response) {
@@ -45,7 +118,11 @@ router.get("/cliente", async function(req: Request, res: Response) {
 router.get("/cliente/:id", async function(req: Request, res: Response) {
     const clienteRepository = await connect.getClienteRepository();
     const cliente = await clienteRepository.findOne(req.params.id);
-    return res.send(cliente);
+    if(cliente){
+        return res.send(cliente);
+    }else{
+        return res.send('No existe Cliente');
+    }
 });
 
 //Actualizar usuario por id
@@ -298,7 +375,6 @@ router.put('/dispositivo/:id',async function (req:Request, res:Response, next:Ne
     try{
     const repository = await connect.getDispositivoRepository();
     let dispositivosUpdate = await repository.findOne(req.params.id);
-
     dispositivosUpdate.Modelo = req.body.Modelo;
     dispositivosUpdate.Marca = req.body.Marca;
     dispositivosUpdate.Color = req.body.Color;
@@ -364,7 +440,7 @@ router.get('/planmovilTipoPlan/:TipoPlan',async function (req:Request, res:Respo
             where:[
                 {TipoPlan:req.params.TipoPlan}  //donde el id de servicio es el id que se le pasa
             ]
-        })
+        });
         res.send(planmovil);
     }
     catch(err){
@@ -504,8 +580,7 @@ router.post('/planfijo',async function (req:Request, res:Response, next:NextFunc
 //*UPDATE landline
 router.put('/planfijo/:id', async function (req, res, next:NextFunction) {
     try{
-        console.log("update plan landline")
-        console.log(req.body)
+        
         const repository = await connect.getPlanFijoRepository();
         let planUpdate = await repository.findOne(req.params.id);
         planUpdate.NombrePlan = req.body.NombrePlan;
@@ -949,6 +1024,22 @@ router.put('/pagoEnLinea/plan_internet_plan_fijo/:idcliente', async function(req
             return next(err);
     }
 });
+router.get('/pagoEnLinea/plan_internet_plan_fijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
+        let query ='SELECT pipf.idServicioId,pf.NombrePlan AS "nombreFijo",pi.NombrePlan AS "nombreInternet",pf.Minutos,pf.FijoTechsa,pf.FijoOperador,pf.MovilCualquiera,pipf.PrecioMensual,pi.Descripcion'
+         query += ' FROM  plan_internet_plan_fijo pipf '
+         query += ' INNER JOIN plan_fijo pf ON pipf.idPlanFijoID = pf.ID '
+         query += ' INNER JOIN plan_internet pi WHERE pipf.idPlanInternetID = pi.ID '
+        const services = await repository.query(query)
+       
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
 router.put('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
@@ -958,6 +1049,24 @@ router.put('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async f
         query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
         query += 'INNER JOIN plan_movil pm ON pipmpf.idPlanMovilID = pm.ID '
         query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
+        const services = await repository.query(query)
+        console.log(services)
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/pagoEnLinea/plan_internet_plan_movil_plan_fijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getContratoRepository();
+        let query = 'SELECT pipmpf.idServicioId, pf.Minutos, pf.FijoTechsa,pf.FijoOperador,pipmpf.PrecioMensual,pf.NombrePlan AS "nombreFijo",pi.Velocidad,pi.Descripcion,pm.NombrePlan  '
+        query += 'FROM plan_internet_plan_movil_plan_fijo pipmpf '
+        query += 'INNER JOIN plan_fijo pf ON pipmpf.idPlanFijoID = pf.ID '
+        query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
+        query += 'INNER JOIN plan_movil pm ON pipmpf.idPlanMovilID = pm.ID '
         const services = await repository.query(query)
         console.log(services)
         
@@ -989,7 +1098,7 @@ router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req:
     try{
         console.log(req.body)
         const repository = await connect.getContratoRepository();
-        let query = 'SELECT c.Id,pm.Minutos,d.Modelo AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca FROM contrato c '
+        let query = 'SELECT c.Id,pm.Minutos,d.Marca AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca FROM contrato c '
         query += 'INNER JOIN plan_movil_dispositivo pmd ON c.idServicioId = pmd.idServicioIdId '
         query += 'INNER JOIN plan_movil pm ON pmd.idPlanID = pm.ID '
         query += 'INNER JOIN dispositivo d  ON pmd.idDispositivoID = d.ID '
@@ -1003,12 +1112,42 @@ router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req:
             return next(err);
     }
 });
+router.get('/pagoEnLinea/plan_movil_dispositivo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getContratoRepository();
+        let query ='SELECT pmd.idServicioIdId AS "idServicioId", pm.Minutos,d.Marca AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca '
+        query += 'FROM plan_movil_dispositivo pmd '
+        query += 'INNER JOIN plan_movil pm ON pmd.idPlanID = pm.ID '
+        query += 'INNER JOIN dispositivo d  ON pmd.idDispositivoID = d.ID '
+        const services = await repository.query(query)
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+router.get('/pagoEnLinea/todosTipoPlanes/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{    
+        
+        const repository = await connect.getContratoRepository();
+        let query = 'SELECT s.Nombre FROM contrato c '
+        query += 'INNER JOIN servicio s ON c.idServicioId = s.Id '
+        query += `WHERE c.Id = ${req.params.idContrato} ;`
+        
+        const tipo = await repository.query(query)
+        
+        res.send(tipo);
+    }
+    catch(err){
+            return next(err);
+    }
+});
 
 router.put('/pagoEnLinea/pagar/:idContrato', async function(req: Request, res:Response, next:NextFunction){
     try{
         const contratoRepository = await connect.getContratoRepository();
         const res = await contratoRepository.query(`UPDATE contrato SET Estado=true,FechaContratado=(SELECT DATE(DATE_ADD(FechaContratado, INTERVAL 1 MONTH))) WHERE Id=${req.params.idContrato};`)
-        console.log(res)
         return res
     }
     catch(err){
@@ -1039,4 +1178,17 @@ router.delete('/pagoEnLinea/cancelar/:idContrato', async function(req: Request, 
     }
 });
 
+router.put('/pagoEnLinea/actualizar/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        
+        const repository = await connect.getContratoRepository();
+        let contratoUpdate = await repository.findOne(req.params.idContrato);
 
+        contratoUpdate.IdServicio = req.body.idservicioid;
+        await repository.save(contratoUpdate);
+    
+    }
+    catch(err){
+            return next(err);
+    }
+});
