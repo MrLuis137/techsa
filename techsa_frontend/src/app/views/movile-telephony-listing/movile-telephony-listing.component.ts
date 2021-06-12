@@ -67,8 +67,6 @@ export class MovileTelephonyListingComponent implements OnInit {
       }
 
       //Añadir al carrito
-      
-
       try {
         const token = localStorage.getItem('access_token');
         const id = await this.auth.getUserId(token);
