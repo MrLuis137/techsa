@@ -36,21 +36,26 @@ export class ContratoService {
   }
 
   async newContrato(services, devices, PlanList, total){ 
-    console.log("Hola");
-    let resumen = ""
-    console.log( PlanList)
-    for (let i = 0; i <  PlanList.length; i++){
-     let res = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id,IdCliente: '2201'}));
-     res =  (await this.request('get',`${baseUrl}/servicio/${services[i].Id}`));
-      console.log(PlanList[i].PrecioMensual)
-     resumen += `${PlanList[i].Nombre} costo: ${PlanList[i].PrecioMensual}\n`
+    try {
+      console.log("Hola");
+      let resumen = ""
+      console.log( PlanList)
+      for (let i = 0; i <  PlanList.length; i++){
+       let res = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id,IdCliente: '2201'}));
+       res =  (await this.request('get',`${baseUrl}/servicio/${services[i].Id}`));
+        console.log(PlanList[i].PrecioMensual)
+       resumen += `${PlanList[i].Nombre} costo: ${PlanList[i].PrecioMensual}\n`
+      }
+      for (let i = 0; i <  devices.length; i++){
+        console.log(devices[i])
+        resumen += `${devices[i].modelo} costo: ${devices[i].Precio }`
+      }
+      resumen += `Total: ${total}`
+      console.log(resumen)
+      return true
+    } catch (err) {
+      return false;
     }
-    for (let i = 0; i <  devices.length; i++){
-      console.log(devices[i])
-      resumen += `${devices[i].modelo} costo: ${devices[i].Precio }`
-    }
-    resumen += `Total: ${total}`
-    console.log(resumen)
     //(await this.request('post',`${baseUrl}/factura/`,  resumen ));
 
   }

@@ -451,30 +451,48 @@ router.get('/planmovilTipoPlan/:TipoPlan',async function (req:Request, res:Respo
 //*UPDATE mobilephone
 router.put('/planmovil/:id', async function (req, res, next:NextFunction) {
     try{
-        console.log("update plan mobilephone")
-        console.log(req.body)
-        const repository = await connect.getPlanMovilRepository();
-        let planUpdate = await repository.findOne(req.params.id);
-        planUpdate.NombrePlan = req.body.NombrePlan;
-        planUpdate.Descripcion = req.body.Descripcion;
-        planUpdate.PrecioMensual = req.body.PrecioMensual;
-        planUpdate.Minutos = req.body.Minutos;
-        planUpdate.GBInternet = req.body.GBInternet;
-        planUpdate.CostoLlamada = req.body.CostoLlamada;
-        planUpdate.TipoPlan = req.body.TipoPlan;
-        await repository.save(planUpdate);
+        const planmovil = await getManager().query(
+            "SELECT * FROM plan_movil where plan_movil.ID = ?;",[req.params.id]);
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planmovil[0].idServicioId]);
+        if (contrato==false){
+            console.log("si se puede modificar")
+            const repository = await connect.getPlanMovilRepository();
+            let planUpdate = await repository.findOne(req.params.id);
+            planUpdate.NombrePlan = req.body.NombrePlan;
+            planUpdate.Descripcion = req.body.Descripcion;
+            planUpdate.PrecioMensual = req.body.PrecioMensual;
+            planUpdate.Minutos = req.body.Minutos;
+            planUpdate.GBInternet = req.body.GBInternet;
+            planUpdate.CostoLlamada = req.body.CostoLlamada;
+            planUpdate.TipoPlan = req.body.TipoPlan;
+            await repository.save(planUpdate);
+        }else{
+            console.log("no se puede modificar")
+        }
         res.send('OK');
     } 
     catch(err){
         console.log(err)
     }
-}); 
+});
 //*DELETE mobilephone
 router.delete('/planmovil/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete plan mobilephone");
     try{
-        const repository = await connect.getPlanMovilRepository();
-        await repository.delete(req.params.id)
+        const planmovil = await getManager().query(
+            "SELECT * FROM plan_movil where plan_movil.ID = ?;",[req.params.id]);
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planmovil[0].idServicioId]);
+        if (contrato==false){
+            console.log("si se puede borrar")
+            const planmovilDelete = await getManager().query(
+                "DELETE FROM plan_movil WHERE plan_movil.ID = ?;",[req.params.id]);
+            const servicio = await getManager().query(
+                "DELETE FROM servicio where servicio.Id = ?;",[planmovil[0].idServicioId]);
+        }else{
+            console.log("no se puede borrar porque hya uno usando vacido")
+        }
         res.send('OK');
     }
     catch(err){
@@ -577,25 +595,35 @@ router.post('/planfijo',async function (req:Request, res:Response, next:NextFunc
         return next(err);
     }
 });
+
 //*UPDATE landline
 router.put('/planfijo/:id', async function (req, res, next:NextFunction) {
     try{
-        
-        const repository = await connect.getPlanFijoRepository();
-        let planUpdate = await repository.findOne(req.params.id);
-        planUpdate.NombrePlan = req.body.NombrePlan;
-        planUpdate.PrecioMensual = req.body.PrecioMensual;
-        planUpdate.Minutos = req.body.Minutos;
-        planUpdate.FijoTechsa = req.body.FijoTechsa;
-        planUpdate.FijoOperador = req.body.FijoOperador;
-        planUpdate.MovilCualquiera = req.body.MovilCualquiera;
-        await repository.save(planUpdate);
+        const planfijo = await getManager().query(
+            "SELECT * FROM plan_fijo where plan_fijo.ID = ?;",[req.params.id]);
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planfijo[0].idServicioId]);
+        if (contrato==false){
+            console.log("Si se puede modificar")
+            console.log(req.body)
+            const repository = await connect.getPlanFijoRepository();
+            let planUpdate = await repository.findOne(req.params.id);
+            planUpdate.NombrePlan = req.body.NombrePlan;
+            planUpdate.PrecioMensual = req.body.PrecioMensual;
+            planUpdate.Minutos = req.body.Minutos;
+            planUpdate.FijoTechsa = req.body.FijoTechsa;
+            planUpdate.FijoOperador = req.body.FijoOperador;
+            planUpdate.MovilCualquiera = req.body.MovilCualquiera;
+            await repository.save(planUpdate);
+        }else{
+            console.log("no se puede modificar")
+        }
         res.send('OK');
     } 
     catch(err){
         console.log(err)
     }
-}); 
+});
 //*DELETE landline
 router.delete('/planfijo/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete plan landline");
@@ -605,20 +633,20 @@ router.delete('/planfijo/:id',async function (req:Request, res:Response, next:Ne
         // let planDelete = await repository.findOne(req.params.id);
         // let servicio = await repositorioServicio.findOne(planDelete.IdServicio);
         // console.log(servicio.Id);
-
         // await repository.delete(planDelete);
-
         const planfijo = await getManager().query(
             "SELECT * FROM plan_fijo where plan_fijo.ID = ?;",[req.params.id]);
-        
-        const planfijoDelete = await getManager().query(
-            "DELETE FROM plan_fijo WHERE plan_fijo.ID = ?;",[req.params.id]);
-            
-        const servicio = await getManager().query(
-            "DELETE FROM servicio where servicio.Id = ?;",[planfijo[0].idServicioId]);
-    
-        // await repositorioServicio.delete(servicio.Id);
- 
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planfijo[0].idServicioId]);
+        if (contrato==false){
+            console.log("si se puede borrar")
+            const planfijoDelete = await getManager().query(
+                "DELETE FROM plan_fijo WHERE plan_fijo.ID = ?;",[req.params.id]);
+            const servicio = await getManager().query(
+                "DELETE FROM servicio where servicio.Id = ?;",[planfijo[0].idServicioId]);
+        }else{
+            console.log("no se puede borrar porque hya uno usando vacido")
+        }
         res.send('OK');
     }
     catch(err){
@@ -682,29 +710,48 @@ router.get('/servicio/planinternet/:id',async function (req:Request, res:Respons
 //*UPDATE internet
 router.put('/planinternet/:id', async function (req, res, next:NextFunction) {
     try{
-        console.log("update plan internet")
-        console.log(req.body)
-        const repository = await connect.getPlanInternetRepository();
-        let planUpdate = await repository.findOne(req.params.id);
-        planUpdate.NombrePlan = req.body.NombrePlan;
-        planUpdate.Velocidad = req.body.Velocidad;
-        planUpdate.Descripcion = req.body.Descripcion;
-        planUpdate.PrecioMensual = req.body.PrecioMensual;
-        // planUpdate.Tipo = req.body.Tipo;
-        await repository.save(planUpdate);
+        const planinternet = await getManager().query(
+            "SELECT * FROM plan_internet where plan_internet.ID = ?;",[req.params.id]);
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planinternet[0].idServicioId]);
+        if (contrato==false){
+            console.log("Si se puede modificar")
+            console.log(req.body)
+            const repository = await connect.getPlanInternetRepository();
+            let planUpdate = await repository.findOne(req.params.id);
+            planUpdate.NombrePlan = req.body.NombrePlan;
+            planUpdate.Velocidad = req.body.Velocidad;
+            planUpdate.Descripcion = req.body.Descripcion;
+            planUpdate.PrecioMensual = req.body.PrecioMensual;
+            // planUpdate.Tipo = req.body.Tipo;
+            await repository.save(planUpdate);
+        }else{
+            console.log("no se puede modificar porque hya uno usando vacido")
+        }
         res.send('OK');
     } 
     catch(err){
         console.log(err)
     }
-}); 
+});
 
-//*DELETE techsa
+//*DELETE planinternet
 router.delete('/planinternet/:id',async function (req:Request, res:Response, next:NextFunction){
     console.log("delete plan internet");
     try{
-        const repository = await connect.getPlanInternetRepository();
-        await repository.delete(req.params.id)
+        const planinternet = await getManager().query(
+            "SELECT * FROM plan_internet where plan_internet.ID = ?;",[req.params.id]);
+        const contrato = await getManager().query(
+            "SELECT * FROM contrato where contrato.idServicioId = ?;",[planinternet[0].idServicioId]);
+        if (contrato==false){
+            console.log("si se puede borrar")
+            const planinternetDelete = await getManager().query(
+                "DELETE FROM plan_internet WHERE plan_internet.ID = ?;",[req.params.id]);
+            const servicio = await getManager().query(
+                "DELETE FROM servicio where servicio.Id = ?;",[planinternet[0].idServicioId]);
+        }else{
+            console.log("no se puede borrar porque hya uno usando vacido")
+        }
         res.send('OK');
     }
     catch(err){

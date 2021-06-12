@@ -27,23 +27,43 @@ export class CartService {
       result.subscribe(resolve as any, reject as any);
     });
   }
-  getDispositivosByUserId(id:string){
-    return this.request('get', `${baseUrl}/carrito/dispositivos/${id}`);
+  
+  async getDispositivosByUserId(id:string){
+    try {
+      return await this.request('get', `${baseUrl}/carrito/dispositivos/${id}`);
+    } catch (err) {
+      return false;
+    }
   }
 
-
-  getServiciosByUserId(id:string){
-    return this.request('get', `${baseUrl}/carrito/servicios/${id}`);
+  async getServiciosByUserId(id:string){
+    try {
+      return await this.request('get', `${baseUrl}/carrito/servicios/${id}`);
+    } catch (err) {
+      return false;
+    }
   }
-  setServicioByUserId(idUsuario:String, idServicio){
-    return this.request('put', `${baseUrl}/carrito/servicios/${idUsuario}`, {servicio: idServicio});
+  async setServicioByUserId(idUsuario:String, idServicio){
+    try {
+      return await this.request('put', `${baseUrl}/carrito/servicios/${idUsuario}`, {servicio: idServicio});
+    } catch (err) {
+      return false;
+    }
   }
 
-  getServicesByServiceID(id:String){
-    return this.request('get',`${baseUrl}/servicio/${id}`) 
+  async getServicesByServiceID(id:String){
+    try {
+      return await this.request('get',`${baseUrl}/servicio/${id}`) 
+    } catch (err) {
+      return false;
+    }
   }
 
-  setDispositivoByUserId(idUsuario:String, idDispositivo){
-    return this.request('put', `${baseUrl}/carrito/dispositivos/${idUsuario}`, {dispositivo: idDispositivo});
+  async setDispositivoByUserId(idUsuario:String, idDispositivo){
+    try {
+      return await this.request('put', `${baseUrl}/carrito/dispositivos/${idUsuario}`, {dispositivo: idDispositivo});
+    } catch (err) {
+      return false;
+    }
   }
 }

@@ -28,25 +28,45 @@ export class AgenteVentasService {
     });
   }
 
-  getAgenteVentasAll(){
-    return this.request('get', `${baseUrl}/agenteventas`);
+  async getAgenteVentasAll(){
+    try {
+      return await this.request('get', `${baseUrl}/agenteventas`);
+    } catch (err) {
+      return false;
+    }
   }
 
   async getAgenteVentasbyId(id:string){
-    return await this.request('get', `${baseUrl}/agenteventas/${id}`);
+    try {
+      return await this.request('get', `${baseUrl}/agenteventas/${id}`);
+    } catch (err) {
+      return false;
+    }
   }
 
   createAgenteVentas( agenteVentas:AgenteVentas ){
     console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
-    return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
+    try {
+      return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
+    } catch (err) {
+      return false;
+    }
   }
 
   deleteAgenteVentas( id:string ){
-    return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
+    try {
+      return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
+    } catch (err) {
+      return false;
+    }
   }
 
   updateGerente(id:string, agenteVentas:AgenteVentas){
     console.log("servicio updateAgente de Ventas")
-    return this.request('put', `${baseUrl}/agenteventas/${id}`, agenteVentas,'text');
+    try {
+      return this.request('put', `${baseUrl}/agenteventas/${id}`, agenteVentas,'text');
+    } catch (err) {
+      return false;
+    }
   }
 }
