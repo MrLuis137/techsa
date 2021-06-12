@@ -27,9 +27,14 @@ export class LandlineManagmentComponent implements OnInit {
   }
 
   async delete (ID:string,NombrePlan:String){
-    console.log("Eliminando empleado: ",ID,NombrePlan)
-    await this.planFijoService.deletePlanFijo(ID)
-  
+    if(confirm("¿Eliminar este Producto?")){
+      console.log("Eliminando empleado: ",ID,NombrePlan);
+      try {
+        await this.planFijoService.deletePlanFijo(ID);
+        alert("Plan Eliminado");
+      } catch (err) {
+        alert("Error al eliminar este Plan Fijo, puede estar asociado a otro plan");
+      }
+    }
   }
-
 }
