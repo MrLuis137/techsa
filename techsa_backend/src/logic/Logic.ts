@@ -427,8 +427,8 @@ router.delete('/dispositivo/:id',async function (req:Request, res:Response, next
 //GET todos los plan moviles
 router.get('/planmovil', async function(req: Request, res:Response, next:NextFunction){
     try{
-        const repository = await connect.getPlanMovilRepository();
-        const todosPlanMovil = await repository.find();
+        const todosPlanMovil = await getManager().query(
+            "SELECT * FROM plan_movil");
         res.send(todosPlanMovil);
     }
     catch(err){
@@ -438,10 +438,10 @@ router.get('/planmovil', async function(req: Request, res:Response, next:NextFun
 
 //GET Plan Movil por id
 router.get('/planmovil/:id',async function (req:Request, res:Response, next:NextFunction){
-    console.log("get planmovil");
     try{
-        const repository = await connect.getPlanMovilRepository();
-        const planmovil = await repository.findOne(req.params.id);
+        const planmovil = await getManager().query(
+            "SELECT * FROM plan_movil where plan_movil.ID = ?;",[req.params.id]);
+        console.log(planmovil);
         res.send(planmovil);
     }
     catch(err){
@@ -453,13 +453,8 @@ router.get('/planmovil/:id',async function (req:Request, res:Response, next:Next
 router.get('/planmovilTipoPlan/:TipoPlan',async function (req:Request, res:Response, next:NextFunction){
     console.log("get planmovil id servicio");
     try{
-        const repository = await connect.getPlanMovilRepository();
-        //const planmovil = await repository.findOne(req.params.id);
-        const planmovil = await repository.find({
-            where:[
-                {TipoPlan:req.params.TipoPlan}  //donde el id de servicio es el id que se le pasa
-            ]
-        });
+        const planmovil = await getManager().query(
+            "SELECT * FROM plan_movil where plan_movil.TipoPlan = ?;",[req.params.TipoPlan]);
         res.send(planmovil);
     }
     catch(err){

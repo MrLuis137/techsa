@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/cart.service';
 import { Dispositivo } from '../../models/Dispositivo';
 import { DeviceService } from '../../services/device.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 
 @Component({
@@ -17,7 +17,11 @@ export class DevicesListingComponent implements OnInit {
   //Lista de dispositivos del backend
   deviceList:Dispositivo[] = [];
 
-  constructor(private car :CartService, private deviceService:DeviceService, private auth:AuthService, private router:Router) { }
+  constructor(private car :CartService,
+    private deviceService:DeviceService,
+    private auth:AuthService,
+    private router:Router,
+    private carrito:CartService) { }
 
   //Función que se ejecuta al iniciar la página
   ngOnInit(): void {
@@ -51,12 +55,22 @@ export class DevicesListingComponent implements OnInit {
 
   //addToCart
   //Añade un planFijo al carrito
-  addToCart(device:Dispositivo){
+  async addToCart(device:Dispositivo){
     if (this.auth.loggedIn) {   //Si ya está logueado, puede adquirir el servicio 
       console.log("DeviceListing:addtoCart:Añadiendo Producto al carrito");
       console.log(device);
 
       //Añadir al carrito
+
+      try {
+        const token = localStorage.getItem('access_token');
+        const id = await this.auth.getUserId(token);
+        await this.carrito.setServicioByUserId(id.slice(10,14),device.Id);
+        alert("Dispositivo Añadido al carrito");
+      } catch (err) {
+        alert("Error añadiendo al carrito");
+      }
+
       
     }else{  //Si no está logueado recibe un mensaje de error
       if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){
