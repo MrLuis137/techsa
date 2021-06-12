@@ -17,14 +17,18 @@ export class OnlinePayComponent implements OnInit {
   async ngOnInit() {
     const token = localStorage.getItem('access_token');
     const id = await this.auth.getUserId(token);
-    this.services=await this.contratoService.getAllContratosPendientesByIdCliente(id.slice(10,14))
-    
-     
+    try {
+      this.services=await this.contratoService.getAllContratosPendientesByIdCliente(id.slice(10,14))
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }  
   }
 
   //Manda a pagar el contrato de un id
   pay(idContrado:number){
-    this.contratoService.pay(idContrado);
+    if(confirm("¿Desea Pagar esta factura?")){
+      this.contratoService.pay(idContrado);
+    }
   }
 
 }

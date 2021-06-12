@@ -12,6 +12,8 @@ import { Servicio } from '../entity/Servicio';
 import { PlanMovil } from '../entity/PlanMovil';
 import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
+import * as bcrypt from 'bcryptjs';
+
 
 //import * as jwt from 'jsonwebtoken';
 import { Cliente } from '../entity/Cliente';
@@ -35,38 +37,49 @@ const jwt = require('jsonwebtoken');
 
 router.post("/auth" , async function (req: Request, res: Response) {
     const body = req.body;
-    console.log(body);
 
     const clienteRepository = await connect.getClienteRepository();
     const usuario = await clienteRepository.find({
         where:[
-            {NombreUsuario:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+            {NombreUsuario:body.username }  //donde existe el usuario y la contraseña
         ]
     });
 
     const gerenteRepository = await connect.getGerenteRepository();
     const gerente = await gerenteRepository.find({
         where:[
-            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+            {Id_laboral:body.username }  //donde existe el usuario y la contraseña
         ]
     });
 
     const agenteVentasRepo = await connect.getAgenteVentasRepository();
     const agenteVentas = await agenteVentasRepo.find({
         where:[
-            {Id_laboral:body.username, Contrasenia:body.password }  //donde existe el usuario y la contraseña
+            {Id_laboral:body.username }  //donde existe el usuario y la contraseña
         ]
     });
 
     if (usuario[0]) {
-        var tokenID = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
-        return res.send({token:tokenID});
+        if(bcrypt.compareSync(body.password,usuario[0].Contrasenia )){
+            var tokenID = jwt.sign({userID:usuario[0].Id, role:"cliente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+            return res.send({token:tokenID});
+        }else{
+            return res.send(401);
+        }
     }if (gerente[0]) {
-        var tokenID = jwt.sign({userID:gerente[0].Id_laboral, role:"gerente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
-        return res.send({token:tokenID});
+        if(bcrypt.compareSync(body.password,gerente[0].Contrasenia )){
+            var tokenID = jwt.sign({userID:gerente[0].Id_laboral, role:"gerente"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+            return res.send({token:tokenID});
+        }else{
+            return res.send(401);
+        }
     }if (agenteVentas[0]) {
-        var tokenID = jwt.sign({userID:agenteVentas[0].Id_laboral, role:"agenteventas"}, 'MENSAJESECRETO', {expiresIn:'24h'});
-        return res.send({token:tokenID});
+        if(bcrypt.compareSync(body.password,agenteVentas[0].Contrasenia )){
+            var tokenID = jwt.sign({userID:agenteVentas[0].Id_laboral, role:"agenteventas"}, 'MENSAJESECRETO', {expiresIn:'24h'});
+            return res.send({token:tokenID});
+        }else{
+            return res.send(401);
+        }
     }else{
         return res.send(401);
     }    

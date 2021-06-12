@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import {first} from 'rxjs/operators';
+import * as bcrypt from 'bcryptjs';
+
 
 
 @Component({
@@ -26,6 +28,10 @@ export class LoginComponent implements OnInit {
   //Función que se activa en el html, para que envíe el form al backend 
   async submit(){
     try {
+      // const salt = bcrypt.genSaltSync(10);
+      // const pass = bcrypt.hashSync(this.password, "hola");
+      //console.log(pass);
+
       const submit = await this.auth.login(this.username, this.password); //Recibe la respuesta del backend
       this.redirect(); //Si el usuario se loguea satisfactoriamente, llama a redirect.
 
