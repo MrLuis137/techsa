@@ -44,6 +44,7 @@ export class AuthService {
     const jsonResponse = JSON.parse(response);  //Parsea la respuesta del backend 
     localStorage.setItem('access_token', jsonResponse.token);  //Guarda el token dentro del local storage "Acá loguea al usuario "
     console.log("Auth.Service:Usuario logueado");
+    await this.loadRole();
     return true;
   }
 
@@ -77,6 +78,29 @@ export class AuthService {
   //Retorna si el token existe o no, para saber si hay un usuario loggueado o no. 
   public get loggedIn(): boolean{
     return (localStorage.getItem('access_token') != null); //Quita el token del local storage
+  }
+
+  async loadRole(){
+    const token = localStorage.getItem('access_token'); //Pide el token de acceso en el local storage
+    const role = await this.getUserRole(token);  //Pide el rol del usuario 
+
+    //Reviza que usuario cliente está logueado 
+    if (JSON.parse(role).role == "cliente" ){
+      this.isCliente = true;
+      this.isGerente = false;
+    };
+
+    //Reviza que usuario gerente está logueado 
+    if (JSON.parse(role).role == "gerente" ){
+      this.isCliente = false;
+      this.isGerente = true;
+    };
+
+    //Reviza que usuario agente de ventas está logueado 
+    if (JSON.parse(role).role == "agenteventas" ){
+      this.isCliente = false;
+      this.isGerente = false;
+    };
   }
 
 }
