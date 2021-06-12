@@ -16,7 +16,10 @@ export class TelephonyListingComponent implements OnInit {
 
   telephonyListingData:PlanFijo[] = []  //Lista de planes fijos que se muestran en el 
 
-  constructor(public planFijoService:PlanfijoService, public router:Router, public auth:AuthService) { }
+  constructor(public planFijoService:PlanfijoService,
+     public router:Router,
+      public auth:AuthService,
+      private carrito:CartService) { }
 
 
   //Función que se ejecuta cuando secarga la página
@@ -50,12 +53,21 @@ export class TelephonyListingComponent implements OnInit {
 
   //addToCart
   //Añade un planFijo al carrito
-  addToCart(planFijo:PlanFijo){
+  async addToCart(planFijo:PlanFijo){
     
     if (this.auth.loggedIn) {   //Si ya está logueado, puede adquirir el servicio 
       console.log("TelephonyListing:addtoCart:Añadiendo Producto al carrito");
       console.log(planFijo);
       //Añadir al carrito
+      try {
+        const token = localStorage.getItem('access_token');
+        const id = await this.auth.getUserId(token);
+        await this.carrito.setServicioByUserId(id.slice(10,14),planFijo.IdServicio);
+        alert("Plan Fijo Añadido al carrito");
+      } catch (err) {
+        alert("Error añadiendo al carrito");
+      }
+
     }else{  //Si no está logueado recibe un mensaje de error
       if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){
         this.router.navigate(['login']);

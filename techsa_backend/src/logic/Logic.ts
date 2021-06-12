@@ -966,7 +966,7 @@ router.get('/servicio/:idServicio', async function(req: Request, res:Response, n
             const repository = await connect.getPlanMovilRepository();
             data = await repository.findOne({where:{idServicio : service.Id}});
         }
-        else if(service.Nombre == "PlanFijoRepository"){
+        else if(service.Nombre == "PlanFijo"){
             console.log("PlanFijoRepository")
             const repository = await connect.getPlanFijoRepository();
             data = await repository.findOne({where:{IdServicio : service.Id}});
