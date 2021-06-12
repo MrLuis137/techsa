@@ -37,6 +37,8 @@ export class ContratoService {
     });
   }
 
+  //Genera los contratos por los servicios correspondientes
+  //Y genera la factura
   async newContrato(services, devices, PlanList, total, idCliente){ 
     let resume = "       Factura TECH.SA      \n"
     const date = new Date().toISOString()
@@ -54,7 +56,7 @@ export class ContratoService {
     }
     resume += `  Total: ${total}\n`
     console.log(resume)
-    this.request('post',`${baseUrl}/factura/`,  {resumen:resume} );
+    this.request('post',`${baseUrl}/factura/${idCliente}`,  {resumen:resume} );
 
   }
 
