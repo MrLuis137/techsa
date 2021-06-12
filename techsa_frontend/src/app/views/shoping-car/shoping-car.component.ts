@@ -9,6 +9,7 @@ import { InternetserviceService } from '../../services/internetservice.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { CartServiceElementComponent } from '../cart-service-element/cart-service-element.component';
 import { ContratoService } from '../../services/contrato.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -24,11 +25,21 @@ export class ShopingCarComponent implements OnInit {
   servicesList
   PlanList = []
   total = 0
-  constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver
+  id
+  constructor(private car:CartService,
+    private Planfijo:PlanfijoService, 
+    private internet:InternetserviceService,
+    private movileTelephony :MovileTelephonyService,
+    private devices: DeviceService, 
+    private resolver: ComponentFactoryResolver,
+    private auth: AuthService
     , private contract: ContratoService) {
    }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+  const token = localStorage.getItem('access_token');
+  this.id = await this.auth.getUserId(token);
+  
   this.servicesList =this.getCarServices()
   this.devicesList = this.getCarDevices()
   console.log(this.devicesList)
@@ -37,7 +48,7 @@ export class ShopingCarComponent implements OnInit {
 
   async getCarServices(){
     let data = []
-    await this.car.getServiciosByUserId('2201').then(function ( res ){
+    await this.car.getServiciosByUserId(this.id.slice(10,14)).then(function ( res ){
      data = res
     })
     for(let i = 0; i< data.length; i++){
@@ -50,7 +61,7 @@ export class ShopingCarComponent implements OnInit {
   }
 
   async getCarDevices(){
-    let data = await this.car.getDispositivosByUserId('2201').then(function (res){
+    let data = await this.car.getDispositivosByUserId(this.id.slice(10,14)).then(function (res){
       return res
     })
     console.log(data)
@@ -87,7 +98,7 @@ export class ShopingCarComponent implements OnInit {
   
   confirmOrder(){
     console.log(this.servicesList, this.devicesList)
-    this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total)
+    this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total, this.id.slice(10,14))
   }
 
 }

@@ -14,6 +14,7 @@ import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
 
 //import * as jwt from 'jsonwebtoken';
+import { Cliente } from '../entity/Cliente';
 
  
 
@@ -89,20 +90,25 @@ router.get("/auth/role/:token", async function(req: Request, res: Response) {
 });
 
 ///////////////////////////  Cliente  ////////////////////////////////////////////
-router.post("/cliente" , async function (req: Request, res: Response) {
-    const clienteRepository = await connect.getClienteRepository();
-    const user = await clienteRepository.create(req.body);
-    const results = await clienteRepository.save(user);
-    return res.send(results);
-    
-} );
 
 
 
 router.post("/cliente" , async function (req: Request, res: Response) {
+
     const clienteRepository = await connect.getClienteRepository();
-    const user = await clienteRepository.create(req.body);
+    const user = new Cliente();
+    user.Nombre = req.body.Nombre
+    user.Apellido = req.body.Apellido
+    user.Correo = req.body.Correo
+    user.NombreUsuario = req.body.NombreUsuario
+    user.Residencia = req.body.Residencia
+    user.Contrasenia = req.body.Contrasenia
+    console.log(user)
     const results = await clienteRepository.save(user);
+    const carritoRepository = await connect.getCarritoRepository();
+    const carrito = new CarritoCompras();
+    carrito.IdCliente = user;
+    await carritoRepository.save(carrito);
     return res.send(results);
     
 } );

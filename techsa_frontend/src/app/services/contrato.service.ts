@@ -5,6 +5,7 @@ import { PlanfijoService } from './planfijo.service';
 import { InternetserviceService } from 'src/app/services/internetservice.service';
 import { MovileTelephonyService } from './moviletelephony.service';
 import { MobiledeviceService } from './mobiledevice.service';
+import { AuthService } from './auth.service';
 
 
 const baseUrl = "http://localhost:4201"
@@ -19,7 +20,8 @@ export class ContratoService {
     private internetService:InternetserviceService,
     private planFijoService:PlanfijoService,
     private mobileService: MovileTelephonyService,
-    private  mobileDeviceService: MobiledeviceService ) { }
+    
+    ) { }
 
   private async request(method: string, url:string, data?:any, responseType?:any){
 
@@ -35,7 +37,7 @@ export class ContratoService {
     });
   }
 
-  async newContrato(services, devices, PlanList, total){ 
+  async newContrato(services, devices, PlanList, total, idCliente){ 
     console.log("Hola");
     let resumen = ""
     console.log( PlanList)
