@@ -57,7 +57,6 @@ export class DevicesListingComponent implements OnInit {
       console.log(device);
 
       //Añadir al carrito
-
       
     }else{  //Si no está logueado recibe un mensaje de error
       if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){

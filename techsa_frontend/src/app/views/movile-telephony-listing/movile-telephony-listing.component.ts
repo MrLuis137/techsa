@@ -4,6 +4,9 @@ import { DeviceService } from '../../services/device.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { PlanMovil } from '../../models/PlanMovil';
 import { Dispositivo } from '../../models/Dispositivo';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { router } from '../../../../../techsa_backend/src/logic/Logic';
 
 
 
@@ -25,7 +28,9 @@ export class MovileTelephonyListingComponent implements OnInit {
 
   constructor(public mobileService: MovileTelephonyService, 
     public mobileDeviceService: MobiledeviceService,
-    public deviceService:DeviceService) { }
+    public deviceService:DeviceService,
+    public auth:AuthService,
+    public router:Router) { }
 
   ngOnInit(): void {
     this.refresh()
@@ -46,8 +51,19 @@ export class MovileTelephonyListingComponent implements OnInit {
     await this.fillTemps();
   }
 
+  //addToCart
+  //Añade un planFijo al carrito
   addToCart(planMovil:PlanMovil){
-    console.log(planMovil);
+    
+    if (this.auth.loggedIn) {   //Si ya está logueado, puede adquirir el servicio 
+      console.log("TelephonyListing:addtoCart:Añadiendo Producto al carrito");
+      console.log(planMovil);
+      //Añadir al carrito
+    }else{  //Si no está logueado recibe un mensaje de error
+      if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){
+        this.router.navigate(['login']);
+      }
+    }
   }
 
   async fillTemps(){

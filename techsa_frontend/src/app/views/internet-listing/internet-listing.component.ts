@@ -29,26 +29,33 @@ export class InternetListingComponent implements OnInit {
 
   //Llama a refresh cuando se carga la pagina
   ngOnInit(): void {
-    this.refresh();
+    try {
+      this.refresh();
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
   }
 
   async refresh() {
-
-    //Carga las listas de las tablas
-    const internetListData = await this.internetService.getPlanInternetAll();
-    const internetLandlineListData = await this.internetService.getPlanInternetFijoAll();
-    const internetLandlineMobileListData  = await this.internetService.getPlanInternetFijoMovilAll();
-    
-    this.internetList = internetListData;
-    this.internetLandLineList = internetLandlineListData;
-    this.internetLandlineMobileList = internetLandlineMobileListData;
-
-    //Llama a la función que se encarga de crear los planes internet  + fijo
-    this.internetLandline();
-    //Llama a la función que se encarga de crear los planes internet  + fijo + movil
-    this.internetLandlineMobile();
-    //console.log(this.internetList);
-    //console.log(this.internetLandline_And_MobilesPlans);
+    try {
+          //Carga las listas de las tablas
+          const internetListData = await this.internetService.getPlanInternetAll();
+          const internetLandlineListData = await this.internetService.getPlanInternetFijoAll();
+          const internetLandlineMobileListData  = await this.internetService.getPlanInternetFijoMovilAll();
+          
+          this.internetList = internetListData;
+          this.internetLandLineList = internetLandlineListData;
+          this.internetLandlineMobileList = internetLandlineMobileListData;
+      
+          //Llama a la función que se encarga de crear los planes internet  + fijo
+          this.internetLandline();
+          //Llama a la función que se encarga de crear los planes internet  + fijo + movil
+          this.internetLandlineMobile();
+          //console.log(this.internetList);
+          //console.log(this.internetLandline_And_MobilesPlans);
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
 
   }
 

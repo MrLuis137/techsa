@@ -19,8 +19,6 @@ export class MyServicesComponent implements OnInit {
     const id = await this.auth.getUserId(token);
     this.services=await this.contratoService.getAllContratosByIdCliente(id.slice(10,14))
     
-    
-    
   }
   //cancela un contrato con ese id
   async cancel(idContrato:number){
