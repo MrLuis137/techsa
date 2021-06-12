@@ -134,4 +134,9 @@ export class ContratoService {
     await this.request('put', `${baseUrl}/pagoEnLinea/actualizar/${idContrato}`,{"idservicioid":idservicioid});
   }
 
+  async isMoroso(idContrato:number){
+    const a=await this.request('get', `${baseUrl}/pagoEnLinea/isMoroso/${idContrato}`);
+    return a;
+  }
+
 }

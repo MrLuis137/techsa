@@ -28,7 +28,15 @@ export class ModifyContratoComponent implements OnInit {
 
   //Cambia el servicio relacionado a al contrato 
   async elegir(idServicio:number){
-    this.contratoService.actualizarContrato(this.idContrato,idServicio)
+    const morosidad = await this.contratoService.isMoroso(this.idContrato);
+    console.log(morosidad)
+    if (morosidad[0].Estado){
+      //await this.contratoService.actualizarContrato(this.idContrato,idServicio);
+      console.log("Se modifico")
+    }else{
+      console.log("No se puede modificar hasta que pague")
+    }
+    
 
   }
 

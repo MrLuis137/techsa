@@ -1201,6 +1201,18 @@ router.put('/pagoEnLinea/pagar/:idContrato', async function(req: Request, res:Re
             return next(err);
     }
 });
+
+router.get('/pagoEnLinea/isMoroso/:idContrato', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const contratoRepository = await connect.getContratoRepository();
+        const resp = await contratoRepository.query(`SELECT c.Estado FROM contrato c WHERE Id=${req.params.idContrato};`)
+        res.send(resp)
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
 router.get('/pagoEnLinea/get/:idContrato', async function(req: Request, res:Response, next:NextFunction){
     try{
         const contratoRepository = await connect.getContratoRepository();
