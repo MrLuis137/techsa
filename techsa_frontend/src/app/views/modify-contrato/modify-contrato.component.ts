@@ -21,8 +21,7 @@ export class ModifyContratoComponent implements OnInit {
   async ngOnInit() {
     this._ac.paramMap.subscribe(async param =>{
       this.idContrato = param.get('id');
-      this.data= await this.contratoService.getPlanesTipo(parseInt(this.idContrato))
-    })
+      this.data= await this.contratoService.getPlanesTipo(parseInt(this.idContrato))})
     
   }
 
@@ -37,7 +36,6 @@ export class ModifyContratoComponent implements OnInit {
       console.log("No se puede modificar hasta que pague")
     }
     
-
   }
 
 }

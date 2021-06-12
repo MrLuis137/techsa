@@ -61,6 +61,7 @@ export class DeviceService {
   //Retorna 
   async updateDispositivo(id:string, dispositivo:Dispositivo){
     return await this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
+
   }
 
 }

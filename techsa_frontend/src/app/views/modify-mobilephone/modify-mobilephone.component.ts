@@ -35,16 +35,27 @@ export class ModifyMobilePhoneComponent implements OnInit {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
       console.log("Id a modificar",id);
-      this.data = await this.planMovilService.getPlanMovilById(id);
+      try {
+        this.data = await this.planMovilService.getPlanMovilById(id);
+      } catch (err) {
+        alert("Error al cargar los datos. \n Intente recargar la página.");
+      }
       this.newMobiePhoneForm.setValue(this.data);
     });
   }
   
   async modify(values){
-    console.log("Vamos a modificar Dipositivo componente")
-    var plan = new PlanMovil();
-    plan = this.setPlan(plan,values)
-    await this.planMovilService.updatePlanMovil(values.ID,plan);
+    if(confirm("¿Desea Modificar el Dispositivo?")){
+      console.log("Vamos a modificar Dipositivo componente")
+      var plan = new PlanMovil();
+      plan = this.setPlan(plan,values);
+      try {
+        await this.planMovilService.updatePlanMovil(values.ID,plan);
+        alert("Plan movil modificado");
+      } catch (err) {
+        alert("Error al modificar el plan movil");
+      }
+    }
   }
   
   setPlan(plan:PlanMovil,values:any):PlanMovil {

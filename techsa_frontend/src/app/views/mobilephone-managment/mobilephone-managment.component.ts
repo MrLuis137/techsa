@@ -15,13 +15,19 @@ export class MobilephoneManagmentComponent implements OnInit {
     ) { }
 
   async ngOnInit() {
-    this.planes = await this.planMovilService.getPlanMovilAll();
+    try {
+      this.planes = await this.planMovilService.getPlanMovilAll();
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
     console.log(this.planes);
   }
 
   async delete (ID:string,NombrePlan:String){
-    console.log("Eliminando plan movil: ",ID,NombrePlan)
-    await this.planMovilService.deletePlanMovil(ID)
+    if(confirm("¿Eliminar Producto?")){
+      console.log("Eliminando plan movil: ",ID,NombrePlan)
+      await this.planMovilService.deletePlanMovil(ID)
+      location.reload();
+    } 
   }
-
 }

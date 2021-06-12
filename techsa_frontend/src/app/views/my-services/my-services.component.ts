@@ -17,14 +17,23 @@ export class MyServicesComponent implements OnInit {
   async ngOnInit() {
     const token = localStorage.getItem('access_token');
     const id = await this.auth.getUserId(token);
-    this.services=await this.contratoService.getAllContratosByIdCliente(id.slice(10,14))
+    try {
+      this.services=await this.contratoService.getAllContratosByIdCliente(id.slice(10,14))
+    } catch (err) {
+      alert("Error al cargar los datos. \n Intente recargar la página.");
+    }
     
   }
   //cancela un contrato con ese id
   async cancel(idContrato:number){
-    await this.contratoService.delete(idContrato).then((data)=>{
-        console.log(data)
-    })
+    if(confirm("¿Desea cancelar el contrato?")){
+      try {
+        await this.contratoService.delete(idContrato).then((data)=>{console.log(data)});
+        alert("Contrato cancelado");
+      } catch (err) {
+        alert("Error al cancelar el contrato");
+      }
+    }
   }
  
 

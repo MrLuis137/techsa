@@ -38,16 +38,31 @@ export class ModifyDeviceComponent implements OnInit {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('id');
       console.log("Id a modificar",id)
-      this.data = await this.deviceService.getDispositivobyId(id)
+      try {
+        this.data = await this.deviceService.getDispositivobyId(id)
+      } catch (err) {
+        alert("Error al cargar los datos. \n Intente recargar la página.");
+      }
       this.newDeviceForm.setValue(this.data)
     })
   }
+
   async modify(values){
-    console.log("Vamos a modificar Dipositivo componente")
-    var device = new Dispositivo();
-    device = this.setDevice(device,values)
-    console.log(values)
-    await this.deviceService.updateDispositivo(values.Id,device);
+
+    if(confirm("¿Desea Modificar el Dispositivo?")){
+      console.log("Vamos a modificar Dipositivo componente")
+      var device = new Dispositivo();
+      device = this.setDevice(device,values)
+      console.log(values)
+      try {
+        await this.deviceService.updateDispositivo(values.Id,device);
+        alert("Dispositivo Modificado.");
+      } catch (err) {
+        alert("Error al modificar dispositivo.");
+      }
+    }
+
+    
   }
   
   setDevice(device:Dispositivo,values:any):Dispositivo {

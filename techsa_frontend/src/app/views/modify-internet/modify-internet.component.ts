@@ -39,17 +39,28 @@ export class ModifyInternetComponent implements OnInit {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('ID');
       console.log("Id a modificar",id);
-      this.data = await this.internetService.getPlanInternet_idInternet(id);
+      try {
+        this.data = await this.internetService.getPlanInternet_idInternet(id);
+      } catch (err) {
+        alert("Error al cargar los datos. \n Intente recargar la página.");
+      }
       console.log(this.data);
       this.newInternetForm.setValue(this.data[0]);
     })
   }
   
   async modify(values){
-    console.log("Vamos a modificar Dipositivo componente")
-    var plan = new PlanInternet();
-    plan = this.setPlan(plan,values);
-    await this.internetService.updatePlanInternet(values.ID,plan);
+    if(confirm("¿Desea Modificar el Plan de internet?")){
+      console.log("Vamos a modificar Dipositivo componente")
+      var plan = new PlanInternet();
+      plan = this.setPlan(plan,values);
+      try {
+        await this.internetService.updatePlanInternet(values.ID,plan);
+        alert("Plan modificado");
+      } catch (err) {
+        alert("Error al modificar el plan ");
+      }
+    }
   }
   
   setPlan(plan:PlanInternet,values:any):PlanInternet {

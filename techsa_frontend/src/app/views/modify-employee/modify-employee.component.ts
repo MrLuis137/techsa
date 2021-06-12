@@ -37,9 +37,17 @@ export class ModifyEmployeeComponent implements OnInit {
    async ngOnInit() {
     this._ac.paramMap.subscribe(async param =>{
       const id =param.get('id');
-      this.data = await this.gerenteService.getGerentebyId(id)
+      try {
+        this.data = await this.gerenteService.getGerentebyId(id);
+      } catch (err) {
+        alert("Error al cargar los datos. \n Intente recargar la página.");
+      }
       if (this.data == null){
-        this.data = await this.agenteVentasService.getAgenteVentasbyId(id)
+        try {
+          this.data = await this.agenteVentasService.getAgenteVentasbyId(id);
+        } catch (err) {
+          alert("Error al cargar los datos. \n Intente recargar la página.");
+        }
       }
       console.log("ngOnInit",this.data)
       this.modifyEmployeeForm.setValue(this.data); 
@@ -50,19 +58,33 @@ export class ModifyEmployeeComponent implements OnInit {
     
   async modify(values){
     var empleado:any;
-    if (values.Puesto == 'Gerente'){
-      console.log("Vamos a modificar Gerente componente")
-      empleado = new Gerente();
-      empleado = this.setEmployee(empleado,values)
-      await this.gerenteService.updateGerente(values.Id_laboral,empleado);
+    if(confirm("¿Desea Modificar el Empleado?")){
+
+      if (values.Puesto == 'Gerente'){
+        console.log("Vamos a modificar Gerente componente")
+        empleado = new Gerente();
+        empleado = this.setEmployee(empleado,values)
+        try {
+          await this.gerenteService.updateGerente(values.Id_laboral,empleado);
+          alert("Empleado modificado");
+        } catch (err) {
+          alert("Error al modificar el empleado");
+        }
+      }
+
+      else{
+        console.log("Vamos a modificar Agente de ventas componente")
+        empleado = new AgenteVentas();
+        empleado = this.setEmployee(empleado,values)
+        try {
+          await this.agenteVentasService.createAgenteVentas(empleado);
+          alert("Empleado modificado");
+        } catch (err) {
+          alert("Error al modificar el empleado");
+
+        }
+      }
     }
-    else{
-      console.log("Vamos a modificar Agente de ventas componente")
-      empleado = new AgenteVentas();
-      empleado = this.setEmployee(empleado,values)
-      await this.agenteVentasService.createAgenteVentas(empleado);
-    }
-    
   }
   setEmployee(empleado:any,values:any):any {
     empleado.Nombre = values.Nombre;
