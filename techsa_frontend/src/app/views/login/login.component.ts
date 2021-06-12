@@ -25,14 +25,14 @@ export class LoginComponent implements OnInit {
 
   //Función que se activa en el html, para que envíe el form al backend 
   async submit(){
-    const submit = await this.auth.login(this.username, this.password); //Recibe la respuesta del backend
-    if(submit){
+    try {
+      const submit = await this.auth.login(this.username, this.password); //Recibe la respuesta del backend
       this.redirect(); //Si el usuario se loguea satisfactoriamente, llama a redirect.
-      //this.router.navigate(['my-services']);
-    }else{
+
+    } catch (err) {
       this.error = 'No se pudo autenticar';
       alert(this.error);  //Muestra una alerta 
-    };
+    }
   }
 
   //Redirect 

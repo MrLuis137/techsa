@@ -29,44 +29,26 @@ export class AgenteVentasService {
   }
 
   async getAgenteVentasAll(){
-    try {
-      return await this.request('get', `${baseUrl}/agenteventas`);
-    } catch (err) {
-      return false;
-    }
+    return await this.request('get', `${baseUrl}/agenteventas`);
   }
 
   async getAgenteVentasbyId(id:string){
-    try {
-      return await this.request('get', `${baseUrl}/agenteventas/${id}`);
-    } catch (err) {
-      return false;
-    }
+    return await this.request('get', `${baseUrl}/agenteventas/${id}`);
+
   }
 
   createAgenteVentas( agenteVentas:AgenteVentas ){
     console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
-    try {
-      return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
-    } catch (err) {
-      return false;
-    }
+    return this.request('post', `${baseUrl}/agenteventas`, agenteVentas);
+
   }
 
   deleteAgenteVentas( id:string ){
-    try {
-      return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
-    } catch (err) {
-      return false;
-    }
+    return this.request('delete', `${baseUrl}/agenteventas/${id}`, null, 'text');
   }
 
   updateGerente(id:string, agenteVentas:AgenteVentas){
     console.log("servicio updateAgente de Ventas")
-    try {
-      return this.request('put', `${baseUrl}/agenteventas/${id}`, agenteVentas,'text');
-    } catch (err) {
-      return false;
-    }
+    return this.request('put', `${baseUrl}/agenteventas/${id}`, agenteVentas,'text');
   }
 }

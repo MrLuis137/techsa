@@ -31,22 +31,14 @@ export class DeviceService {
   //Le dice al backend que le envíe la lista de dispositivos 
   //Retorna false si hay algún problema en el request
   async getDispositivoAll(){
-    try {
-      return await this.request('get', `${baseUrl}/dispositivo`);
-    } catch (error) {
-      return false;
-    } 
+    return await this.request('get', `${baseUrl}/dispositivo`);
   }
 
   //getDispositivobyId
   //Solicita al back end que retorne un dispositivo, buscandolo por el id
   //Retorna false si hay algún problema en el request
   async getDispositivobyId(id:string){
-    try {
-      return await this.request('get', `${baseUrl}/dispositivo/${id}`);
-    } catch (err) {
-      return false;
-    }
+    return await this.request('get', `${baseUrl}/dispositivo/${id}`);
   }
 
   //createDispositivo
@@ -54,33 +46,21 @@ export class DeviceService {
   //Retorna 
   async createDispositivo( dispositivo:Dispositivo ){
     console.log('createDispositivo' + JSON.stringify(dispositivo));
-    try {
-      return await this.request('post', `${baseUrl}/dispositivo`, dispositivo);
-    } catch (err) {
-      return false;
-    }
+    return await this.request('post', `${baseUrl}/dispositivo`, dispositivo);
   }
 
   //deleteDispositivo
   //solicita al backend que elimine un dispositivo, buscandolo por el id
   //Retorna 
   async deleteDispositivo( id:string ){
-    try {
-      return await this.request('delete', `${baseUrl}/dispositivo/${id}`, null, 'text');
-    } catch (err) {
-      return false;
-    }
+    return await this.request('delete', `${baseUrl}/dispositivo/${id}`, null, 'text');
   }
 
   //updateDispositivo
   //Envía al backend un dispositivo y le pide que lo actualice en la base de datos 
   //Retorna 
   async updateDispositivo(id:string, dispositivo:Dispositivo){
-    try {
-      return await this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
-    } catch (err) {
-      return false;
-    }
+    return await this.request('put', `${baseUrl}/dispositivo/${id}`, dispositivo,'text');
   }
 
 }

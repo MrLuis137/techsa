@@ -39,42 +39,26 @@ export class AuthService {
   //el backend responde con un Token generado de JWT.
   async login( username:string, password:string ){
     //console.log('createAgenteVentas' + JSON.stringify(agenteVentas));
-    try {
-      console.log("Auth.Service:Enviando Petición de login al backend");
-      const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
-      const jsonResponse = JSON.parse(response);  //Parsea la respuesta del backend 
-      localStorage.setItem('access_token', jsonResponse.token);  //Guarda el token dentro del local storage "Acá loguea al usuario "
-      console.log("Auth.Service:Usuario logueado");
-      return true;
-    } catch (error) {
-      console.log("Auth.Service:Usuario no ha sido encontrado");
-      return false;
-    }
-  
+    console.log("Auth.Service:Enviando Petición de login al backend");
+    const response = await this.request('post', `${baseUrl}/auth`, {username:username, password:password});
+    const jsonResponse = JSON.parse(response);  //Parsea la respuesta del backend 
+    localStorage.setItem('access_token', jsonResponse.token);  //Guarda el token dentro del local storage "Acá loguea al usuario "
+    console.log("Auth.Service:Usuario logueado");
+    return true;
   }
 
   //getUserRole
   //Envía el token al backend, para que el backend retorne el rol del usuario 
   async getUserRole( token:string ){
-    try {
-      console.log("Auth.Service:Enviando Petición de getRole al backend");
-      return this.request('get',`${baseUrl}/auth/role/${token}`); //Envia el token y recibe el rol del usuario logueado
-    } catch (error) {
-      console.log("Auth.Service:Usuario no ha sido encontrado");
-      return false;  //Retorna falso si recibe algún error 
-    }
+    console.log("Auth.Service:Enviando Petición de getRole al backend");
+    return this.request('get',`${baseUrl}/auth/role/${token}`); //Envia el token y recibe el rol del usuario logueado
   }
 
   //getUserId
   //Envía el token al backend, para que el backend retorne el id del usuario logueado
   async getUserId( token:string ){
-    try {
-      console.log("Auth.Service:Enviando Petición de getUserId al backend");
-      return this.request('get',`${baseUrl}/auth/id/${token}`); //Envía la petición al backend
-    } catch (error) {
-      console.log("Auth.Service:Usuario no ha sido encontrado");
-      return false; //Retorna falo si recibe algún error 
-    }
+    console.log("Auth.Service:Enviando Petición de getUserId al backend");
+    return this.request('get',`${baseUrl}/auth/id/${token}`); //Envía la petición al backend
   }
 
   //logout
