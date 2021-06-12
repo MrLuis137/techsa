@@ -22,14 +22,14 @@ export class ShopingCarComponent implements OnInit {
   
   devicesList
   servicesList
+  PlanList = []
   total = 0
   constructor(private car:CartService,private Planfijo:PlanfijoService, private internet:InternetserviceService, private movileTelephony :MovileTelephonyService , private devices: DeviceService, private resolver: ComponentFactoryResolver
     , private contract: ContratoService) {
    }
 
   ngOnInit(): void {
-    
-  this.servicesList = this.getCarServices()
+  this.servicesList =this.getCarServices()
   this.devicesList = this.getCarDevices()
   console.log(this.devicesList)
   console.log(this.total)
@@ -42,21 +42,7 @@ export class ShopingCarComponent implements OnInit {
     })
     for(let i = 0; i< data.length; i++){
       //this.createComponent(data[i])
-      let service
-      switch(data[i].Nombre) {
-        case "PlanInternet": {
-          this.getInternetSercive(data[i].IdServicio)
-          
-          }
-          
-        case "PlanInternetPlanFijo": {
-          //this.get
-        }
-        case "Prepago": {
-          //this.getP
-        }
-
-      }
+      this.getService(data[i].IdServicio)
       console.log(data[i])
     }
     return data
@@ -71,20 +57,15 @@ export class ShopingCarComponent implements OnInit {
     for(let i = 0; i< data.length; i++){
       this.createDeviceComponent(data[i])
       this.total += data[i].Precio
-      console.log(data[i])
     }
     return data
   }
 
-  async getInternetSercive(id){
-    let service = await this.internet.getPlanInternet_IdServicio(id).then(function (res){
-      return res[0]
-      
-      console.log(service)
-     })
-     console.log(service)
-     this.total += service.PrecioMensual
-     this.createServiceComponent(service)
+  async getService(id){
+    let service = await this.car.getServicesByServiceID(id)
+      this.total += service.PrecioMensual
+      this.createServiceComponent(service)
+      this.PlanList.push(service)
   }
 
   createDeviceComponent(device) {
@@ -105,8 +86,8 @@ export class ShopingCarComponent implements OnInit {
   }
   
   confirmOrder(){
-    console.log(this.servicesList)
-    this.contract.newContrato(this.servicesList)
+    console.log(this.servicesList, this.devicesList)
+    this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total)
   }
 
 }

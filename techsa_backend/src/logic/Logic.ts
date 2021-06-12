@@ -15,6 +15,15 @@ import {PlanFijo} from '../entity/PlanFijo';
  
 
 export const router: Router = Router();
+const nodemailer = require('nodemailer');
+let transport =  nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "5dfdb473226cc2",
+      pass: "367aff7b0ebf3f"
+    }
+  });
 
 ///////////////////////////  Cliente  ////////////////////////////////////////////
 router.post("/cliente" , async function (req: Request, res: Response) {
@@ -789,13 +798,106 @@ router.put('/carrito/servicios/:idcliente', async function(req: Request, res:Res
             return next(err);
     }
 });
+
+router.get('/servicio/:idServicio', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        console.log(req.params.idServicio)
+        const servicioRepository = await connect.getServicioRepository();
+        const service = await servicioRepository.findOne(req.params.idServicio)
+        console.log(service)
+        let data;
+        let query = ""
+        if(service.Nombre == "PlanInternet"){
+            console.log("PlanInternet")
+            const repository = await connect.getPlanInternetRepository();
+            data = await repository.findOne({where:{IdServicio : service.Id}});
+        }
+        else if(service.Nombre == "PlanInternetPlanFijo"){
+            console.log("PlanInternetPlanFijo");
+             query +="select plan_internet_plan_fijo.ID, plan_internet_plan_fijo.PrecioMensual as PrecioMensual,  CONCAT(plan_fijo.NombrePlan, '+', plan_internet.NombrePlan) as NombrePlan  from  plan_internet_plan_fijo ";
+             query +="join plan_fijo on plan_fijo.ID = plan_internet_plan_fijo.idPlanFijoID ";
+             query +="join plan_internet on plan_internet.ID = plan_internet_plan_fijo.idPlanInternetID ";
+             query +=`where plan_internet_plan_fijo.idServicioId = ${service.Id};`;
+            const repository = await connect.getPlanInternetPlanFijoRepository();
+            data = await repository.query(query);
+            data = data[0]
+        }
+        else if(service.Nombre == "PlanMovil" || service.Nombre == "PostPago" || service.Nombre == "Prepago"){
+            console.log("PlanMovil")
+            const repository = await connect.getPlanMovilRepository();
+            data = await repository.findOne({where:{idServicio : service.Id}});
+        }
+        else if(service.Nombre == "PlanFijoRepository"){
+            console.log("PlanFijoRepository")
+            const repository = await connect.getPlanFijoRepository();
+            data = await repository.findOne({where:{IdServicio : service.Id}});
+        }  
+        else if(service.Nombre == "PlanInternetPlanMovilPlanFijo"){
+            console.log("PlanInternetPlanMovilPlanFijo")
+            const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
+           query +="SELECT plan_internet_plan_movil_plan_fijo.ID, plan_internet_plan_movil_plan_fijo.PrecioMensual as PrecioMensual,  CONCAT(plan_fijo.NombrePlan, '+', plan_internet.NombrePlan, '+', plan_movil.NombrePlan) as NombrePlan FROM plan_internet_plan_movil_plan_fijo "
+           query +="INNER JOIN plan_fijo on plan_fijo.ID = plan_internet_plan_movil_plan_fijo.idPlanFijoID "
+           query +="INNER JOIN plan_internet on plan_internet.ID = plan_internet_plan_movil_plan_fijo.idPlanInternetID "
+           query +="INNER JOIN plan_movil on plan_movil.ID = plan_internet_plan_movil_plan_fijo.idPlanMovilID "
+           query +=`WHERE plan_internet_plan_movil_plan_fijo.idServicioId = ${service.Id};`
+           data = await repository.query(query);
+           data = data[0]
+        } 
+        else if(service.Nombre == "PlanMovilDispositivo"){
+            console.log("PlanMovilDispositivo")
+            const repository = await connect.getPlanMovilDispositivoRepository();
+           
+            query += "select plan_movil_dispositivo.ID, plan_movil_dispositivo.Precio as PrecioMensual,  CONCAT(plan_movil.NombrePlan ,'+', dispositivo.Marca , '+', dispositivo.Modelo ) as NombrePlan  from  plan_movil_dispositivo "
+            query += "join dispositivo on dispositivo.ID = plan_movil_dispositivo.idDispositivoId "
+            query += "join plan_movil on plan_movil.ID = plan_movil_dispositivo.idPlanID "
+            query += `where plan_movil_dispositivo.idServicioIdId = ${service.Id};`
+            data = await repository.query(query)
+            data = data[0]
+        } 
+        return res.send(data)
+    }
+    catch(err){
+            return next(err);
+    }
+});
 ////////////////////////////////  Nuevo contrato ///////////////////////////////////////
 
-router.put('/contrato/'), async function(req: Request, res:Response, next:NextFunction){
+router.put('/contrato/', async function(req: Request, res:Response, next:NextFunction){
     const repository = await connect.getContratoRepository();
     repository.query(`INSERT INTO contrato(FechaContratado, Estado, idServicioId, idClienteId) values(curdate() , 1, ${req.body.IdServicio}, ${req.body.IdCliente}) `)
-    
-}
+   
+});
+ 
+
+
+router.post('/factura/',  async function(req: Request, res:Response, next:NextFunction){
+    console.log(req.body)
+    const services = req.body.services;
+    const devices = req.body.devices;
+    let total = 0;
+    console.log(devices[3])
+    for (let device of devices){
+        //total += devices.Precio
+        console.log(device)
+        console.log(JSON.stringify(device))
+        console.log("WTF")
+    }
+    let message = {
+        from: 'tucorreo@gmail.com',
+        to: 'mi-amigo@yahoo.com',
+        subject: 'Asunto Del Correo',
+        text: "Wenas",
+      };
+      /*transport.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
+      })*/
+      res.send
+    });
+
 
 
 
@@ -936,3 +1038,5 @@ router.delete('/pagoEnLinea/cancelar/:idContrato', async function(req: Request, 
             return next(err);
     }
 });
+
+

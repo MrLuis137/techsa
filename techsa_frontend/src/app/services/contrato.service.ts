@@ -12,8 +12,7 @@ export class ContratoService {
   constructor(private http:HttpClient) { }
 
   private async request(method: string, url:string, data?:any, responseType?:any){
-      
-    //console.log('request' + JSON.stringify(data));
+
     const result = this.http.request(method,url,{
       body:data,
       responseType:responseType || 'json',
@@ -26,10 +25,24 @@ export class ContratoService {
     });
   }
 
-  async newContrato(services){ 
-    for (let i = 0; i <  services.length){
-      services = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id, '2201'}));
+  async newContrato(services, devices, PlanList, total){ 
+    console.log("Hola");
+    let resumen = ""
+    console.log( PlanList)
+    for (let i = 0; i <  PlanList.length; i++){
+     let res = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id,IdCliente: '2201'}));
+     res =  (await this.request('get',`${baseUrl}/servicio/${services[i].Id}`));
+      console.log(PlanList[i].PrecioMensual)
+     resumen += `${PlanList[i].Nombre} costo: ${PlanList[i].PrecioMensual}\n`
     }
+    for (let i = 0; i <  devices.length; i++){
+      console.log(devices[i])
+      resumen += `${devices[i].modelo} costo: ${devices[i].Precio }`
+    }
+    resumen += `Total: ${total}`
+    console.log(resumen)
+    //(await this.request('post',`${baseUrl}/factura/`,  resumen ));
+
   }
 
   //Toma los contratos en los que un cliente está moroso
