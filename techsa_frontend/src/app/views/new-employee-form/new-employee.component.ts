@@ -7,6 +7,8 @@ import { AgenteVentasService } from '../../services/agente-ventas.service';
 import { AgenteVentas } from '../../models/AgenteVentas';
 import { Gerente } from '../../models/Gerente';
 import { GerenteService } from '../../services/gerente.service';
+import * as bcrypt from 'bcryptjs';
+
 
 
 @Component({
@@ -71,13 +73,16 @@ export class NewEmployeeComponent implements OnInit {
     
   }
   setEmployee(empleado:any,values:any):any {
+    const salt = bcrypt.genSaltSync(10);
+    const pass = bcrypt.hashSync(values.contrasenia, salt);
+
     empleado.Nombre = values.nombre;
     empleado.Cedula = values.cedula;
-    empleado.FechaNacimiento = new Date(values.fechaNacmiento);
+    empleado.FechaNacimiento = new Date(values.fechaNacimiento);
     empleado.Puesto = values.puesto;
     empleado.Usuario = values.usuario;
     empleado.Id_laboral = values.id_laboral;
-    empleado.Contrasenia = values.contrasenia;
+    empleado.Contrasenia = pass;
     return empleado
   }
 
