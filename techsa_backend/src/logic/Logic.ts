@@ -571,8 +571,7 @@ router.post('/planfijo',async function (req:Request, res:Response, next:NextFunc
 //*UPDATE landline
 router.put('/planfijo/:id', async function (req, res, next:NextFunction) {
     try{
-        console.log("update plan landline")
-        console.log(req.body)
+        
         const repository = await connect.getPlanFijoRepository();
         let planUpdate = await repository.findOne(req.params.id);
         planUpdate.NombrePlan = req.body.NombrePlan;
@@ -914,6 +913,22 @@ router.put('/pagoEnLinea/plan_internet_plan_fijo/:idcliente', async function(req
             return next(err);
     }
 });
+router.get('/pagoEnLinea/plan_internet_plan_fijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getPlanInternetPlanMovilPlanFijoRepository();
+        let query ='SELECT pipf.idServicioId,pf.NombrePlan AS "nombreFijo",pi.NombrePlan AS "nombreInternet",pf.Minutos,pf.FijoTechsa,pf.FijoOperador,pf.MovilCualquiera,pipf.PrecioMensual,pi.Descripcion'
+         query += ' FROM  plan_internet_plan_fijo pipf '
+         query += ' INNER JOIN plan_fijo pf ON pipf.idPlanFijoID = pf.ID '
+         query += ' INNER JOIN plan_internet pi WHERE pipf.idPlanInternetID = pi.ID '
+        const services = await repository.query(query)
+       
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
 router.put('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async function(req: Request, res:Response, next:NextFunction){
     try{
         const repository = await connect.getContratoRepository();
@@ -923,6 +938,24 @@ router.put('/pagoEnLinea/plan_internet_plan_movil_plan_fijo/:idcliente', async f
         query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
         query += 'INNER JOIN plan_movil pm ON pipmpf.idPlanMovilID = pm.ID '
         query += `WHERE c.idClienteId = ${req.params.idcliente} and c.estado=${req.body.Estado} and c.FechaContratado <= (Select NOW())`
+        const services = await repository.query(query)
+        console.log(services)
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
+
+router.get('/pagoEnLinea/plan_internet_plan_movil_plan_fijo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getContratoRepository();
+        let query = 'SELECT pipmpf.idServicioId, pf.Minutos, pf.FijoTechsa,pf.FijoOperador,pipmpf.PrecioMensual,pf.NombrePlan AS "nombreFijo",pi.Velocidad,pi.Descripcion,pm.NombrePlan  '
+        query += 'FROM plan_internet_plan_movil_plan_fijo pipmpf '
+        query += 'INNER JOIN plan_fijo pf ON pipmpf.idPlanFijoID = pf.ID '
+        query += 'INNER JOIN plan_internet pi ON pipmpf.idPlanInternetID = pi.ID '
+        query += 'INNER JOIN plan_movil pm ON pipmpf.idPlanMovilID = pm.ID '
         const services = await repository.query(query)
         console.log(services)
         
@@ -968,17 +1001,30 @@ router.put('/pagoEnLinea/plan_movil_dispositivo/:idcliente', async function(req:
             return next(err);
     }
 });
-
+router.get('/pagoEnLinea/plan_movil_dispositivo', async function(req: Request, res:Response, next:NextFunction){
+    try{
+        const repository = await connect.getContratoRepository();
+        let query ='SELECT pmd.idServicioIdId AS "idServicioId", pm.Minutos,d.Marca AS "dispositivo",pm.PrecioMensual,pm.Descripcion,pm.NombrePlan,pm.CostoLlamada,pm.GBInternet, d.Modelo,d.Marca '
+        query += 'FROM plan_movil_dispositivo pmd '
+        query += 'INNER JOIN plan_movil pm ON pmd.idPlanID = pm.ID '
+        query += 'INNER JOIN dispositivo d  ON pmd.idDispositivoID = d.ID '
+        const services = await repository.query(query)
+        
+        res.send(services);
+    }
+    catch(err){
+            return next(err);
+    }
+});
 router.get('/pagoEnLinea/todosTipoPlanes/:idContrato', async function(req: Request, res:Response, next:NextFunction){
     try{    
-        console.log("pagoEnLinea/todosTipoPlanes")
+        
         const repository = await connect.getContratoRepository();
         let query = 'SELECT s.Nombre FROM contrato c '
         query += 'INNER JOIN servicio s ON c.idServicioId = s.Id '
         query += `WHERE c.Id = ${req.params.idContrato} ;`
         
         const tipo = await repository.query(query)
-        console.log(tipo);
         
         res.send(tipo);
     }
@@ -991,7 +1037,6 @@ router.put('/pagoEnLinea/pagar/:idContrato', async function(req: Request, res:Re
     try{
         const contratoRepository = await connect.getContratoRepository();
         const res = await contratoRepository.query(`UPDATE contrato SET Estado=true,FechaContratado=(SELECT DATE(DATE_ADD(FechaContratado, INTERVAL 1 MONTH))) WHERE Id=${req.params.idContrato};`)
-        console.log(res)
         return res
     }
     catch(err){
