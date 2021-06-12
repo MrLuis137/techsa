@@ -33,27 +33,28 @@ export class ContratoService {
       }
     });
     return new Promise<any>((resolve,reject) =>{
-      result.subscribe(resolve as any, reject as any);
+      result.subscribe(resolve as any, reject as any); 
     });
   }
 
   async newContrato(services, devices, PlanList, total, idCliente){ 
-    console.log("Hola");
-    let resumen = ""
-    console.log( PlanList)
+    let resume = "       Factura TECH.SA      \n"
+    const date = new Date().toISOString()
+    resume += `Fecha: ${date} \n`
+    resume += "\n" 
     for (let i = 0; i <  PlanList.length; i++){
-     let res = (await this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].Id,IdCliente: '2201'}));
-     res =  (await this.request('get',`${baseUrl}/servicio/${services[i].Id}`));
+      console.log(services[i])
+      //this.request('put',`${baseUrl}/contrato/`,{IdServicio:services[i].IdServicio ,IdCliente: idCliente});
       console.log(PlanList[i].PrecioMensual)
-     resumen += `${PlanList[i].Nombre} costo: ${PlanList[i].PrecioMensual}\n`
+      resume += `  ${PlanList[i].NombrePlan} costo: ${PlanList[i].PrecioMensual}\n`
     }
     for (let i = 0; i <  devices.length; i++){
       console.log(devices[i])
-      resumen += `${devices[i].modelo} costo: ${devices[i].Precio }`
+      resume += `  ${devices[i].Modelo} costo: ${devices[i].Precio }\n`
     }
-    resumen += `Total: ${total}`
-    console.log(resumen)
-    //(await this.request('post',`${baseUrl}/factura/`,  resumen ));
+    resume += `  Total: ${total}\n`
+    console.log(resume)
+    this.request('post',`${baseUrl}/factura/`,  {resumen:resume} );
 
   }
 

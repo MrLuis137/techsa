@@ -21,8 +21,8 @@ export class ShopingCarComponent implements OnInit {
   @ViewChild("deviceContainer", { read: ViewContainerRef }) deviceContainer;
   @ViewChild("serviceContainer", { read: ViewContainerRef }) serviceContainer;
   
-  devicesList
-  servicesList
+  devicesList = [] 
+  servicesList = []
   PlanList = []
   total = 0
   id
@@ -40,8 +40,8 @@ export class ShopingCarComponent implements OnInit {
   const token = localStorage.getItem('access_token');
   this.id = await this.auth.getUserId(token);
   
-  this.servicesList =this.getCarServices()
-  this.devicesList = this.getCarDevices()
+  this.getCarServices()
+  this.getCarDevices()
   console.log(this.devicesList)
   console.log(this.total)
   }
@@ -55,6 +55,7 @@ export class ShopingCarComponent implements OnInit {
       //this.createComponent(data[i])
       this.getService(data[i].IdServicio)
       console.log(data[i])
+      this.servicesList.push(data[i])
     }
     return data
   
@@ -68,6 +69,7 @@ export class ShopingCarComponent implements OnInit {
     for(let i = 0; i< data.length; i++){
       this.createDeviceComponent(data[i])
       this.total += data[i].Precio
+      this.devicesList.push(data[i])
     }
     return data
   }

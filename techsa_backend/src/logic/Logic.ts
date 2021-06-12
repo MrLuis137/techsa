@@ -944,9 +944,14 @@ router.get('/servicio/:idServicio', async function(req: Request, res:Response, n
 ////////////////////////////////  Nuevo contrato ///////////////////////////////////////
 
 router.put('/contrato/', async function(req: Request, res:Response, next:NextFunction){
+    try{
     const repository = await connect.getContratoRepository();
     repository.query(`INSERT INTO contrato(FechaContratado, Estado, idServicioId, idClienteId) values(curdate() , 1, ${req.body.IdServicio}, ${req.body.IdCliente}) `)
-   
+    return res.send("OK")
+    }
+    catch(err){
+        return next(err);
+}
 });
  
 
@@ -956,27 +961,20 @@ router.post('/factura/',  async function(req: Request, res:Response, next:NextFu
     const services = req.body.services;
     const devices = req.body.devices;
     let total = 0;
-    console.log(devices[3])
-    for (let device of devices){
-        //total += devices.Precio
-        console.log(device)
-        console.log(JSON.stringify(device))
-        console.log("WTF")
-    }
     let message = {
         from: 'tucorreo@gmail.com',
         to: 'mi-amigo@yahoo.com',
         subject: 'Asunto Del Correo',
-        text: "Wenas",
+        text: req.body.resumen,
       };
-      /*transport.sendMail(message, function(err, info) {
+      transport.sendMail(message, function(err, info) {
         if (err) {
           console.log(err)
         } else {
           console.log(info);
         }
-      })*/
-      res.send
+      })
+      return res.send
     });
 
 
