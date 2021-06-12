@@ -166,10 +166,10 @@ export class InternetListingComponent implements OnInit {
 
 
       try {
+        alert("Plan Internet Añadido al carrito");
         const token = localStorage.getItem('access_token');
         const id = await this.auth.getUserId(token);
         await this.carrito.setServicioByUserId(id.slice(10,14),identificador);
-        alert("Plan Internet Añadido al carrito");
       } catch (err) {
         alert("Error añadiendo al carrito");
       }

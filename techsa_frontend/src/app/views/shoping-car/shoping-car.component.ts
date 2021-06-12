@@ -105,9 +105,6 @@ export class ShopingCarComponent implements OnInit {
     console.log(this.servicesList, this.devicesList);
     try {
       this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total, this.id.slice(10,14));
-      this.servicesList = [];
-      this.devicesList = [];
-      this.PlanList = [];
       alert("Contratos creados");
 
     } catch (err) {

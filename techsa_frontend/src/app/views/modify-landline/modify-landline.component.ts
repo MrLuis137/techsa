@@ -49,10 +49,18 @@ export class ModifyLandlineComponent implements OnInit {
 
   
   async modify(values){
-    console.log("Vamos a modificar Dipositivo componente")
-    var plan = new PlanFijo();
-    plan = this.setPlan(plan,values);
-    await this.planfijoService.updatePlanFijo(values.ID,plan);
+    if(confirm("¿Desea realizar los cambios?")){
+      console.log("Vamos a modificar Dipositivo componente")
+      var plan = new PlanFijo();
+      plan = this.setPlan(plan,values);
+      try {
+        await this.planfijoService.updatePlanFijo(values.ID,plan);
+        alert("Producto Modificado");
+        
+      } catch (err) {
+        alert("Error al  Modificar producto, puede estar ligado a otros servicios");
+      }
+    }
   }
   
   setPlan(plan:PlanFijo,values:any):PlanFijo {

@@ -63,10 +63,10 @@ export class DevicesListingComponent implements OnInit {
       //Añadir al carrito
 
       try {
+        alert("Dispositivo Añadido al carrito");
         const token = localStorage.getItem('access_token');
         const id = await this.auth.getUserId(token);
         await this.carrito.setServicioByUserId(id.slice(10,14),device.Id);
-        alert("Dispositivo Añadido al carrito");
       } catch (err) {
         alert("Error añadiendo al carrito");
       }

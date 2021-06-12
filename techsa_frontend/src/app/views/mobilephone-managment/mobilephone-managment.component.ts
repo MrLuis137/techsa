@@ -25,9 +25,14 @@ export class MobilephoneManagmentComponent implements OnInit {
 
   async delete (ID:string,NombrePlan:String){
     if(confirm("¿Eliminar Producto?")){
-      console.log("Eliminando plan movil: ",ID,NombrePlan)
-      await this.planMovilService.deletePlanMovil(ID)
-      location.reload();
+      console.log("Eliminando plan movil: ",ID,NombrePlan);
+      try {
+        await this.planMovilService.deletePlanMovil(ID);
+        alert("Producto eliminado");
+        location.reload();
+      } catch (err) {
+        alert("No se pudo eliminar el producto, puede estar ligado a otros planes");
+      }
     } 
   }
 }

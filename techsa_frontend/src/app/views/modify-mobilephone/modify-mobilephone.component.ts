@@ -37,10 +37,10 @@ export class ModifyMobilePhoneComponent implements OnInit {
       console.log("Id a modificar",id);
       try {
         this.data = await this.planMovilService.getPlanMovilById(id);
+        this.newMobiePhoneForm.setValue(this.data[0]);
       } catch (err) {
         alert("Error al cargar los datos. \n Intente recargar la página.");
       }
-      this.newMobiePhoneForm.setValue(this.data);
     });
   }
   
