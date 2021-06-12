@@ -49,12 +49,22 @@ export class NewEmployeeComponent implements OnInit {
     if (values.puesto=='Gerente'){
       empleado = new Gerente();
       empleado = this.setEmployee(empleado,values)
-      await this.gerenteService.createGerente(empleado);
+      try {
+        await this.gerenteService.createGerente(empleado);
+        alert("Gerente nuevo guardado");
+      } catch (err) {
+        alert("Error al guardar el nuevo Gerente.");
+      }
     }
     else{
       empleado = new AgenteVentas();
       empleado = this.setEmployee(empleado,values)
-      await this.agenteVentasService.createAgenteVentas(empleado);
+      try {
+        await this.agenteVentasService.createAgenteVentas(empleado);
+        alert("Gerente nuevo guardado");
+      } catch (err) {
+        alert("Error al guardar el nuevo Gerente.");
+      }
     }
     
     

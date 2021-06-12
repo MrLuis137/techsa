@@ -38,7 +38,12 @@ export class NewMobilePhoneFormComponent implements OnInit {
     plan.CostoLlamada=values.CostoLlamada;
     plan.TipoPlan=values.TipoPlan;
     console.log(values);
-    await this.planMovilService.createPlanMovil(plan);
+    try {
+      await this.planMovilService.createPlanMovil(plan);
+      alert("Plan Móvil nuevo guardado");
+    } catch (err) {
+      alert("Error al guardar el nuevo plan móvil.");
+    }
   
   }
 }

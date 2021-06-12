@@ -31,7 +31,12 @@ export class NewInternetFormComponent implements OnInit {
     plan.Velocidad=values.Velocidad;
     plan.PrecioMensual=values.PrecioMensual;
     console.log(values);
-    await this.internetService.createPlanInternet(plan)
+    try {
+      await this.internetService.createPlanInternet(plan);
+      alert("Plan Internet nuevo guardado");
+    } catch (err) {
+      alert("Error al guardar el nuevo plan Internet.");
+    }
     
   }
 }

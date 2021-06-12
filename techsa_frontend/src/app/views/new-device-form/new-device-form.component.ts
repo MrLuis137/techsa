@@ -43,7 +43,13 @@ export class NewDeviceFormComponent implements OnInit {
     device.Precio=values.Precio;
     device.Cantidad=values.Cantidad;
     device.Imagen=values.Imagen;
-    await this.deviceService.createDispositivo(device)
+    try {
+      await this.deviceService.createDispositivo(device)
+      alert("Dispositivo nuevo guardado");
+    } catch (err) {
+      alert("Error al guardar el nuevo dispositivo.");
+
+    }
   }
   
 }

@@ -35,8 +35,11 @@ export class NewlandlineFormComponent implements OnInit {
     plan.FijoOperador=values.FijoOperador;
     plan.MovilCualquiera=values.MovilCualquiera;
     console.log(values);
-    await this.planFijoService.createPlanFijo(plan);
-    
+    try {
+      await this.planFijoService.createPlanFijo(plan);
+      alert("Plan Fijo nuevo guardado");
+    } catch (err) {
+      alert("Error al guardar el nuevo plan fijo.");
+    }
   }
-
 }
