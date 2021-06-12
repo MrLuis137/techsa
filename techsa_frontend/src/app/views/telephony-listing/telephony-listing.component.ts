@@ -51,10 +51,10 @@ export class TelephonyListingComponent implements OnInit {
   //addToCart
   //Añade un planFijo al carrito
   addToCart(planFijo:PlanFijo){
+    
     if (this.auth.loggedIn) {   //Si ya está logueado, puede adquirir el servicio 
       console.log("TelephonyListing:addtoCart:Añadiendo Producto al carrito");
       console.log(planFijo);
-
       //Añadir al carrito
     }else{  //Si no está logueado recibe un mensaje de error
       if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){

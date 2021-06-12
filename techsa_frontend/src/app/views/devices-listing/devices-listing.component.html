@@ -3,6 +3,7 @@
 <section class="device-section">
 
     <div  class="row row-cols1 row-cols-md-3 g-4">
+        <!-- NGfor para recorrer la lista de dispositivos y cargarlos en el html -->
         <div *ngFor="let device of this.deviceList" class="col">
             <div class="card text-center" >
                 <div class="align-center">
@@ -17,6 +18,7 @@
                         <br>Cámara: {{device.Camara}}MP
                         <br>Color: {{device.Color}}
                         <br>Cantidad {{device.Cantidad}}</p>
+                    <!-- Boton para añadir al carrito -->
                     <button type="button"  class="btn" (click)="addToCart(device)">¡Lo quiero!</button>
                 </div>
             </div>

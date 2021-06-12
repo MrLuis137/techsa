@@ -4,6 +4,8 @@ import { PlanfijoService } from 'src/app/services/planfijo.service';
 import { MovileTelephonyService } from '../../services/moviletelephony.service';
 import { PlanInternet } from '../../models/PlanInternet';
 import { CartService } from '../../services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -15,20 +17,24 @@ import { CartService } from '../../services/cart.service';
 })
 export class InternetListingComponent implements OnInit {
 
-  internetList = [];
-  internetLandLineList = [];
-  internetLandlineMobileList = [];
+  internetList = [];                //Lista de planes de internet 
+  internetLandLineList = [];        //Lista de planes internet + fijo
+  internetLandlineMobileList = [];  //Lista de internet + fijo + movil
 
-  internetLandline_And_MobilesPlans = [];
+  
+  internetLandline_And_MobilesPlans = []; //Lista de objetos PlanInternet con informacion de fijos y moviles
 
-  constructor(public mobileTelephonyService:MovileTelephonyService, public planFijoService:PlanfijoService, public internetService:InternetserviceService) { }
 
+  constructor(private mobileTelephonyService:MovileTelephonyService, private planFijoService:PlanfijoService, private internetService:InternetserviceService,private auth:AuthService, private router:Router ) { }
+
+  //Llama a refresh cuando se carga la pagina
   ngOnInit(): void {
     this.refresh();
   }
 
   async refresh() {
 
+    //Carga las listas de las tablas
     const internetListData = await this.internetService.getPlanInternetAll();
     const internetLandlineListData = await this.internetService.getPlanInternetFijoAll();
     const internetLandlineMobileListData  = await this.internetService.getPlanInternetFijoMovilAll();
@@ -37,63 +43,75 @@ export class InternetListingComponent implements OnInit {
     this.internetLandLineList = internetLandlineListData;
     this.internetLandlineMobileList = internetLandlineMobileListData;
 
+    //Llama a la función que se encarga de crear los planes internet  + fijo
     this.internetLandline();
+    //Llama a la función que se encarga de crear los planes internet  + fijo + movil
     this.internetLandlineMobile();
-    console.log(this.internetList);
-    console.log(this.internetLandline_And_MobilesPlans);
+    //console.log(this.internetList);
+    //console.log(this.internetLandline_And_MobilesPlans);
 
   }
 
-  async internetPlans(){
-
-  }
-
+  //internetLandline
   //Devuelve una lista con todos los planes fijos asociados a un plan de internet 
   async internetLandline(){
 
     //const internetLandlineData = await this.internetService.getPlanInternetFijo_IdInternet(idInternet);
-    
+    //Por cada elemento dentro de la lista de internet+fijo, busca los planes de internet y fjo asociados
+    //y los guarda en un nuevo elemento de PlanInternet
     for( const element of  this.internetLandLineList){
-
+      //Busca el plan fijo
       const tempFijo = await this.planFijoService.getPlanFijobyId(element.idPlanFijoID);
+      //Busca el plan internet
       const tempInternet = await this.internetService.getPlanInternet_idInternet(element.idPlanInternetID);
+      
+      //Crea un nuevo plan de internet 
       const tempInternetModel:PlanInternet = new PlanInternet;
-
       tempInternetModel.ID = element.ID;
       tempInternetModel.Descripcion = tempFijo[0].Minutos + " minutos + \n" + tempInternet[0].Descripcion;
       tempInternetModel.PrecioMensual = element.PrecioMensual;
       tempInternetModel.NombrePlan = "Techsa" + tempInternet[0].Velocidad + "@FIJO" ;
       tempInternetModel.IdServicio = element.idServicioId;
       tempInternetModel.Velocidad = tempInternet[0].Velocidad;
-
+      //Ingresa el elemento a la ista
       this.internetLandline_And_MobilesPlans.push(tempInternetModel);
     }
   }
 
 
 
-
+  //internetLandlineMobile
   //Devuele una lista con todos los planes moviles y fijos asociados a un plan de internet 
   async internetLandlineMobile( ){
-    
+      
+    //Por cada elemento dentro de la lista de internet+fijo+movil, busca los planes de internet, movil y fjo asociados
+    //y los guarda en un nuevo elemento de PlanInternet
     for( const element of  this.internetLandlineMobileList){
 
+      //Busca el plan fijo
       const tempFijo = await this.planFijoService.getPlanFijobyId(element.idPlanFijoID);
+      //Busca el plan Internet
       const tempInternet = await this.internetService.getPlanInternet_idInternet(element.idPlanInternetID);
+      //Busca el plan Movil
       const tempMobile = await this.mobileTelephonyService.getPlanMovilById(element.idPlanMovilID)
+      
+      //Crea un nuevo plan internet con la información  de esos tres planes
       const tempInternetModel:PlanInternet = new PlanInternet;
- 
       tempInternetModel.ID = element.ID;
       tempInternetModel.Descripcion = tempFijo[0].Minutos + " minutos Fijo + " + tempInternet[0].Descripcion+ " + " + tempMobile.Descripcion + " Movil";
       tempInternetModel.PrecioMensual = element.PrecioMensual;
       tempInternetModel.NombrePlan = "Techsa FULL" + tempInternet[0].Velocidad;
       tempInternetModel.IdServicio = element.idServicioId;
       tempInternetModel.Velocidad = tempInternet[0].Velocidad;
-
+      //Añade el nuevo plan internet a la lista
       this.internetLandline_And_MobilesPlans.push(tempInternetModel);
     }
   }
 
+  //chooseGradient
+  //Función para escoger un gradient para cada tipo de velocidad de internet 
+  //Cambia las opciones del "class=" del componente html
+  //Por defecto 
   chooseGradient(vel:number){
     if (vel == 50) {
       return {
@@ -125,9 +143,21 @@ export class InternetListingComponent implements OnInit {
 
   }
 
+  //addToCart
+  //Añade un planFijo al carrito
   addToCart(planInternet:PlanInternet){
-    console.log(planInternet);
-    //this.car.addPhone(device)
+    if (this.auth.loggedIn) {   //Si ya está logueado, puede adquirir el servicio 
+      console.log("Internet Listing:addtoCart:Añadiendo Producto al carrito");
+      console.log(planInternet);
+
+      //Añadir al carrito
+
+      
+    }else{  //Si no está logueado recibe un mensaje de error
+      if(confirm("Debe inicar sesión para adquirir el producto \n ¿Desea ir a la página de LogIn?")){
+        this.router.navigate(['login']);
+      }
+    }
   }
 
 }
