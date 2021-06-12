@@ -14,6 +14,7 @@ import { PlanInternet } from '../entity/PlanInternet';
 import {PlanFijo} from '../entity/PlanFijo';
 
 //import * as jwt from 'jsonwebtoken';
+import { Cliente } from '../entity/Cliente';
 
  
 
@@ -89,20 +90,25 @@ router.get("/auth/role/:token", async function(req: Request, res: Response) {
 });
 
 ///////////////////////////  Cliente  ////////////////////////////////////////////
-router.post("/cliente" , async function (req: Request, res: Response) {
-    const clienteRepository = await connect.getClienteRepository();
-    const user = await clienteRepository.create(req.body);
-    const results = await clienteRepository.save(user);
-    return res.send(results);
-    
-} );
 
 
 
 router.post("/cliente" , async function (req: Request, res: Response) {
+
     const clienteRepository = await connect.getClienteRepository();
-    const user = await clienteRepository.create(req.body);
+    const user = new Cliente();
+    user.Nombre = req.body.Nombre
+    user.Apellido = req.body.Apellido
+    user.Correo = req.body.Correo
+    user.NombreUsuario = req.body.NombreUsuario
+    user.Residencia = req.body.Residencia
+    user.Contrasenia = req.body.Contrasenia
+    console.log(user)
     const results = await clienteRepository.save(user);
+    const carritoRepository = await connect.getCarritoRepository();
+    const carrito = new CarritoCompras();
+    carrito.IdCliente = user;
+    await carritoRepository.save(carrito);
     return res.send(results);
     
 } );
@@ -985,9 +991,14 @@ router.get('/servicio/:idServicio', async function(req: Request, res:Response, n
 ////////////////////////////////  Nuevo contrato ///////////////////////////////////////
 
 router.put('/contrato/', async function(req: Request, res:Response, next:NextFunction){
+    try{
     const repository = await connect.getContratoRepository();
     repository.query(`INSERT INTO contrato(FechaContratado, Estado, idServicioId, idClienteId) values(curdate() , 1, ${req.body.IdServicio}, ${req.body.IdCliente}) `)
-   
+    return res.send("OK")
+    }
+    catch(err){
+        return next(err);
+}
 });
  
 
@@ -997,27 +1008,20 @@ router.post('/factura/',  async function(req: Request, res:Response, next:NextFu
     const services = req.body.services;
     const devices = req.body.devices;
     let total = 0;
-    console.log(devices[3])
-    for (let device of devices){
-        //total += devices.Precio
-        console.log(device)
-        console.log(JSON.stringify(device))
-        console.log("WTF")
-    }
     let message = {
         from: 'tucorreo@gmail.com',
         to: 'mi-amigo@yahoo.com',
         subject: 'Asunto Del Correo',
-        text: "Wenas",
+        text: req.body.resumen,
       };
-      /*transport.sendMail(message, function(err, info) {
+      transport.sendMail(message, function(err, info) {
         if (err) {
           console.log(err)
         } else {
           console.log(info);
         }
-      })*/
-      res.send
+      })
+      return res.send
     });
 
 
