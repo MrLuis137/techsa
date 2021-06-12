@@ -29,10 +29,10 @@ var Datos = [{
 }];
 
 var data = [
-    ['cr-pu', 50],
+    ['cr-pu', 1],
     ['cr-sj', 100],
     ['cr-al', 100],
-    ['cr-gu', 50],
+    ['cr-gu', 1],
     ['cr-li', 1],
     ['cr-ca', 100],
     ['cr-he', 100]
@@ -50,7 +50,7 @@ Highcharts.mapChart('mapa-container', {
     },
 
     subtitle: {
-        text: 'Cantidad mostrada por porcentaje'
+        text: 'Servicio cubren la Gran Área Metropolitana'
     },
 
     mapNavigation: {

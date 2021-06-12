@@ -30,7 +30,6 @@ export class ClientNavbarComponent implements OnInit {
   }
 
   mostrar_mapa(){
-    console.log("mostrar mapa");
-    //open("file:///Users/d4n11083/Desktop/Proyecto2/techsa/techsa_frontend/src/Mapa/Mapa.html");
+    this.router.navigate(['coverage-areas']);
   }
 }
