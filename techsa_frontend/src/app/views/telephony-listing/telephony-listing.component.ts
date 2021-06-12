@@ -60,10 +60,10 @@ export class TelephonyListingComponent implements OnInit {
       console.log(planFijo);
       //Añadir al carrito
       try {
+        alert("Añadiendo al carrito");
         const token = localStorage.getItem('access_token');
         const id = await this.auth.getUserId(token);
         await this.carrito.setServicioByUserId(id.slice(10,14),planFijo.IdServicio);
-        alert("Plan Fijo Añadido al carrito");
       } catch (err) {
         alert("Error añadiendo al carrito");
       }

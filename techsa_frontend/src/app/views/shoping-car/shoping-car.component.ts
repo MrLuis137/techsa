@@ -98,13 +98,20 @@ export class ShopingCarComponent implements OnInit {
     console.log(service);
     const factory = this.resolver.resolveComponentFactory(CartServiceElementComponent);
     const nt:ComponentRef<CartServiceElementComponent> = this.serviceContainer.createComponent(factory);
-    
     nt.instance.service = service;
   }
   
   confirmOrder(){
     console.log(this.servicesList, this.devicesList);
-    this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total, this.id.slice(10,14));
-  }
+    try {
+      this.contract.newContrato(this.servicesList,  this.devicesList, this.PlanList,this.total, this.id.slice(10,14));
+      this.servicesList = [];
+      this.devicesList = [];
+      this.PlanList = [];
+      alert("Contratos creados");
 
+    } catch (err) {
+      alert("error creando contrato");
+    }
+  }
 }
