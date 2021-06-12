@@ -10,18 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./telephony-listing.component.css']
 })
 
+//Componente que despliega la lista de telefonía fija 
 export class TelephonyListingComponent implements OnInit {
-  telephonyListingData:PlanFijo[] = []
+
+  telephonyListingData:PlanFijo[] = []  //Lista de planes fijos que se muestran en el 
 
   constructor(public planFijoService:PlanfijoService, public router:Router) { }
 
+
+  //Función que se ejecuta cuando secarga la página
   ngOnInit(): void {
-    this.refresh();
+    this.refresh();  //LLama a refresh
     console.log(this.telephonyListingData);
   }
 
+  //Pide al backend la lista de planes fijos y los
+  //guarda en la lista de telephonyListingData
   async refresh(){
-    const data = await this.planFijoService.getPlanFijoAll();
+    const data = await this.planFijoService.getPlanFijoAll(); //Pide la lista al backend
+    //Por cada elemento de la data, crea un nuevo planFijo 
     data.forEach(element => {
       let newPlanFijo = new PlanFijo;
       newPlanFijo.ID = element.ID;
@@ -36,16 +43,13 @@ export class TelephonyListingComponent implements OnInit {
     });
   }
 
+  //addToCart
+  //Añade un planFijo al carrito
   addToCart(planFijo:PlanFijo){
     console.log(planFijo);
 
-    alert("OMG LOOK AT HER BUTT IT IS SO BIG....");
+    alert("");
 
-    // if(confirm("Debes iniciar sesión para adquirir un producto! \n Ir a Login?")){
-      
-    //   this.router.navigate(['login']);
-    // }
-    //this.car.addPhone(device)
   }
 
 }

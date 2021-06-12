@@ -1,6 +1,9 @@
 <div class="login">
+  <!-- Cuando el botón de submit se presione, se llama a la función 
+        Submit del telephony-listing.component-->
   <form (ngSubmit)="submit()" class="custom-form" >
     <h1 class="pageTitle">Login</h1>
+    <!-- Input del nombre de usuario -->
     <input
       class="input"
       type="text"
@@ -9,6 +12,7 @@
       placeholder="username"
       required="required"
     />
+    <!-- Input del password de usuario -->
     <input
       class="input"
       type="password"
@@ -17,6 +21,7 @@
       placeholder="Password"
       required="required"
     />
+    <!-- Botones -->
     <button  class="btn btn-success btn-lg" type="submit">Iniciar Sesión</button>
     <button class="btn btn-success btn-lg" routerLink="/register">Registrarse</button>
   </form>

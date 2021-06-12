@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import {first} from 'rxjs/operators';
 
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,11 +11,10 @@ import {first} from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
+  //Variables para el form 
   public username:string;
   public password:string;
   public error:string;
-
-
 
   constructor (private auth: AuthService, private router:Router) {}
 
