@@ -25,14 +25,9 @@ h1{
 }
 
 .container{
-    display:ruby-base-container;
+    display:block;
     background-color: rgb(0, 0, 0);
     width: 500px;
-}
-.internet-section {
-    align-items: center;
-    border-radius: 1rem;
-    margin-top: 3rem;
 }
 
 

@@ -21,12 +21,12 @@ export class ModifyContratoComponent implements OnInit {
   async ngOnInit() {
     this._ac.paramMap.subscribe(async param =>{
       this.idContrato = param.get('id');
-      console.log("Id a modificar",this.idContrato)
       this.data= await this.contratoService.getPlanesTipo(parseInt(this.idContrato))
-      console.log(this.data)
     })
     
   }
+
+  //Cambia el servicio relacionado a al contrato 
   async elegir(idServicio:number){
     this.contratoService.actualizarContrato(this.idContrato,idServicio)
 
