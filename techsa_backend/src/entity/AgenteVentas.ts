@@ -12,7 +12,7 @@ export class AgenteVentas{
     @Column()
     Cedula: number;
 
-    @Column()
+    @Column({nullable: true})
     FechaNacimiento: Date;
 
     @Column()

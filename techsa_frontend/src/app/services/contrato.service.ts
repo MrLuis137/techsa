@@ -126,11 +126,13 @@ export class ContratoService {
   async delete(idContrato){
     const contra=await this.request('get', `${baseUrl}/pagoEnLinea/get/${idContrato}`);
     if (contra && contra.Estado==1){
+
       await this.request('delete', `${baseUrl}/pagoEnLinea/cancelar/${idContrato}`);
+     
       return 'OK'
     }
     else{
-      return 'Debe paga el servicio antes de cancelarlo'
+      return 'Not OK'
     }
     
   }

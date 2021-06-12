@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//Importar estos modulos, además hay que hacer un import de ReactiveFormsModule en app.module.ts
+import * as bcrypt from 'bcryptjs';
 import { FormGroup, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { NotificationsService} from 'angular2-notifications'
 import { async } from '@angular/core/testing';
@@ -7,7 +7,7 @@ import { AgenteVentasService } from '../../services/agente-ventas.service';
 import { AgenteVentas } from '../../models/AgenteVentas';
 import { Gerente } from '../../models/Gerente';
 import { GerenteService } from '../../services/gerente.service';
-import * as bcrypt from 'bcryptjs';
+
 
 
 
@@ -33,12 +33,11 @@ export class NewEmployeeComponent implements OnInit {
       Se pueden agregar comprobaciones, pero no lo hice :v
       cualquier cosa, creo que en el video está como https://youtu.be/fP0XXKAWR1E
       */
-      id_laboral: [''],
-      nombre: [''],
-      usuario: [''],
-      cedula: [''],
-      contrasenia: [''],
-      fechaNacimiento: [Date],
+      id_laboral: new FormControl(),
+      nombre:new FormControl(),
+      cedula: new FormControl(),
+      contrasenia:new FormControl(),
+      FechaNacimiento: new FormControl(),
       puesto: ['Gerente']
     })
   }
@@ -47,8 +46,11 @@ export class NewEmployeeComponent implements OnInit {
   }
   
   async add(values:any){
+    const salt = bcrypt.genSaltSync(10);
+    values.contrasenia = bcrypt.hashSync(values.contrasenia, salt);
+
     var empleado:any;
-    if (values.puesto=='Gerente'){
+    if (values.puesto == 'Gerente'){
       empleado = new Gerente();
       empleado = this.setEmployee(empleado,values)
       try {
@@ -78,7 +80,7 @@ export class NewEmployeeComponent implements OnInit {
 
     empleado.Nombre = values.nombre;
     empleado.Cedula = values.cedula;
-    empleado.FechaNacimiento = new Date(values.fechaNacimiento);
+    empleado.FechaNacimiento = new Date(values.FechaNacimiento);
     empleado.Puesto = values.puesto;
     empleado.Usuario = values.usuario;
     empleado.Id_laboral = values.id_laboral;

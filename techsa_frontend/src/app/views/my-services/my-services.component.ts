@@ -28,10 +28,17 @@ export class MyServicesComponent implements OnInit {
   async cancel(idContrato:number){
     if(confirm("¿Desea cancelar el contrato?")){
       try {
-        await this.contratoService.delete(idContrato).then((data)=>{console.log(data)});
-        alert("Contrato cancelado");
+        await this.contratoService.delete(idContrato).then((data)=>{console.log(data)
+          if (data == 'OK'){
+            alert("Contrato cancelado");
+            location.reload();
+          }
+          else{
+            alert("Debe paga el servicio antes de cancelarlo");
+          }
+        });
       } catch (err) {
-        alert("Error al cancelar el contrato");
+        console.log(err)
       }
     }
   }

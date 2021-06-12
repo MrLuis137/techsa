@@ -63,7 +63,6 @@ export class ModifyEmployeeComponent implements OnInit {
     if(confirm("¿Desea Modificar el Empleado?")){
 
       if (values.Puesto == 'Gerente'){
-        console.log("Vamos a modificar Gerente componente")
         empleado = new Gerente();
         empleado = this.setEmployee(empleado,values)
         try {

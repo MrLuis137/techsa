@@ -1,6 +1,7 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 import { ContratoService } from '../../services/contrato.service';
 
@@ -12,9 +13,11 @@ import { ContratoService } from '../../services/contrato.service';
 export class ModifyContratoComponent implements OnInit {
   data=[]
   idContrato
+  
   constructor(
     private contratoService:ContratoService,
     private _ac:ActivatedRoute,
+    private router:Router
     ) { }
 
 
@@ -30,10 +33,11 @@ export class ModifyContratoComponent implements OnInit {
     const morosidad = await this.contratoService.isMoroso(this.idContrato);
     console.log(morosidad)
     if (morosidad[0].Estado){
-      //await this.contratoService.actualizarContrato(this.idContrato,idServicio);
-      console.log("Se modifico")
+      alert("Contrato actualizado")
+      await this.contratoService.actualizarContrato(this.idContrato,idServicio);
+      
     }else{
-      console.log("No se puede modificar hasta que pague")
+      alert("No se puede modificar hasta que pague")
     }
     
   }

@@ -13,7 +13,7 @@ export class Gerente{
     @Column()
     Cedula: number;
 
-    @Column()
+    @Column({nullable: true})
     FechaNacimiento: Date;
 
     @Column()

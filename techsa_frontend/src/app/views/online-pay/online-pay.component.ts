@@ -28,6 +28,7 @@ export class OnlinePayComponent implements OnInit {
   pay(idContrado:number){
     if(confirm("¿Desea Pagar esta factura?")){
       this.contratoService.pay(idContrado);
+      location.reload()
     }
   }
 

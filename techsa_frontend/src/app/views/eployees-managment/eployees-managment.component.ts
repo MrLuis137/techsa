@@ -22,10 +22,11 @@ export class EployeesManagmentComponent implements OnInit {
   async ngOnInit() {
     try {
       this.employees = await this.agenteVentasService.getAgenteVentasAll();
+      this.employees=this.employees.concat(await this.gerenteService.getGerenteAll());
     } catch (err) {
       alert("Error al cargar la lista de empleados.\n Intentelo de nuevo.");
     }
-    this.employees=this.employees.concat(await this.gerenteService.getGerenteAll());
+    
     console.log(this.employees);
   }
 
